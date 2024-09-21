@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		font-size: 110%;
+
+		--background: 229 27% 8%;
+		--foreground: 232 42% 89%;
+		--muted: 229 12% 15%;
+		--muted-foreground: 229 12% 55%;
+		--popover: 229 27% 5%;
+		--popover-foreground: 232 28% 89%;
+		--card: 229 27% 6%;
+		--card-foreground: 232 28% 84%;
+		--border: 229 17% 23%;
+		--input: 229 17% 26%;
+		--primary: 174 42% 65%;
+		--primary-foreground: 174 42% 5%;
+		--secondary: 174 30% 25%;
+		--secondary-foreground: 174 30% 85%;
+		--accent: 229 27% 23%;
+		--accent-foreground: 229 27% 83%;
+		--destructive: 5 88% 59%;
+		--destructive-foreground: 0 0% 100%;
+		--ring: 174 42% 65%;
+		--radius: 0.5rem;
+	}
+
+	@keyframes snap-in {
+		0% {
+			clip-path: inset(0 100% 0 0);
+		}
+		99% {
+			clip-path: inset(0 100% 0 0);
+			height: auto;
+		}
+		100% {
+			clip-path: inset(0 0 0 0);
+			height: auto;
+		}
+	}
+
+	@keyframes vertical-wipe-in {
+		0% {
+			clip-path: inset(0 0 100% 0);
+		}
+		100% {
+			clip-path: inset(0 0 0 0);
+		}
+	}
+
+	@keyframes vertical-wipe-out {
+		0% {
+			clip-path: inset(0 0 0 0);
+		}
+		100% {
+			clip-path: inset(100% 0 0 0);
+		}
+	}
+
+	a {
+		color: hsl(var(--primary));
+		text-decoration: underline;
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
+
+	@-moz-document url-prefix() {
+		* {
+			scrollbar-width: thin;
+			scrollbar-color: hsl(var(--primary) / 1);
+		}
+	}
+
+	::-webkit-scrollbar {
+		background-color: transparent;
+		width: 0.75rem;
+	}
+
+	::-webkit-scrollbar-track {
+		background-color: transparent;
+	}
+
+	::-webkit-scrollbar-corner {
+		background-color: transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: hsl(var(--primary) / 1);
+		border: 0.15rem solid transparent;
+		background-clip: content-box;
+		transition: all 0.3s ease-out;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background-color: hsl(var(--primary) / 1);
+	}
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+	body {
+		@apply bg-background text-foreground;
+	}
+}
