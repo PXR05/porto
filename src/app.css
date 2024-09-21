@@ -44,24 +44,6 @@
 		}
 	}
 
-	@keyframes vertical-wipe-in {
-		0% {
-			clip-path: inset(0 0 100% 0);
-		}
-		100% {
-			clip-path: inset(0 0 0 0);
-		}
-	}
-
-	@keyframes vertical-wipe-out {
-		0% {
-			clip-path: inset(0 0 0 0);
-		}
-		100% {
-			clip-path: inset(100% 0 0 0);
-		}
-	}
-
 	a {
 		color: hsl(var(--primary));
 		text-decoration: underline;
@@ -100,6 +82,23 @@
 
 	::-webkit-scrollbar-thumb:hover {
 		background-color: hsl(var(--primary) / 1);
+	}
+
+	@keyframes vertical-wipe-in {
+		0% {
+			clip-path: inset(0 0 100% 0);
+		}
+		100% {
+			clip-path: inset(0 0 0 0);
+		}
+	}
+	@keyframes vertical-wipe-out {
+		0% {
+			clip-path: inset(0 0 0 0);
+		}
+		100% {
+			clip-path: inset(100% 0 0 0);
+		}
 	}
 }
 

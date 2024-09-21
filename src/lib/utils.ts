@@ -1,7 +1,7 @@
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { cubicOut } from "svelte/easing";
-import type { TransitionConfig } from "svelte/transition";
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+import { circInOut, cubicOut } from 'svelte/easing';
+import type { TransitionConfig } from 'svelte/transition';
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -14,18 +14,70 @@ type FlyAndScaleParams = {
 	duration?: number;
 };
 
+export const wipeIn = (
+	node: Element,
+	params: { duration?: number; delay?: number }
+): TransitionConfig => {
+	return {
+		duration: params.duration ?? 150,
+		delay: params.delay ?? 0,
+		css: (t) => {
+			const eased = circInOut(t);
+			return `clip-path: inset(0 0 ${100 - eased * 100}% 0);`;
+		}
+	};
+};
+
+export const reverseWipeIn = (
+	node: Element,
+	params: { duration?: number; delay?: number }
+): TransitionConfig => {
+	return {
+		duration: params.duration ?? 150,
+		delay: params.delay ?? 0,
+		css: (t) => {
+			const eased = circInOut(t);
+			return `clip-path: inset(0 0 ${eased * 100}% 0);`;
+		}
+	};
+}
+
+export const wipeOut = (
+	node: Element,
+	params: { duration?: number; delay?: number }
+): TransitionConfig => {
+	return {
+		duration: params.duration ?? 150,
+		delay: params.delay ?? 0,
+		css: (t) => {
+			const eased = circInOut(t);
+			return `clip-path: inset(${eased * 100}% 0 0 0);`;
+		}
+	};
+};
+
+export const reverseWipeOut = (
+	node: Element,
+	params: { duration?: number; delay?: number }
+): TransitionConfig => {
+	return {
+		duration: params.duration ?? 150,
+		delay: params.delay ?? 0,
+		css: (t) => {
+			const eased = circInOut(t);
+			return `clip-path: inset(${100 - eased * 100}% 0 0 0);`;
+		}
+	};
+};
+
 export const flyAndScale = (
 	node: Element,
 	params: FlyAndScaleParams = { y: -8, x: 0, start: 0.95, duration: 150 }
 ): TransitionConfig => {
 	const style = getComputedStyle(node);
-	const transform = style.transform === "none" ? "" : style.transform;
+	const transform = style.transform === 'none' ? '' : style.transform;
 
-	const scaleConversion = (
-		valueA: number,
-		scaleA: [number, number],
-		scaleB: [number, number]
-	) => {
+	const scaleConversion = (valueA: number, scaleA: [number, number], scaleB: [number, number]) => {
 		const [minA, maxA] = scaleA;
 		const [minB, maxB] = scaleB;
 
@@ -35,13 +87,11 @@ export const flyAndScale = (
 		return valueB;
 	};
 
-	const styleToString = (
-		style: Record<string, number | string | undefined>
-	): string => {
+	const styleToString = (style: Record<string, number | string | undefined>): string => {
 		return Object.keys(style).reduce((str, key) => {
 			if (style[key] === undefined) return str;
 			return str + `${key}:${style[key]};`;
-		}, "");
+		}, '');
 	};
 
 	return {
