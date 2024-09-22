@@ -1,47 +1,40 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
 	import { className, cmdHistory, duration, skip } from '@/lib/stores';
 	import { highlight } from '@/lib/highlight';
 	import 'highlight.js/styles/atom-one-dark.min.css';
 	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
 	import Header from './Header.svelte';
+	import { projects as pr } from '@/lib/projects';
 
-	const projects = [
-		{
-			link: '/projects/yorishiro',
-			content: 'Yorishiro'
-		},
-		{
-			link: '/projects/monograph',
-			content: 'Monograph'
-		},
-		{
-			link: '/projects/binary',
-			content: 'Binary'
-		},
-		{
-			link: '/projects/neiro',
-			content: 'Neiro'
-		},
-		{
-			link: '/projects/archive',
-			content: 'Archive'
-		}
-	];
+	const projects = Object.entries(pr).map(([key, value]) => ({
+		link: `/projects/${key}`,
+		content: value.title
+	}));
+
+	const diff = Date.now() - new Date(import.meta.env.VITE_BIRTHDATE).getTime();
 
 	let sections = $state([
 		{
-			cmd: 'cat profile.txt',
+			cmd: 'cat name.txt',
 			type: 'text',
 			content: 'William Luhur'
+		},
+		{
+			cmd: 'cat age.txt',
+			type: 'text',
+			content: new Date(diff).getFullYear() - 1970 + ''
+		},
+		{
+			cmd: 'cat location.txt',
+			type: 'text',
+			content: 'Indonesia'
 		},
 		{
 			cmd: 'cat intro.txt',
 			type: 'text',
 			content:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, vestibulum mi id, ultricies turpis. Nulla facilisi. Nullam nec nunc nec nunc.'
+				'Undergraduate student majoring in Computer Science. Able to adapt and work on various technologies quickly. Focused on creating software that I actually want use.'
 		},
 		{
 			cmd: "grep -E 'email|wa|github' contacts.txt",
@@ -70,7 +63,6 @@
 				'React',
 				'React Native',
 				'Next.js',
-				'Expo',
 				'SQL',
 				'Python',
 				'Node.js',
@@ -112,7 +104,7 @@
 		// 	]
 		// },
 		{
-			cmd: 'ls projects',
+			cmd: 'ls <a>projects</a>',
 			type: 'links',
 			content: projects
 		}
@@ -154,30 +146,30 @@
 		}
 	}
 
-	let value = $state('');
-	function handleSubmit(
-		e: SubmitEvent & {
-			currentTarget: EventTarget & HTMLFormElement;
-		}
-	) {
-		e.preventDefault();
-		if (!value || value.trim() === '') return;
-		cmdHistory.update((h) => [...h, value]);
-		// @ts-ignore
-		if (projects.some((c) => c.content.toLowerCase() === value.toLowerCase())) {
-			goto(`/projects/${value.toLowerCase()}`);
-		} else {
-			sections.push({
-				cmd: 'view ' + value,
-				type: 'text',
-				content: `view: ${value}: No such project found.`
-			});
-			value = '';
-			setTimeout(() => {
-				scrollBottom(true);
-			}, 0);
-		}
-	}
+	// let value = $state('');
+	// function handleSubmit(
+	// 	e: SubmitEvent & {
+	// 		currentTarget: EventTarget & HTMLFormElement;
+	// 	}
+	// ) {
+	// 	e.preventDefault();
+	// 	if (!value || value.trim() === '') return;
+	// 	cmdHistory.update((h) => [...h, value]);
+	// 	// @ts-ignore
+	// 	if (projects.some((c) => c.content.toLowerCase() === value.toLowerCase())) {
+	// 		goto(`/projects/${value.toLowerCase()}`);
+	// 	} else {
+	// 		sections.push({
+	// 			cmd: 'view ' + value,
+	// 			type: 'text',
+	// 			content: `view: ${value}: No such project found.`
+	// 		});
+	// 		value = '';
+	// 		setTimeout(() => {
+	// 			scrollBottom(true);
+	// 		}, 0);
+	// 	}
+	// }
 
 	$effect(() => {
 		if ($skip) {
@@ -215,17 +207,17 @@
 <div
 	bind:this={container}
 	style="pointer-events: none;"
-	class="h-full p-4 overflow-scroll custom-scroll flex flex-col gap-8"
+	class="custom-scroll flex h-full flex-col gap-8 overflow-scroll p-4"
 >
 	{#if show}
 		{#each sections as section, i}
 			<h2
+				class="flex flex-wrap items-center justify-between text-lg font-medium text-white"
 				style={$skip
 					? ''
 					: `height: 0; opacity: 0; animation: snap-in ${$duration / 2}ms ${
 							i * $duration * 2.5
 						}ms forwards;`}
-				class="text-lg font-medium flex flex-wrap items-center justify-between text-white"
 			>
 				<span class="flex items-center">
 					&gt;&nbsp;
@@ -233,18 +225,18 @@
 				</span>
 			</h2>
 			<div
+				onanimationstart={handleAnimationStart}
+				onanimationend={() => handleAnimationEnd(i)}
+				class="mx-5 {i === sections.length - 1 && 'mb-8'}"
 				style={$skip
 					? ''
 					: `height: 0; opacity: 0; animation: snap-in ${$duration / 2}ms ${
 							i * $duration * 2.5 + $duration / 2
 						}ms forwards;`}
-				class="mx-5 {i === sections.length - 1 && 'mb-16'}"
-				onanimationstart={handleAnimationStart}
-				onanimationend={() => handleAnimationEnd(i)}
 			>
 				{#if section.type === 'text'}
 					<p class="text-lg text-muted-foreground">
-						"<span class="text-foreground">{section.content}</span>"
+						"<span class="text-foreground">{@html section.content}</span>"
 					</p>
 				{/if}
 				{#if section.type === 'links'}
@@ -284,12 +276,13 @@
 			axis: 'y',
 			duration: $duration / 4
 		}}
-		class="absolute bottom-0 p-2 text-xl w-full bg-primary font-medium text-primary-foreground hover:opacity-75 transition-all grid place-items-center"
+		class="absolute bottom-0 grid w-full place-items-center bg-primary p-2 text-xl font-medium text-primary-foreground transition-all hover:opacity-75"
 		onclick={() => skip.set(true)}
 	>
 		<span class="scale-x-150"> ▼ </span>
 	</button>
 {/if}
+<!-- 
 {#if done}
 	<form
 		transition:slide={{
@@ -298,21 +291,20 @@
 			delay: $duration / 4
 		}}
 		onsubmit={handleSubmit}
-		class="absolute bottom-0 px-5 h-12 w-full border-t-2 border-primary text-lg font-medium flex items-center text-white bg-background"
+		class="absolute bottom-0 flex h-12 w-full items-center border-t-2 border-primary bg-background px-5 text-lg font-medium text-white"
 	>
 		&gt;&nbsp;
 		<span class="hljs-built_in"> view </span>
 		&nbsp;
-		<!-- svelte-ignore a11y_autofocus -->
 		<input
 			bind:value
 			autofocus
 			id="project"
 			name="project"
 			placeholder="project_name"
-			class="w-full text-foreground border-none text-lg outline-none bg-transparent {value.trim()
+			class="w-full border-none bg-transparent text-lg text-foreground outline-none {value.trim()
 				.length > 0 && 'underline'}"
 			type="text"
 		/>
 	</form>
-{/if}
+{/if} -->
