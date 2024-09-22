@@ -70,6 +70,22 @@ export const reverseWipeOut = (
 	};
 };
 
+export const typewriter = (
+  node: Element,
+  { speed = 1 }: { speed?: number }
+): TransitionConfig => {
+  const text = node.textContent ?? ''
+  const duration = text.length / (speed * 0.01)
+
+  return {
+	duration,
+	tick: (t) => {
+	  const i = Math.trunc(text.length * t)
+	  node.textContent = text.slice(0, i)
+	}
+  }
+}
+
 export const flyAndScale = (
 	node: Element,
 	params: FlyAndScaleParams = { y: -8, x: 0, start: 0.95, duration: 150 }

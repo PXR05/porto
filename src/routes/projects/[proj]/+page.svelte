@@ -1,6 +1,7 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { className, duration } from '@/lib/stores';
+	import { className, duration, skip } from '@/lib/stores';
 	import Header from '@/routes/Header.svelte';
 	import { onMount } from 'svelte';
 
@@ -68,22 +69,29 @@
 		{proj.charAt(0).toUpperCase() + proj.slice(1)}
 	</span>
 </Header>
-<a
-	href="/?skip"
+<button
+	onclick={() => {
+		skip.set(true);
+		if (window.history.length > 1) {
+			history.back();
+		} else {
+			setTimeout(() => {
+				goto('/');
+			}, 0);
+		}
+	}}
 	class="no-underline absolute top-0 right-0 px-1 aspect-square w-12 bg-primary text-primary-foreground hover:opacity-75 transition-all grid place-items-center text-3xl text-center"
 >
 	&times;
-</a>
-<div
-	class="h-[calc(100svh-4rem)] md:h-[calc(100svh-13rem)] grid md:grid-cols-2 max-md:overflow-scroll"
->
+</button>
+<div class="h-[calc(100svh-4rem)] md:h-[calc(100svh-13rem)] grid overflow-scroll">
 	<img
 		alt={proj}
-		src="/assets/{proj}_banner.png"
+		src="/assets/{proj}_banner.webp"
 		style="--duration: {$duration}ms;"
-		class="img h-full object-center object-cover md:border-r-2 max-md:border-b-2 border-primary"
+		class="img h-full w-full object-center object-cover border-b-2 border-primary"
 	/>
-	<div class="flex flex-col gap-4 p-4 w-full md:overflow-scroll">
+	<div class="flex flex-col gap-4 p-4 w-full">
 		<a
 			href={project.link}
 			target="_blank"
@@ -108,7 +116,7 @@
 <style>
 	.img {
 		clip-path: inset(0 0 100% 0);
-		animation: vertical-wipe-in calc(var(--duration) / 2) ease-out calc(var(--duration) * 1.5)
-			forwards;
+		animation: vertical-wipe-in calc(var(--duration) / 2) cubic-bezier(0.85, 0, 0.15, 1)
+			calc(var(--duration) * 1.5) forwards;
 	}
 </style>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { className, cmdHistory, duration } from '@/lib/stores';
+	import { className, cmdHistory, duration, skip } from '@/lib/stores';
 	import { highlight } from '@/lib/highlight';
 	import 'highlight.js/styles/atom-one-dark.min.css';
 	import { onMount } from 'svelte';
@@ -118,7 +118,6 @@
 		}
 	]);
 
-	let skip = $state(false);
 	let show = $state(false);
 	let done = $state(false);
 	let container = $state<HTMLDivElement>();
@@ -135,20 +134,20 @@
 	function handleSkip() {
 		show = true;
 		done = true;
-		skip = true;
 		if (container) {
 			container.style.pointerEvents = 'auto';
 		}
 	}
 
 	function handleAnimationStart() {
-		if (skip) return;
+		if ($skip) return;
 		scrollBottom(true);
 	}
 
 	function handleAnimationEnd(i: number) {
-		if (i === sections.length - 1 && !skip && !done) {
+		if (i === sections.length - 1 && !$skip && !done) {
 			done = true;
+			skip.set(true);
 			if (container) {
 				container.style.pointerEvents = 'auto';
 			}
@@ -180,11 +179,19 @@
 		}
 	}
 
+	$effect(() => {
+		if ($skip) {
+			handleSkip();
+		}
+	});
+
 	onMount(() => {
 		setTimeout(() => {
 			show = true;
 		}, $duration * 1.5);
+
 		className.set('');
+
 		const history = $cmdHistory.map((h) => ({
 			cmd: 'view ' + h,
 			type: 'text',
@@ -194,18 +201,12 @@
 				: `view: ${h}: No such project found.`
 		}));
 		if (history.length > 0) {
-			skip = true;
+			skip.set(true);
 			done = true;
 			sections = sections.concat(history);
 			setTimeout(() => {
 				scrollBottom(true);
 			}, 0);
-		}
-	});
-
-	$effect(() => {
-		if ($page.url.searchParams.has('skip')) {
-			handleSkip();
 		}
 	});
 </script>
@@ -219,9 +220,9 @@
 	{#if show}
 		{#each sections as section, i}
 			<h2
-				style={skip
+				style={$skip
 					? ''
-					: `height: 1rem; clip-path: inset(0 100% 0 0); animation: snap-in ${$duration / 2}ms ${
+					: `height: 0; opacity: 0; animation: snap-in ${$duration / 2}ms ${
 							i * $duration * 2.5
 						}ms forwards;`}
 				class="text-lg font-medium flex flex-wrap items-center justify-between text-white"
@@ -230,21 +231,11 @@
 					&gt;&nbsp;
 					{@html highlight(section.cmd).join('')}
 				</span>
-				<!-- <span class="text-muted-foreground"
-					>{new Date(
-						Date.now() + (i * $duration * 2.5 + $duration / 2) + Math.random() * 100
-					).toLocaleString('en-US', {
-						hour: 'numeric',
-						minute: 'numeric',
-						second: 'numeric',
-						hour12: true
-					})}</span
-				> -->
 			</h2>
 			<div
-				style={skip
+				style={$skip
 					? ''
-					: `height: 1rem; clip-path: inset(0 100% 0 0); animation: snap-in ${$duration / 2}ms ${
+					: `height: 0; opacity: 0; animation: snap-in ${$duration / 2}ms ${
 							i * $duration * 2.5 + $duration / 2
 						}ms forwards;`}
 				class="mx-5 {i === sections.length - 1 && 'mb-16'}"
@@ -287,14 +278,14 @@
 		{/each}
 	{/if}
 </div>
-{#if !skip && !done}
+{#if !$skip && !done}
 	<button
 		out:slide={{
 			axis: 'y',
 			duration: $duration / 4
 		}}
 		class="absolute bottom-0 p-2 text-xl w-full bg-primary font-medium text-primary-foreground hover:opacity-75 transition-all grid place-items-center"
-		onclick={handleSkip}
+		onclick={() => skip.set(true)}
 	>
 		<span class="scale-x-150"> ▼ </span>
 	</button>

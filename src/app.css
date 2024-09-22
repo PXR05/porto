@@ -118,14 +118,14 @@
 
 	@keyframes snap-in {
 		0% {
-			clip-path: inset(0 100% 0 0);
+			opacity: 0;
 		}
 		99% {
-			clip-path: inset(0 100% 0 0);
+			opacity: 0;
 			height: auto;
 		}
 		100% {
-			clip-path: inset(0 0 0 0);
+			opacity: 1;
 			height: auto;
 		}
 	}

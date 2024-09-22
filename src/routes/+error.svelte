@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 
 	onMount(() => {
-		className.set('max-w-[90vw]');
+		className.set('md:max-w-[90vw]');
 	});
 </script>
 
