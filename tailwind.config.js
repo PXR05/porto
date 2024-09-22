@@ -1,11 +1,18 @@
 import { fontFamily } from 'tailwindcss/defaultTheme';
+import plugin from 'tailwindcss/plugin';
 
 /** @type {import('tailwindcss').Config} */
 const config = {
 	darkMode: ['class'],
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	safelist: ['dark'],
-	plugins: [require('@tailwindcss/typography')],
+	plugins: [
+		plugin(({ addVariant }) => {
+			addVariant('gruvbox', '.gruvbox &');
+			addVariant('catppuccin', '.catppuccin &');
+		}),
+		require('@tailwindcss/typography')
+	],
 	theme: {
 		container: {
 			center: true,

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { className } from '@/lib/stores';
-	import { parseMarkdown } from '@/lib/markdown';
+	import { className, duration } from '@/lib/stores';
+	import Header from '@/routes/Header.svelte';
 	import { onMount } from 'svelte';
 
 	const projects: Record<
@@ -54,28 +54,36 @@
 	let project = $derived(projects[proj]);
 
 	onMount(() => {
-		className.set('max-w-[90vw]');
+		className.set('md:max-w-[90vw]');
 	});
 </script>
 
-<h1 class="border-b-2 border-primary text-primary w-full text-xl font-semibold p-2">
-	PXR/projects/{proj}
-</h1>
+<svelte:head>
+	<title>PXR</title>
+</svelte:head>
+
+<Header>
+	<span> PXR/Projects/ </span>
+	<span class="font-semibold underline">
+		{proj.charAt(0).toUpperCase() + proj.slice(1)}
+	</span>
+</Header>
 <a
 	href="/?skip"
-	class="no-underline absolute top-0 right-0 px-1 aspect-square w-11 bg-primary text-primary-foreground hover:opacity-75 transition-all grid place-items-center text-3xl text-center"
+	class="no-underline absolute top-0 right-0 px-1 aspect-square w-12 bg-primary text-primary-foreground hover:opacity-75 transition-all grid place-items-center text-3xl text-center"
 >
 	&times;
 </a>
-<div class="h-[calc(100svh-4rem)] md:h-[calc(100svh-13rem)] flex flex-col">
+<div
+	class="h-[calc(100svh-4rem)] md:h-[calc(100svh-13rem)] grid md:grid-cols-2 max-md:overflow-scroll"
+>
 	<img
 		alt={proj}
-		loading="eager"
 		src="/assets/{proj}_banner.png"
-		style="--duration: 500ms;"
-		class="img w-full h-full object-center object-cover border-b-2 border-primary"
+		style="--duration: {$duration}ms;"
+		class="img h-full object-center object-cover md:border-r-2 max-md:border-b-2 border-primary"
 	/>
-	<div class="h-fit flex flex-col gap-4 p-4 w-full">
+	<div class="flex flex-col gap-4 p-4 w-full md:overflow-scroll">
 		<a
 			href={project.link}
 			target="_blank"
@@ -86,7 +94,7 @@
 		</a>
 		<div class="flex flex-wrap gap-2">
 			{#each project.tags as tag}
-				<span class="bg-primary text-primary-foreground px-1">
+				<span class="bg-primary font-medium text-primary-foreground px-1.5">
 					{tag}
 				</span>
 			{/each}
@@ -100,7 +108,7 @@
 <style>
 	.img {
 		clip-path: inset(0 0 100% 0);
-		animation: vertical-wipe-in calc(var(--duration) / 2) ease-in-out calc(var(--duration) * 1.5)
+		animation: vertical-wipe-in calc(var(--duration) / 2) ease-out calc(var(--duration) * 1.5)
 			forwards;
 	}
 </style>

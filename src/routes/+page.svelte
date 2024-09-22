@@ -6,6 +6,7 @@
 	import 'highlight.js/styles/atom-one-dark.min.css';
 	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
+	import Header from './Header.svelte';
 
 	const projects = [
 		{
@@ -64,28 +65,24 @@
 			cmd: 'sort -k 2 skills.txt',
 			type: 'list',
 			content: [
-				'C',
-				'C#',
-				'CSS',
-				'Dart',
-				'Go',
-				'HTML',
-				'Java',
-				'JavaScript',
-				'Python',
 				'TypeScript',
-				'Expo',
-				'Flutter',
-				'Next.js',
-				'Node.js',
+				'Svelte',
 				'React',
 				'React Native',
-				'Svelte',
-				'Unity',
-				'Godot',
+				'Next.js',
+				'Expo',
+				'SQL',
+				'Python',
+				'Node.js',
+				'Flutter',
+				'Java',
+				'C',
+				'C#',
+				'Dart',
+				'Go',
 				'Git',
-				'Linux',
-				'SQL'
+				'Unity',
+				'Godot'
 			]
 		},
 		// {
@@ -146,7 +143,7 @@
 
 	function handleAnimationStart() {
 		if (skip) return;
-		scrollBottom();
+		scrollBottom(true);
 	}
 
 	function handleAnimationEnd(i: number) {
@@ -178,7 +175,7 @@
 			});
 			value = '';
 			setTimeout(() => {
-				scrollBottom();
+				scrollBottom(true);
 			}, 0);
 		}
 	}
@@ -186,7 +183,7 @@
 	onMount(() => {
 		setTimeout(() => {
 			show = true;
-		}, $duration * 2);
+		}, $duration * 1.5);
 		className.set('');
 		const history = $cmdHistory.map((h) => ({
 			cmd: 'view ' + h,
@@ -197,6 +194,8 @@
 				: `view: ${h}: No such project found.`
 		}));
 		if (history.length > 0) {
+			skip = true;
+			done = true;
 			sections = sections.concat(history);
 			setTimeout(() => {
 				scrollBottom(true);
@@ -211,19 +210,11 @@
 	});
 </script>
 
-<h1 class="border-b-2 border-primary text-primary w-full text-xl font-semibold p-2">PXR</h1>
-{#if !skip && !done}
-	<button
-		class="absolute bottom-0 right-0 px-2 h-11 bg-primary text-primary-foreground hover:opacity-75 transition-all grid place-items-center"
-		onclick={handleSkip}
-	>
-		SKIP
-	</button>
-{/if}
+<Header>PXR</Header>
 <div
 	bind:this={container}
 	style="pointer-events: none;"
-	class="h-full p-4 overflow-scroll flex flex-col gap-8"
+	class="h-full p-4 overflow-scroll custom-scroll flex flex-col gap-8"
 >
 	{#if show}
 		{#each sections as section, i}
@@ -233,10 +224,22 @@
 					: `height: 1rem; clip-path: inset(0 100% 0 0); animation: snap-in ${$duration / 2}ms ${
 							i * $duration * 2.5
 						}ms forwards;`}
-				class="text-lg font-medium flex flex-wrap items-center text-white"
+				class="text-lg font-medium flex flex-wrap items-center justify-between text-white"
 			>
-				&gt;&nbsp;
-				{@html highlight(section.cmd).join('')}
+				<span class="flex items-center">
+					&gt;&nbsp;
+					{@html highlight(section.cmd).join('')}
+				</span>
+				<!-- <span class="text-muted-foreground"
+					>{new Date(
+						Date.now() + (i * $duration * 2.5 + $duration / 2) + Math.random() * 100
+					).toLocaleString('en-US', {
+						hour: 'numeric',
+						minute: 'numeric',
+						second: 'numeric',
+						hour12: true
+					})}</span
+				> -->
 			</h2>
 			<div
 				style={skip
@@ -284,14 +287,27 @@
 		{/each}
 	{/if}
 </div>
+{#if !skip && !done}
+	<button
+		out:slide={{
+			axis: 'y',
+			duration: $duration / 4
+		}}
+		class="absolute bottom-0 p-2 text-xl w-full bg-primary font-medium text-primary-foreground hover:opacity-75 transition-all grid place-items-center"
+		onclick={handleSkip}
+	>
+		<span class="scale-x-150"> ▼ </span>
+	</button>
+{/if}
 {#if done}
 	<form
 		transition:slide={{
 			axis: 'y',
-			duration: 150
+			duration: $duration / 4,
+			delay: $duration / 4
 		}}
 		onsubmit={handleSubmit}
-		class="absolute bottom-0 box-border px-5 py-2 w-full border-t-2 border-primary text-lg font-medium flex items-center text-white bg-background"
+		class="absolute bottom-0 px-5 h-12 w-full border-t-2 border-primary text-lg font-medium flex items-center text-white bg-background"
 	>
 		&gt;&nbsp;
 		<span class="hljs-built_in"> view </span>
