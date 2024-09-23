@@ -9,7 +9,6 @@ export const highlight = (s: string) => {
 		if (node.type === 'text') {
 			if (node.value.endsWith('</a>')) {
 				const target = node.value.trim().slice(3, -4);
-				console.log(target);
 				return node.value.replace(/<a>/g, `\u00a0<a href="/${target}" class="text-white">`);
 			}
 			if (cmds.includes(node.value.split(' ')[0])) {

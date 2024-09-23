@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
 	import Header from './Header.svelte';
-	import { projects as pr } from '@/lib/projects';
+	import { contacts, projects as pr, profile, skills } from '@/lib/data';
 
 	const projects = Object.entries(pr).map(([key, value]) => ({
 		link: `/projects/${key}`,
@@ -18,7 +18,7 @@
 		{
 			cmd: 'cat name.txt',
 			type: 'text',
-			content: 'William Luhur'
+			content: profile.name
 		},
 		{
 			cmd: 'cat age.txt',
@@ -28,54 +28,25 @@
 		{
 			cmd: 'cat location.txt',
 			type: 'text',
-			content: 'Indonesia'
+			content: profile.location
 		},
 		{
 			cmd: 'cat intro.txt',
 			type: 'text',
-			content:
-				'Undergraduate student majoring in Computer Science. Able to adapt and work on various technologies quickly. Focused on creating software that I actually want use.'
+			content: profile.intro
 		},
 		{
 			cmd: "grep -E 'email|wa|github' contacts.txt",
 			type: 'links',
-			content: [
-				{
-					link: 'mailto:pxr2709@gmail.com',
-					content: 'Email'
-				},
-				{
-					link: 'https://wa.me/qr/RN4FDCJ6YPQVD1',
-					content: 'WhatsApp'
-				},
-				{
-					link: 'https://github.com/PXR05',
-					content: 'Github'
-				}
-			]
+			content: Object.entries(contacts).map(([key, value]) => ({
+				link: key === 'Email' ? `mailto:${value}` : value,
+				content: key
+			}))
 		},
 		{
 			cmd: 'sort -k 2 skills.txt',
 			type: 'list',
-			content: [
-				'TypeScript',
-				'Svelte',
-				'React',
-				'React Native',
-				'Next.js',
-				'SQL',
-				'Python',
-				'Node.js',
-				'Flutter',
-				'Java',
-				'C',
-				'C#',
-				'Dart',
-				'Go',
-				'Git',
-				'Unity',
-				'Godot'
-			]
+			content: skills
 		},
 		// {
 		// 	cmd: 'ls certificates | sort',
@@ -202,6 +173,10 @@
 		}
 	});
 </script>
+
+<svelte:head>
+	<title>PXR</title>
+</svelte:head>
 
 <Header>PXR</Header>
 <div

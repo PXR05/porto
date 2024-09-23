@@ -8,10 +8,14 @@
 	});
 </script>
 
-<h1 class="border-b-2 border-primary text-primary w-full text-xl font-semibold p-2">PXR</h1>
+<svelte:head>
+	<title>PXR/Error</title>
+</svelte:head>
+
+<h1 class="w-full border-b-2 border-primary p-2 text-xl font-semibold text-primary">PXR</h1>
 <a
 	href="/"
-	class="no-underline absolute top-0 right-0 px-1 aspect-square w-11 bg-primary text-primary-foreground hover:opacity-75 transition-all grid place-items-center text-3xl text-center"
+	class="absolute right-0 top-0 grid aspect-square w-11 place-items-center bg-primary px-1 text-center text-3xl text-primary-foreground no-underline transition-all hover:opacity-75"
 >
 	&times;
 </a>

@@ -1,13 +1,19 @@
 <script>
 	import { onMount } from 'svelte';
 	import Header from '../Header.svelte';
-	import { projects } from '@/lib/projects';
+	import { projects } from '@/lib/data';
 	import { className } from '@/lib/stores';
 
 	onMount(() => {
 		className.set('md:max-w-[90vw]');
 	});
 </script>
+
+<svelte:head>
+	<title>
+		PXR/Projects
+	</title>
+</svelte:head>
 
 <Header>
 	<span> PXR/ </span>
