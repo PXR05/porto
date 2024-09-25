@@ -27,7 +27,7 @@
 </svelte:head>
 
 {#if show}
-	<div class="relative h-svh mx-2">
+	<div class="relative mx-2 h-svh">
 		{#key renderCount}
 			<div
 				in:wipeIn={{
@@ -40,7 +40,7 @@
 				}}
 				style="--duration: {$duration}ms;"
 				class={cn(
-					'absolute inset-0 m-auto overflow-hidden border-2 border-primary h-[calc(100svh-1rem)] md:h-[calc(100svh-10rem)] w-full max-w-3xl flex flex-col',
+					'absolute inset-0 m-auto flex h-[calc(100svh-1rem)] w-full max-w-3xl flex-col overflow-hidden border-2 border-primary md:h-[calc(100svh-10rem)]',
 					renderCount === 0 && 'cont',
 					$className
 				)}
@@ -54,7 +54,7 @@
 						duration: $duration / 2
 					}}
 					class={cn(
-						'z-50 w-full h-full bg-primary absolute inset-0',
+						'absolute inset-0 z-50 h-full w-full bg-primary',
 						renderCount === 0 ? 'screen' : '[clip-path:inset(0_100%_0_0)]'
 					)}
 				></div>
@@ -63,7 +63,7 @@
 		{/key}
 	</div>
 {/if}
-<div class="absolute right-2 bottom-2">
+<div class="absolute bottom-2 right-2">
 	<ThemeSwitch />
 </div>
 

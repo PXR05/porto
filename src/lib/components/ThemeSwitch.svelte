@@ -40,7 +40,7 @@
 		<Button
 			builders={[builder]}
 			variant="ghost"
-			class="w-[3.1rem] h-[3.1rem] rounded-none border-2 border-primary"
+			class="w-[3.1rem] h-[3.1rem] bg-background rounded-none border-2 border-primary"
 		>
 			<span class="grid">
 				{#each themes as t (t.name)}
