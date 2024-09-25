@@ -51,16 +51,16 @@
 			<button
 				onclick={() => (carouselIndex -= 1)}
 				style="left: {i * 100}%; "
-				class="absolute bottom-0 top-0 h-full w-[10%] text-2xl text-white mix-blend-difference transition-all hover:pr-8 hover:opacity-100 {carouselIndex !==
-					0 && 'opacity-0'}"
+				class="absolute bottom-0 top-0 h-full w-[10%] text-2xl text-white mix-blend-difference transition-all md:hover:pr-8 hover:opacity-100 {carouselIndex !==
+					0 && 'md:opacity-0'}"
 			>
 				❰
 			</button>
 			<button
 				onclick={() => (carouselIndex += 1)}
 				style="left: {i * 100 + 90}%;"
-				class="absolute bottom-0 top-0 h-full w-[10%] text-2xl text-white mix-blend-difference transition-all hover:pl-8 hover:opacity-100 {carouselIndex !==
-					0 && 'opacity-0'}"
+				class="absolute bottom-0 top-0 h-full w-[10%] text-2xl text-white mix-blend-difference transition-all md:hover:pl-8 hover:opacity-100 {carouselIndex !==
+					0 && 'md:opacity-0'}"
 			>
 				❱
 			</button>

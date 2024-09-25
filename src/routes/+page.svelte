@@ -194,7 +194,7 @@
 							i * $duration * 2.5
 						}ms forwards;`}
 			>
-				<span class="flex items-center">
+				<span class="cmd flex items-center flex-wrap">
 					&gt;&nbsp;
 					{@html highlight(section.cmd).join('')}
 				</span>
@@ -257,6 +257,7 @@
 		<span class="scale-x-150"> ▼ </span>
 	</button>
 {/if}
+
 <!-- 
 {#if done}
 	<form
@@ -283,3 +284,9 @@
 		/>
 	</form>
 {/if} -->
+
+<style>
+	/* :global(.cmd > *) {
+		display: none;
+	} */
+</style>

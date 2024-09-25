@@ -30,6 +30,12 @@
 		--ring: 174 42% 65%;
 	}
 
+	@media (max-width: 768px) {
+		:root {
+			font-size: 100%;
+		}
+	}
+
 	.gruvbox {
 		--background: 195 6% 12%;
 		--foreground: 43 59% 81%;
