@@ -4,6 +4,10 @@
 	import { className, duration } from '@/lib/stores';
 	import Header from '@/routes/Header.svelte';
 	import { onMount } from 'svelte';
+	import * as Dialog from '$lib/components/ui/dialog';
+	import Carousel from './Carousel.svelte';
+	import { scale } from 'svelte/transition';
+	import { circInOut } from 'svelte/easing';
 
 	let proj = $derived($page.params.proj);
 	let project = $derived(projects[proj] ?? {});
@@ -12,14 +16,9 @@
 		className.set('md:max-w-[90vw]');
 	});
 
-	let carouselIndex = $state(0);
-	let images = $state<HTMLImageElement[]>([]);
-	$effect(() => {
-		if (images.length > 1) {
-			carouselIndex = (carouselIndex + images.length) % images.length;
-			images[carouselIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
-		}
-	});
+	let open = $state(false);
+
+	let index = $state(0);
 </script>
 
 <svelte:head>
@@ -35,38 +34,8 @@
 	</span>
 </Header>
 <div class="grid overflow-scroll">
-	<div
-		style="--duration: {$duration}ms ; grid-template-columns: repeat({project.carouselLength}, 100%);"
-		class="img relative grid snap-x snap-mandatory overflow-hidden"
-	>
-		{#each Array.from({ length: project.carouselLength }) as _, i}
-			<img
-				alt="{proj}-{i}"
-				bind:this={images[i]}
-				src="/assets/{proj}_{i}.webp"
-				class="h-full w-full snap-center border-b-2 border-primary object-cover {i === 0
-					? 'object-center'
-					: 'object-top'}"
-			/>
-			<button
-				onclick={() => (carouselIndex -= 1)}
-				style="left: {i * 100}%; "
-				class="absolute bottom-0 top-0 h-full w-[10%] text-2xl text-white mix-blend-difference transition-all md:hover:pr-8 hover:opacity-100 {carouselIndex !==
-					0 && 'md:opacity-0'}"
-			>
-				❰
-			</button>
-			<button
-				onclick={() => (carouselIndex += 1)}
-				style="left: {i * 100 + 90}%;"
-				class="absolute bottom-0 top-0 h-full w-[10%] text-2xl text-white mix-blend-difference transition-all md:hover:pl-8 hover:opacity-100 {carouselIndex !==
-					0 && 'md:opacity-0'}"
-			>
-				❱
-			</button>
-		{/each}
-	</div>
-	<div class="flex w-full flex-col gap-4 p-4">
+	<Carousel bind:index {proj} count={project.carouselLength} onclick={() => (open = true)} />
+	<div class="flex w-full flex-col gap-4 border-t-2 border-primary p-4">
 		<a
 			href={project.link}
 			target="_blank"
@@ -88,10 +57,16 @@
 	</div>
 </div>
 
-<style>
-	.img {
-		clip-path: inset(0 0 100% 0);
-		animation: vertical-wipe-in calc(var(--duration) / 2) cubic-bezier(0.85, 0, 0.15, 1)
-			calc(var(--duration) * 1.5) forwards;
-	}
-</style>
+<Dialog.Root bind:open>
+	<Dialog.Content
+		transition={scale}
+		transitionConfig={{ duration: $duration / 2, start: 0.5, easing: circInOut }}
+		class="h-full max-h-svh w-full max-w-[100vw] p-0"
+	>
+		<img
+			src="/assets/{proj}_{index}.webp"
+			alt="{proj}-{index}"
+			class="h-full w-full object-contain"
+		/>
+	</Dialog.Content>
+</Dialog.Root>
