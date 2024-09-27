@@ -36,7 +36,7 @@
 			content: profile.intro
 		},
 		{
-			cmd: "grep -E 'email|wa|github' contacts.txt",
+			cmd: "grep -E 'email|wa|linkedin|github|linkedin' socials.txt",
 			type: 'links',
 			content: Object.entries(contacts).map(([key, value]) => ({
 				link: key === 'Email' ? `mailto:${value}` : value,
@@ -44,7 +44,7 @@
 			}))
 		},
 		{
-			cmd: 'sort -k 2 skills.txt',
+			cmd: 'sort -k 2 skillset.txt',
 			type: 'list',
 			content: skills
 		},
@@ -194,7 +194,7 @@
 							i * $duration * 2.5
 						}ms forwards;`}
 			>
-				<span class="cmd flex items-center flex-wrap">
+				<span class="cmd flex flex-wrap items-center">
 					&gt;&nbsp;
 					{@html highlight(section.cmd).join('')}
 				</span>

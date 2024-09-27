@@ -51,9 +51,11 @@ export const projects: Record<
 };
 
 export const contacts = {
-	Email: 'pxr2709@gmail.com',
+	Email: 'williamluhur.27@gmail.com',
 	WhatsApp: 'https://wa.me/+628990377159',
-	GitHub: 'https://github.com/PXR05'
+	'X (Twitter)': 'https://x.com/pxr_____',
+	GitHub: 'https://github.com/PXR05',
+	LinkedIn: 'https://www.linkedin.com/in/william-luhur/'
 };
 
 export const skills = [
@@ -80,5 +82,5 @@ export const profile = {
 	name: 'William Luhur',
 	location: 'Tangerang, Indonesia',
 	intro:
-		'Undergraduate student majoring in Computer Science. Able to adapt and work on various technologies quickly. Focused on creating software that I actually want use.'
+		'Undergraduate student majoring in Computer Science. Able to adapt and work on various technologies quickly. Focused on creating software that I actually want to use.'
 };
