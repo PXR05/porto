@@ -36,7 +36,7 @@
 			content: profile.intro
 		},
 		{
-			cmd: "grep -E 'email|wa|linkedin|github|linkedin' socials.txt",
+			cmd: "grep -E 'email|wa|linkedin|github|x' socials.txt",
 			type: 'links',
 			content: Object.entries(contacts).map(([key, value]) => ({
 				link: key === 'Email' ? `mailto:${value}` : value,
@@ -99,6 +99,9 @@
 		done = true;
 		if (container) {
 			container.style.pointerEvents = 'auto';
+			container.scrollTo({
+				top: container.scrollHeight
+			});
 		}
 	}
 
