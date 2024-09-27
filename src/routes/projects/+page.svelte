@@ -27,13 +27,13 @@
 		{#each Object.keys(projects) as proj}
 			<div>
 				+
-				<a href="/projects/{proj}" class="text-base font-semibold text-primary">
+				<a href="/projects/{proj}" class="text-lg font-semibold text-primary">
 					{proj.charAt(0).toUpperCase() + proj.slice(1)}
 				</a>
 			</div>
 		{/each}
 	</div>
-	<p>
+	<p class="text-lg">
 		Or you can go back to the <a href="/">home page</a>.
 	</p>
 </div>

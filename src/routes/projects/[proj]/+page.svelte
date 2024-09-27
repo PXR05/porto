@@ -8,6 +8,7 @@
 	import Carousel from './Carousel.svelte';
 	import { scale } from 'svelte/transition';
 	import { circInOut } from 'svelte/easing';
+	import { ArrowUpRight, SquareArrowUpRight } from 'lucide-svelte';
 
 	let proj = $derived($page.params.proj);
 	let project = $derived(projects[proj] ?? {});
@@ -42,7 +43,10 @@
 			rel="noopener noreferrer"
 			class="flex w-fit items-center gap-2"
 		>
-			<h2 class="text-2xl font-semibold text-primary">{project.title}</h2>
+			<h2 class="flex items-center gap-1 text-2xl font-semibold text-primary">
+				{project.title}
+				<ArrowUpRight size={28} strokeWidth={3} absoluteStrokeWidth />
+			</h2>
 		</a>
 		<div class="flex flex-wrap gap-2">
 			{#each project.tags as tag}

@@ -16,7 +16,7 @@ export const highlight = (s: string) => {
 			}
 			if (node.value.endsWith('.txt')) {
 				const last = node.value.split(' ').pop();
-				return `${node.value.split(' ').slice(0, -1).join('\u00a0')}\u00a0<span class="underline">${last}</span>`;
+				return `${node.value.split(' ').slice(0, -1).join('\u00a0')}\u00a0<span class="underline decoration-[0.1rem]">${last}</span>`;
 			}
 			return `<span>${node.value.replaceAll(' ', '\u00a0')}</span>`;
 		}

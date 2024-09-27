@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { className, cmdHistory, duration, skip } from '@/lib/stores';
+	import * as HoverCard from '@/lib/components/ui/hover-card';
 	import { highlight } from '@/lib/highlight';
 	import 'highlight.js/styles/atom-one-dark.min.css';
 	import { onMount } from 'svelte';
@@ -9,7 +10,23 @@
 
 	const projects = Object.entries(pr).map(([key, value]) => ({
 		link: `/projects/${key}`,
-		content: value.title
+		content: value.title,
+		hover:
+			"<div class='flex flex-col gap-4'>" +
+			"<a class='w-full flex items-center gap-4' href='/projects/" +
+			key +
+			"'>" +
+			"<img src='/assets/" +
+			key +
+			"_logo.webp' alt='banner' class='border-2 border-primary object-cover w-10 h-10' />" +
+			"<h3 class='text-xl font-medium text-primary'>" +
+			value.title +
+			'</h3>' +
+			'</a>' +
+			'<p>' +
+			value.content +
+			'</p>' +
+			'</div>'
 	}));
 
 	const diff = Date.now() - new Date(import.meta.env.VITE_BIRTHDATE).getTime();
@@ -221,12 +238,24 @@
 					<div class="flex flex-wrap items-center text-muted-foreground">
 						[
 						{#each section.content as link, i}
-							{@const l = link as { link: string; content: string }}
-							<p title={l.link}>
-								"<a href={l.link} class="text-lg">{l.content}</a
-								>"{#if i !== section.content.length - 1},
-								{/if}&nbsp;
-							</p>
+							{@const l = link as { link: string; content: string; hover?: string }}
+							<HoverCard.Root openDelay={150} closeDelay={50}>
+								<p>
+									"<a href={l.link} class="text-lg">
+										<HoverCard.Trigger class="">
+											{l.content}
+										</HoverCard.Trigger>
+									</a>"{#if i !== section.content.length - 1},
+									{/if}&nbsp;
+								</p>
+								{#if l.hover}
+									<HoverCard.Content
+										class="mt-0 rounded-none border-2 border-primary bg-background p-4"
+									>
+										{@html l.hover}
+									</HoverCard.Content>
+								{/if}
+							</HoverCard.Root>
 						{/each}
 						]
 					</div>

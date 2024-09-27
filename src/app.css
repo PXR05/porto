@@ -83,18 +83,12 @@
 	a {
 		color: hsl(var(--primary));
 		text-decoration: underline;
+		text-decoration-thickness: 0.1rem;
 	}
 
 	a:hover {
 		text-decoration: none;
 	}
-
-	/* @-moz-document url-prefix() {
-		* {
-			scrollbar-width: thin;
-			scrollbar-color: hsl(var(--primary) / 1);
-		}
-	} */
 
 	.custom-scroll {
 		&::-webkit-scrollbar {
