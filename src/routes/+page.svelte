@@ -29,18 +29,11 @@
 			'</div>'
 	}));
 
-	const diff = Date.now() - new Date(import.meta.env.VITE_BIRTHDATE).getTime();
-
 	let sections = $state([
 		{
 			cmd: 'cat name.txt',
 			type: 'text',
 			content: profile.name
-		},
-		{
-			cmd: 'cat age.txt',
-			type: 'text',
-			content: new Date(diff).getFullYear() - 1970 + ''
 		},
 		{
 			cmd: 'cat location.txt',

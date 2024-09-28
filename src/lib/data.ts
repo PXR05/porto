@@ -79,7 +79,7 @@ export const skills = [
 ];
 
 export const profile = {
-	name: 'William Luhur',
+	name: 'William',
 	location: 'Tangerang, Indonesia',
 	intro:
 		'Undergraduate student majoring in Computer Science. Able to adapt and work on various technologies quickly. Focused on creating software that I actually want to use.'
