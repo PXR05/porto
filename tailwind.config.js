@@ -64,7 +64,7 @@ const config = {
 			},
 			fontFamily: {
 				sans: ['JetBrains Mono', ...fontFamily.mono],
-				mono: ['JetBrains Mono', ...fontFamily.mono]
+				mono: ['Departure Mono', ...fontFamily.mono]
 			}
 		}
 	}

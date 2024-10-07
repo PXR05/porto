@@ -19,7 +19,7 @@
 			"<img src='/assets/" +
 			key +
 			"_logo.webp' alt='banner' class='border-2 border-primary object-cover w-10 h-10' />" +
-			"<h3 class='text-xl font-medium text-primary'>" +
+			"<h3 class='text-xl font-medium font-mono text-primary'>" +
 			value.title +
 			'</h3>' +
 			'</a>' +
@@ -282,36 +282,3 @@
 		<span class="scale-x-150"> ▼ </span>
 	</button>
 {/if}
-
-<!-- 
-{#if done}
-	<form
-		transition:slide={{
-			axis: 'y',
-			duration: $duration / 4,
-			delay: $duration / 4
-		}}
-		onsubmit={handleSubmit}
-		class="absolute bottom-0 flex h-12 w-full items-center border-t-2 border-primary bg-background px-5 text-lg font-medium text-white"
-	>
-		&gt;&nbsp;
-		<span class="hljs-built_in"> view </span>
-		&nbsp;
-		<input
-			bind:value
-			autofocus
-			id="project"
-			name="project"
-			placeholder="project_name"
-			class="w-full border-none bg-transparent text-lg text-foreground outline-none {value.trim()
-				.length > 0 && 'underline'}"
-			type="text"
-		/>
-	</form>
-{/if} -->
-
-<style>
-	/* :global(.cmd > *) {
-		display: none;
-	} */
-</style>
