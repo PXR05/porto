@@ -13,6 +13,14 @@
 			url('/fonts/DepartureMono.woff') format('woff');
 	}
 
+	@font-face {
+		font-family: 'Alpha Lyrae';
+		font-weight: 400;
+		src:
+			url('/fonts/AlphaLyrae.woff2') format('woff2'),
+			url('/fonts/AlphaLyrae.woff') format('woff');
+	}
+
 	:root {
 		font-size: 110%;
 		--radius: 0.5rem;
