@@ -17,8 +17,8 @@
 
 	let images = $state<HTMLImageElement[]>([]);
 	$effect(() => {
-		if (images.length > 1) {
-			images[index].scrollIntoView({ block: 'center', behavior: 'smooth' });
+		if (images.length > 1 && images[index]) {
+			images[index].scrollIntoView({ inline: 'center', behavior: 'smooth' });
 		}
 	});
 </script>

@@ -129,32 +129,7 @@
 			}
 		}
 	}
-
-	// let value = $state('');
-	// function handleSubmit(
-	// 	e: SubmitEvent & {
-	// 		currentTarget: EventTarget & HTMLFormElement;
-	// 	}
-	// ) {
-	// 	e.preventDefault();
-	// 	if (!value || value.trim() === '') return;
-	// 	cmdHistory.update((h) => [...h, value]);
-	// 	// @ts-ignore
-	// 	if (projects.some((c) => c.content.toLowerCase() === value.toLowerCase())) {
-	// 		goto(`/projects/${value.toLowerCase()}`);
-	// 	} else {
-	// 		sections.push({
-	// 			cmd: 'view ' + value,
-	// 			type: 'text',
-	// 			content: `view: ${value}: No such project found.`
-	// 		});
-	// 		value = '';
-	// 		setTimeout(() => {
-	// 			scrollBottom(true);
-	// 		}, 0);
-	// 	}
-	// }
-
+	
 	$effect(() => {
 		if ($skip) {
 			handleSkip();
