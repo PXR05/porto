@@ -7,6 +7,7 @@
 	import { slide } from 'svelte/transition';
 	import Header from './Header.svelte';
 	import { contacts, projects as pr, profile, skills } from '@/lib/data';
+	import { beforeNavigate } from '$app/navigation';
 
 	const projects = Object.entries(pr).map(([key, value]) => ({
 		link: `/projects/${key}`,
@@ -129,7 +130,7 @@
 			}
 		}
 	}
-	
+
 	$effect(() => {
 		if ($skip) {
 			handleSkip();
@@ -158,6 +159,18 @@
 			setTimeout(() => {
 				scrollBottom(true);
 			}, 0);
+		}
+	});
+
+	let hoverEnabled = $state(true);
+	beforeNavigate(() => {
+		hoverEnabled = false;
+		if (!$skip && !done) {
+			skip.set(true);
+			done = true;
+			if (container) {
+				container.style.pointerEvents = 'auto';
+			}
 		}
 	});
 </script>
@@ -216,7 +229,7 @@
 									</a>"{#if i !== section.content.length - 1},
 									{/if}&nbsp;
 								</p>
-								{#if l.hover}
+								{#if l.hover && hoverEnabled}
 									<HoverCard.Content
 										class="mt-0 rounded-none border-2 border-primary bg-background p-4"
 									>
