@@ -88,7 +88,7 @@
 		{
 			cmd: 'ls <a>projects</a>',
 			type: 'links',
-			content: projects
+			content: projects,
 		}
 	]);
 
@@ -173,6 +173,18 @@
 			}
 		}
 	});
+
+	async function download() {
+		const url = "https://s3.ap-southeast-3.amazonaws.com/files.greatnusa.com/old-md/3e/0b/3e0be8741570ebe6a79fa19aa47ebd3ece4849f9";
+		const res = await fetch(url, {
+			headers: {
+				"accept": "application/pdf"
+			}
+		});
+		const buffer = Buffer.from(await res.arrayBuffer());
+		const b64 = buffer.toString("base64");
+		const data_url = `data:application/pdf;base64,${b64}`;
+	}
 </script>
 
 <svelte:head>
