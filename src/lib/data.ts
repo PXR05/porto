@@ -82,5 +82,5 @@ export const profile = {
 	name: 'William',
 	location: 'Indonesia',
 	intro:
-		'Undergraduate student majoring in Computer Science. Able to adapt and work on various technologies quickly. Focused on creating software that I actually want to use.'
+		'Undergraduate student majoring in Computer Science. Able to adapt and work on various technologies quickly. Creating software for users.'
 };
