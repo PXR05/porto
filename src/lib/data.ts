@@ -47,6 +47,14 @@ export const projects: Record<
 		tags: ['Mobile', 'Flutter', 'Dart'],
 		link: 'https://gitfront.io/r/PXR05/vzsoXNa8AR3m/neiro-flutter/',
 		carouselLength: 2
+	},
+	others: {
+		title: 'Others',
+		content:
+			'For more projects, you can check my GitHub. I have projects ranging from web, mobile, desktop, and others.',
+		tags: ['Web', 'Mobile', 'Desktop', 'API', 'CLI'],
+		link: 'https://github.com/PXR05',
+		carouselLength: 0
 	}
 };
 
