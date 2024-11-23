@@ -37,7 +37,7 @@ export const projects: Record<
 		content:
 			'Audio recorder app built in React Native with Expo. Able to record, mark, and transcribe recordings from audio to text',
 		tags: ['Mobile', 'React Native', 'Expo', 'TypeScript'],
-		link: 'https://gitfront.io/r/PXR05/KKfGo8RWpwL7/archive/',
+		link: 'https://github.com/PXR05/archive',
 		carouselLength: 2
 	},
 	neiro: {
@@ -54,7 +54,7 @@ export const projects: Record<
 			'For more projects, you can check my GitHub. I have projects ranging from web, mobile, desktop, and others.',
 		tags: ['Web', 'Mobile', 'Desktop', 'API', 'CLI'],
 		link: 'https://github.com/PXR05',
-		carouselLength: 0
+		carouselLength: 1
 	}
 };
 
