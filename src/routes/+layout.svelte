@@ -40,7 +40,7 @@
 				}}
 				style="--duration: {$duration}ms;"
 				class={cn(
-					'absolute inset-0 m-auto flex h-[calc(100svh-1rem)] w-full max-w-3xl flex-col overflow-hidden border-2 border-primary md:h-[calc(100svh-10rem)]',
+					'absolute inset-0 m-auto flex h-[calc(100svh-1rem)] w-full max-w-[80ch] flex-col overflow-hidden border-2 border-primary md:h-[calc(100svh-10rem)]',
 					renderCount === 0 && 'cont',
 					$className
 				)}

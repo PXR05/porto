@@ -20,15 +20,23 @@ export const projects: Record<
 		title: 'Monograph',
 		content:
 			'A note-taking app that uses Markdown for formatting and extended with various QoL features. Similar to Notion and Obsidian. Built using Svelte and ProseMirror for the text editor.',
-		tags: ['Web', 'Svelte', 'TypeScript', 'Tailwind'],
+		tags: ['Web', 'Svelte', 'TypeScript', 'Tailwind', 'Markdown', 'TipTap'],
 		link: 'https://monograph.pages.dev',
 		carouselLength: 7
+	},
+	preprocess: {
+		title: 'Preprocess',
+		content:
+			'A web app with a collection of tools to preprocesses multiple types of data. Uses ffmpeg.wasm for audio processing and Tesseract.js for OCR. Built using Svelte and Tailwind.',
+		tags: ['Web', 'Svelte', 'TypeScript', 'Tailwind', 'ffmpeg', 'OCR'],
+		link: 'https://preprocess.pages.dev',
+		carouselLength: 9
 	},
 	binary: {
 		title: 'Binary',
 		content:
 			'A variation of tic-tac-toe built using Svelte with the ability to do co-op multiplayer using the PeerJS WebRTC library.',
-		tags: ['Web', 'Svelte', 'TypeScript'],
+		tags: ['Web', 'Svelte', 'TypeScript', 'WebRTC'],
 		link: 'https://binarygame.pages.dev',
 		carouselLength: 3
 	},
@@ -36,7 +44,7 @@ export const projects: Record<
 		title: 'Archive',
 		content:
 			'Audio recorder app built in React Native with Expo. Able to record, mark, and transcribe recordings from audio to text',
-		tags: ['Mobile', 'React Native', 'Expo', 'TypeScript'],
+		tags: ['Mobile', 'React Native', 'Expo', 'TypeScript', 'Whisper'],
 		link: 'https://github.com/PXR05/archive',
 		carouselLength: 2
 	},

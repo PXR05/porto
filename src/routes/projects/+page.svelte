@@ -10,9 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>
-		PXR/Projects
-	</title>
+	<title>PXR/Projects</title>
 </svelte:head>
 
 <Header>
@@ -24,11 +22,14 @@
 		You're not supposed to be here. <br /> You're probably looking for one of these:
 	</h2>
 	<div class="grid gap-2">
-		{#each Object.keys(projects) as proj}
+		{#each Object.entries(projects) as [key, value]}
 			<div>
 				+
-				<a href="/projects/{proj}" class="text-lg font-semibold text-primary">
-					{proj.charAt(0).toUpperCase() + proj.slice(1)}
+				<a
+					href={key === 'others' ? value.link : `/projects/${key}`}
+					class="text-lg font-semibold text-primary"
+				>
+					{key.charAt(0).toUpperCase() + key.slice(1)}
 				</a>
 			</div>
 		{/each}
