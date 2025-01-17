@@ -13,7 +13,7 @@ export const projects: Record<
 		content:
 			'A manga reading website that aggregates from multiple sources to get the latest chapters. Uses Supabase for the database and authentication. Made for personal use.',
 		tags: ['Web', 'Svelte', 'TypeScript', 'Supabase', 'Tailwind'],
-		link: 'https://yorishiro.pages.dev/account/pin',
+		link: 'https://yorishiro.pages.dev/auth/pin',
 		carouselLength: 5
 	},
 	monograph: {
