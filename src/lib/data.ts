@@ -11,16 +11,16 @@ export const projects: Record<
 	yorishiro: {
 		title: 'Yorishiro',
 		content:
-			'A manga reading website that aggregates from multiple sources to get the latest chapters. Uses Supabase for the database and authentication. Made for personal use.',
-		tags: ['Web', 'Svelte', 'TypeScript', 'Supabase', 'Tailwind'],
+			'A manga reading website that aggregates from multiple sources to get the latest chapters. Uses Supabase for remote database and authentication. Uses Dexie.js for a local cache database to save on remote database bandwidth.',
+		tags: ['Web', 'Svelte', 'TypeScript', 'Tailwind', 'Supabase', 'Dexie.js'],
 		link: 'https://yorishiro.pages.dev/auth/pin',
 		carouselLength: 5
 	},
 	monograph: {
 		title: 'Monograph',
 		content:
-			'A note-taking app that uses Markdown for formatting and extended with various QoL features. Similar to Notion and Obsidian. Built using Svelte and ProseMirror for the text editor.',
-		tags: ['Web', 'Svelte', 'TypeScript', 'Tailwind', 'Markdown', 'TipTap'],
+			'A note-taking app that uses Markdown for formatting and extended with various QoL features. Similar to Notion and Obsidian. Built using Svelte and ProseMirror for the text editor. Data stored locally using IndexedDB wrapped with Dexie.js.',
+		tags: ['Web', 'Svelte', 'TypeScript', 'Tailwind', 'Dexie.js', 'Markdown', 'TipTap'],
 		link: 'https://monograph.pages.dev',
 		carouselLength: 7
 	},
@@ -28,7 +28,7 @@ export const projects: Record<
 		title: 'Preprocess',
 		content:
 			'A web app with a collection of tools to preprocesses multiple types of data. Uses ffmpeg.wasm for audio processing and Tesseract.js for OCR. Built using Svelte and Tailwind.',
-		tags: ['Web', 'Svelte', 'TypeScript', 'Tailwind', 'ffmpeg', 'OCR'],
+		tags: ['Web', 'Svelte', 'TypeScript', 'Tailwind', 'ffmpeg', 'Tesseract'],
 		link: 'https://preprocess.pages.dev',
 		carouselLength: 9
 	},
