@@ -5,12 +5,14 @@
 		proj,
 		count,
 		index = $bindable(0),
+		className,
 		animate = true,
 		onclick = () => {}
 	}: {
 		proj: string;
 		count: number;
 		index: number;
+		className?: string;
 		animate?: boolean;
 		onclick?: () => void;
 	} = $props();
@@ -24,8 +26,9 @@
 </script>
 
 <div
-	style="--duration: {animate ? $duration : 0}ms ; grid-template-columns: repeat({count}, 100%);"
-	class="img relative grid snap-x snap-mandatory overflow-hidden"
+	style="--duration: {animate ? $duration : 0}ms; grid-template-columns: repeat({count}, 100%);"
+	class="relative grid snap-x snap-mandatory overflow-hidden {className}"
+	class:img={animate}
 >
 	{#each Array.from({ length: count }) as _, i}
 		<!-- svelte-ignore a11y_click_events_have_key_events -->

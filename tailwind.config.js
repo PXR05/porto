@@ -8,9 +8,11 @@ const config = {
 	safelist: ['dark'],
 	plugins: [
 		plugin(({ addVariant }) => {
+			addVariant('ocean', '.ocean &');
 			addVariant('gruvbox', '.gruvbox &');
 			addVariant('catppuccin', '.catppuccin &');
 		}),
+		require('tailwindcss-animate'),
 		require('@tailwindcss/typography')
 	],
 	theme: {
@@ -63,9 +65,31 @@ const config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: ['JetBrains Mono', ...fontFamily.mono],
-				mono: ['Departure Mono', ...fontFamily.mono],
-				styled: ['Alpha Lyrae', ...fontFamily.mono]
+				t_sans: ['JetBrains Mono', ...fontFamily.mono],
+				t_mono: ['Departure Mono', ...fontFamily.mono],
+				t_styled: ['Alpha Lyrae', ...fontFamily.mono],
+				sans: ['Geist', ...fontFamily.sans],
+				serif: ['Lora', ...fontFamily.serif],
+				mono: ['Geist Mono', ...fontFamily.mono]
+			},
+			keyframes: {
+				'accordion-down': {
+					from: { height: '0' },
+					to: { height: 'var(--bits-accordion-content-height)' }
+				},
+				'accordion-up': {
+					from: { height: 'var(--bits-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'caret-blink': {
+					'0%,70%,100%': { opacity: '1' },
+					'20%,50%': { opacity: '0' }
+				}
+			},
+			animation: {
+				'accordion-down': 'accordion-down 0.2s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'caret-blink': 'caret-blink 1.25s ease-out infinite'
 			}
 		}
 	}

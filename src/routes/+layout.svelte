@@ -1,83 +1,65 @@
 <script lang="ts">
-	import { onNavigate } from '$app/navigation';
-	import { className, duration } from '@/lib/stores';
-	import { cn, reverseWipeIn, reverseWipeOut, wipeIn, wipeOut } from '@/lib/utils';
-	import { onMount, type Snippet } from 'svelte';
+	import { page } from '$app/state';
+	import { Circle, Sparkle, TerminalSquare, Waves } from 'lucide-svelte';
 	import '../app.css';
-	import ThemeSwitch from '@/lib/components/ThemeSwitch.svelte';
+	import Splash from './Splash.svelte';
+	import { browser } from '$app/environment';
 
-	let { children }: { children: Snippet<[]> } = $props();
+	let { children } = $props();
 
-	let renderCount = $state(0);
+	let showSplash = $state(true);
 
-	onNavigate(() => {
-		renderCount += 1;
-	});
+	const themes = [
+		{
+			name: 'serif',
+			icon: Circle
+		},
+		{
+			name: 'ocean',
+			icon: Waves
+		}
+	];
 
-	let show = $state(false);
-	onMount(() => {
-		setTimeout(() => {
-			show = true;
-		}, $duration * 0.5);
+	function setTheme(newTheme: string) {
+		document.documentElement.classList.remove(...themes.map((t) => t.name));
+		document.documentElement.classList.add(newTheme);
+		localStorage.setItem('theme', newTheme);
+	}
+
+	$effect(() => {
+		if (!browser) return;
+		if (page.url.pathname === '/') {
+			setTheme('serif-default');
+		} else if (page.url.pathname.startsWith('/terminal')) {
+			setTheme('ocean');
+		}
 	});
 </script>
 
 <svelte:head>
-	<title>PXR</title>
+	<title>PXR {page.url.hash && '|'} {page.url.hash.substring(1)}</title>
 </svelte:head>
 
-{#if show}
-	<div class="relative mx-2 h-svh">
-		{#key renderCount}
-			<div
-				in:wipeIn={{
-					duration: $duration / 2,
-					delay: $duration * 0.5
-				}}
-				out:reverseWipeOut={{
-					duration: $duration / 2,
-					delay: $duration * 0.5
-				}}
-				style="--duration: {$duration}ms;"
-				class={cn(
-					'absolute inset-0 m-auto flex h-[calc(100svh-1rem)] w-full max-w-[80ch] flex-col overflow-hidden border-2 border-primary md:h-[calc(100svh-10rem)]',
-					renderCount === 0 && 'cont',
-					$className
-				)}
-			>
-				<div
-					in:wipeOut={{
-						duration: $duration / 2,
-						delay: $duration
-					}}
-					out:reverseWipeIn={{
-						duration: $duration / 2
-					}}
-					class={cn(
-						'absolute inset-0 z-50 h-full w-full bg-primary',
-						renderCount === 0 ? 'screen' : '[clip-path:inset(0_100%_0_0)]'
-					)}
-				></div>
-				{@render children()}
-			</div>
-		{/key}
-	</div>
-{/if}
-<div class="absolute bottom-2 right-2">
-	<ThemeSwitch />
-</div>
+<div class="relative min-h-svh place-items-center">
+	{#if showSplash}
+		<Splash
+			onanimationend={(e) => {
+				if (e === 'hide') {
+					showSplash = false;
+				}
+			}}
+		/>
+	{:else}
+		{@render children()}
+	{/if}
 
-<style>
-	.cont {
-		clip-path: inset(0 0 100% 0);
-		transition-delay: var(--duration);
-		transition: all calc(var(--duration) * 0.5) cubic-bezier(0.85, 0, 0.15, 1);
-		animation: vertical-wipe-in calc(var(--duration) / 2) cubic-bezier(0.85, 0, 0.15, 1)
-			calc(var(--duration) / 2) forwards;
-	}
-	.screen {
-		clip-path: inset(0 0 0 0);
-		animation: vertical-wipe-out calc(var(--duration) / 2) cubic-bezier(0.85, 0, 0.15, 1)
-			var(--duration) forwards;
-	}
-</style>
+	{#if page.url.pathname.startsWith('/terminal')}
+		<a href="/" class="fixed bottom-4 left-4 z-10 p-2">
+			<Sparkle strokeWidth={1.5} />
+		</a>
+	{:else}
+		<a href="/terminal" class="fixed bottom-4 left-4 z-10 p-2">
+			<TerminalSquare strokeWidth={1.5} />
+		</a>
+	{/if}
+</div>

@@ -126,3 +126,5 @@ export const flyAndScale = (
 		easing: cubicOut
 	};
 };
+
+export const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

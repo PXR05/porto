@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { projects } from '@/lib/data';
-	import { className, duration } from '@/lib/stores';
-	import Header from '@/routes/Header.svelte';
+	import { className } from '@/lib/stores';
+	import Header from '@/routes/terminal/Header.svelte';
 	import { onMount } from 'svelte';
 	import * as Dialog from '$lib/components/ui/dialog';
-	import Carousel from './Carousel.svelte';
-	import { scale } from 'svelte/transition';
-	import { circInOut } from 'svelte/easing';
+	import Carousel from '@/lib/components/Carousel.svelte';
 	import { ArrowUpRight } from 'lucide-svelte';
 
 	let proj = $derived($page.params.proj);
@@ -43,12 +41,12 @@
 			rel="noopener noreferrer"
 			class="flex w-fit items-center gap-2"
 		>
-			<h2 class="flex items-center gap-1 font-mono text-2xl font-semibold text-primary">
+			<h2 class="flex items-center gap-1 font-t_mono text-2xl font-semibold text-primary">
 				{project.title}
 				<ArrowUpRight size={28} strokeWidth={3} absoluteStrokeWidth />
 			</h2>
 		</a>
-		<div class="flex flex-wrap gap-2 font-mono">
+		<div class="flex flex-wrap gap-2 font-t_mono">
 			{#each project.tags as tag}
 				<span class="bg-primary px-1.5 font-medium text-primary-foreground">
 					{tag}
@@ -62,11 +60,7 @@
 </div>
 
 <Dialog.Root bind:open>
-	<Dialog.Content
-		transition={scale}
-		transitionConfig={{ duration: $duration / 2, start: 0.5, easing: circInOut }}
-		class="h-full max-h-svh w-full max-w-[100vw] p-0"
-	>
+	<Dialog.Content class="h-full max-h-svh w-full max-w-[100vw] p-0">
 		<img
 			src="/assets/{proj}_{index}.webp"
 			alt="{proj}-{index}"

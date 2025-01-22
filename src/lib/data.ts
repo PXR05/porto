@@ -66,15 +66,15 @@ export const projects: Record<
 	}
 };
 
-export const contacts = {
+export const contacts: Record<string, string> = {
 	Email: 'williamluhur.27@gmail.com',
 	WhatsApp: 'https://wa.me/+628990377159',
 	'X (Twitter)': 'https://x.com/pxr_____',
 	GitHub: 'https://github.com/PXR05',
-	LinkedIn: 'https://www.linkedin.com/in/william-luhur/'
+	LinkedIn: 'https://www.linkedin.com/in/william-luhur'
 };
 
-export const skills = [
+export const skills: string[] = [
 	'TypeScript',
 	'Svelte',
 	'React',
@@ -94,9 +94,17 @@ export const skills = [
 	'Godot'
 ];
 
-export const profile = {
+export const profile: {
+	name: string;
+	title: string;
+	location: string;
+	intro: string;
+} = {
 	name: 'William',
-	location: 'Indonesia',
+	title: 'Software Developer',
+	location: 'Jakarta, Indonesia',
 	intro:
 		'Undergraduate student majoring in Computer Science. Able to adapt and work on various technologies quickly. Creating software for users.'
 };
+
+export default { projects, contacts, skills, profile };

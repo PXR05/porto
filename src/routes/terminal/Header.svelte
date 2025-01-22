@@ -12,7 +12,7 @@
 </script>
 
 <h1
-	class="flex w-full items-center justify-between border-b-2 border-primary font-mono text-xl font-medium text-primary"
+	class="flex w-full items-center justify-between border-b-2 border-primary font-t_mono text-xl font-medium text-primary"
 >
 	<div class="flex items-center">
 		<div class="mr-3 bg-primary">
