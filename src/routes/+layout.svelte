@@ -1,39 +1,48 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { Circle, Sparkle, TerminalSquare, Waves } from 'lucide-svelte';
+	import { Button } from '$lib/components/ui/button';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import { FileText, Sparkle, TerminalSquare } from 'lucide-svelte';
 	import '../app.css';
 	import Splash from './Splash.svelte';
-	import { browser } from '$app/environment';
 
 	let { children } = $props();
 
 	let showSplash = $state(true);
 
-	const themes = [
+	const routes = [
 		{
-			name: 'serif',
-			icon: Circle
+			name: 'Default',
+			path: '/',
+			theme: 'serif-default',
+			icon: Sparkle
 		},
 		{
-			name: 'ocean',
-			icon: Waves
+			name: 'Terminal',
+			path: '/terminal',
+			theme: 'ocean',
+			icon: TerminalSquare
+		},
+		{
+			name: 'Text',
+			path: '/text',
+			theme: 'text',
+			icon: FileText
 		}
 	];
 
 	function setTheme(newTheme: string) {
-		document.documentElement.classList.remove(...themes.map((t) => t.name));
+		document.documentElement.classList.remove(...routes.map((t) => t.theme));
 		document.documentElement.classList.add(newTheme);
 		localStorage.setItem('theme', newTheme);
 	}
 
-	$effect(() => {
-		if (!browser) return;
-		if (page.url.pathname === '/') {
-			setTheme('serif-default');
-		} else if (page.url.pathname.startsWith('/terminal')) {
-			setTheme('ocean');
-		}
-	});
+	let currentRoute = $derived(
+		routes.find((r) => r.path === '/' + page.url.pathname.split('/')[1]) || routes[0]
+	);
+
+	$effect(() => setTheme(currentRoute.theme));
 </script>
 
 <svelte:head>
@@ -53,13 +62,20 @@
 		{@render children()}
 	{/if}
 
-	{#if page.url.pathname.startsWith('/terminal')}
-		<a href="/" class="fixed bottom-4 left-4 z-10 p-2">
-			<Sparkle strokeWidth={1.5} />
-		</a>
-	{:else}
-		<a href="/terminal" class="fixed bottom-4 left-4 z-10 p-2">
-			<TerminalSquare strokeWidth={1.5} />
-		</a>
-	{/if}
+	<div class="fixed bottom-4 left-4 z-10">
+		<DropdownMenu.Root>
+			<DropdownMenu.Trigger>
+				<Button variant="outline" size="icon">
+					<currentRoute.icon class="h-6 w-6" strokeWidth={1.5} />
+				</Button>
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content align="end" side="top" class="w-fit min-w-0 py-0">
+				{#each routes as route}
+					<DropdownMenu.Item onclick={() => goto(route.path)} class="my-2 w-fit">
+						<route.icon class="h-6 w-6" strokeWidth={1.5} />
+					</DropdownMenu.Item>
+				{/each}
+			</DropdownMenu.Content>
+		</DropdownMenu.Root>
+	</div>
 </div>

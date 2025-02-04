@@ -9,8 +9,7 @@ const config = {
 	plugins: [
 		plugin(({ addVariant }) => {
 			addVariant('ocean', '.ocean &');
-			addVariant('gruvbox', '.gruvbox &');
-			addVariant('catppuccin', '.catppuccin &');
+			addVariant('text', '.text &');
 		}),
 		require('tailwindcss-animate'),
 		require('@tailwindcss/typography')
@@ -65,6 +64,7 @@ const config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
+				txt_mono: ['Fira Code', ...fontFamily.mono],
 				t_sans: ['JetBrains Mono', ...fontFamily.mono],
 				t_mono: ['Departure Mono', ...fontFamily.mono],
 				t_styled: ['Alpha Lyrae', ...fontFamily.mono],
