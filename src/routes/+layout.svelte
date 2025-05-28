@@ -49,6 +49,8 @@
 	<title>PXR {page.url.hash && '|'} {page.url.hash.substring(1)}</title>
 </svelte:head>
 
+
+
 <div class="relative min-h-svh place-items-center">
 	{#if showSplash}
 		<Splash

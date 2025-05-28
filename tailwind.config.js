@@ -65,8 +65,8 @@ const config = {
 			},
 			fontFamily: {
 				txt_mono: ['Fira Code', ...fontFamily.mono],
-				t_sans: ['JetBrains Mono', ...fontFamily.mono],
-				t_mono: ['Departure Mono', ...fontFamily.mono],
+				term_sans: ['JetBrains Mono', ...fontFamily.mono],
+				term_mono: ['Departure Mono', ...fontFamily.mono],
 				t_styled: ['Alpha Lyrae', ...fontFamily.mono],
 				sans: ['Geist', ...fontFamily.sans],
 				serif: ['Lora', ...fontFamily.serif],

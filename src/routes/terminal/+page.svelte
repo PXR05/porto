@@ -20,7 +20,7 @@
 			"<img src='/assets/" +
 			key +
 			"_logo.webp' alt='banner' class='border-2 border-primary object-cover w-10 h-10' />" +
-			"<h3 class='text-xl font-medium font-t_mono text-primary'>" +
+			"<h3 class='text-xl font-medium font-term_mono text-primary'>" +
 			value.title +
 			'</h3>' +
 			'</a>' +
@@ -231,7 +231,7 @@
 								</p>
 								{#if l.hover && hoverEnabled}
 									<HoverCard.Content
-										class="mt-0 rounded-none border-2 border-primary bg-background p-4 font-t_sans"
+										class="mt-0 rounded-none border-2 border-primary bg-background p-4 font-term_sans"
 									>
 										{@html l.hover}
 									</HoverCard.Content>

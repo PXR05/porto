@@ -3,6 +3,9 @@
 	import { projects } from '@/lib/data';
 	import ProjectView from './ProjectView.svelte';
 	import { blur, fly } from 'svelte/transition';
+	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
 
 	let {
 		inview
@@ -11,8 +14,36 @@
 	} = $props();
 
 	let selectedProject = $state<(typeof projects)[string]>();
-
 	let open = $state(false);
+
+	$effect(() => {
+		if (browser) {
+			const projectKey = page.url.searchParams.get('project');
+			if (projectKey && projects[projectKey]) {
+				selectedProject = projects[projectKey];
+				open = true;
+			} else {
+				open = false;
+				selectedProject = undefined;
+			}
+		}
+	});
+
+	$effect(() => {
+		if (browser && !open && page.url.searchParams.has('project')) {
+			const url = new URL(page.url);
+			url.searchParams.delete('project');
+			goto(url, { noScroll: true });
+		}
+	});
+
+	function openProject(key: string) {
+		if (browser) {
+			const url = new URL(page.url);
+			url.searchParams.set('project', key);
+			goto(url, { noScroll: true });
+		}
+	}
 </script>
 
 <section class="grid min-h-svh place-items-center p-8">
@@ -37,8 +68,7 @@
 							window.open(project.link, '_blank');
 							return;
 						}
-						selectedProject = project;
-						open = true;
+						openProject(key);
 					}}
 				>
 					{#if inview}
@@ -73,9 +103,7 @@
 </section>
 
 <Dialog.Root bind:open>
-	<Dialog.Content
-		class="h-full max-h-[calc(100svh-4rem)] w-full max-w-[calc(100vw-4rem)] items-end rounded-lg border border-foreground p-0"
-	>
+	<Dialog.Content class="h-[100dvh] w-screen max-w-full items-end rounded-none p-0">
 		{#if selectedProject}
 			<ProjectView {selectedProject} />
 		{/if}

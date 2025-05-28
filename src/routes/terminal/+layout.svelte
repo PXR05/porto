@@ -25,7 +25,7 @@
 	<title>PXR</title>
 </svelte:head>
 
-<div in:fade={{ duration: $duration }} class="contents font-t_sans">
+<div in:fade={{ duration: $duration }} class="contents font-term_sans">
 	{#if show}
 		<div class="relative mx-2 h-svh w-full">
 			{#key renderCount}
