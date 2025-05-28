@@ -6,6 +6,7 @@
 	import { FileText, Sparkle, TerminalSquare } from 'lucide-svelte';
 	import '../app.css';
 	import Splash from './Splash.svelte';
+	import { capitalizeFirstLetter } from '@/lib/utils';
 
 	let { children } = $props();
 
@@ -46,7 +47,7 @@
 </script>
 
 <svelte:head>
-	<title>PXR {page.url.hash && '|'} {page.url.hash.substring(1)}</title>
+	<title>PXR {page.url.hash && '|'} {capitalizeFirstLetter(page.url.hash.substring(1))}</title>
 </svelte:head>
 
 

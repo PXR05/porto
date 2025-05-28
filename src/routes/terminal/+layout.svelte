@@ -27,7 +27,7 @@
 
 <div in:fade={{ duration: $duration }} class="contents font-term_sans">
 	{#if show}
-		<div class="relative mx-2 h-svh w-full">
+		<div class="relative h-svh w-full">
 			{#key renderCount}
 				<div
 					in:wipeIn={{

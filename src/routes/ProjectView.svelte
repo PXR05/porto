@@ -41,7 +41,7 @@
 
 <div class="relative col-[1/1] row-[1/1] flex h-[100dvh] w-screen flex-col gap-8 p-4 md:p-8">
 	<Carousel
-		className="rounded-lg border border-foreground hover:border-primary h-full"
+		className="rounded-lg border border-foreground hover:border-primary h-full m-4 mb-0"
 		bind:index
 		proj={selectedProject.title.toLowerCase()}
 		count={selectedProject.carouselLength}

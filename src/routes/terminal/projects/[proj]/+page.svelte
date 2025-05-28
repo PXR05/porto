@@ -57,7 +57,12 @@
 	</span>
 </Header>
 <div class="grid overflow-scroll">
-	<Carousel bind:index {proj} count={project.carouselLength} onclick={openImageViewer} />
+	<Carousel 
+		bind:index 
+		{proj} 
+		count={project.carouselLength} 
+		onclick={openImageViewer} 
+	/>
 	<div class="flex w-full flex-col gap-4 border-t-2 border-primary p-4">
 		<a
 			href={project.link}

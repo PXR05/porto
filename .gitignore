@@ -23,4 +23,4 @@ vite.config.ts.timestamp-*
 *.psd
 *.ai
 package-lock.json
-bun.lockb
+bun.lock
