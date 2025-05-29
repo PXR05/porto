@@ -1,0 +1,12 @@
+name = "porto"
+pages_build_output_dir = ".svelte-kit/cloudflare"
+compatibility_date = "2025-04-01"
+compatibility_flags = [ "nodejs_compat" ]
+upload_source_maps = true
+
+[vars]
+VITE_BIRTHDATE=2004-09-27
+
+[env.production.vars]
+VITE_BIRTHDATE=2004-09-27
+
