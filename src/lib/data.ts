@@ -19,7 +19,7 @@ export const projects: Record<
 	monograph: {
 		title: 'Monograph',
 		content:
-			'A note-taking app that uses Markdown for formatting and extended with various QoL features. Similar to Notion and Obsidian. Built using Svelte and ProseMirror for the text editor. Data stored locally using IndexedDB wrapped with Dexie.js.',
+			'A note-taking app that uses Markdown for formatting and extended with various QoL features. Built using Svelte and TipTap for the text editor. Data stored locally in IndexedDB with optional backup using Google Drive.',
 		tags: ['Web', 'Svelte', 'TypeScript', 'Tailwind', 'Dexie.js', 'Markdown', 'TipTap'],
 		link: 'https://monograph.pages.dev',
 		carouselLength: 7
