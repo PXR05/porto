@@ -59,10 +59,8 @@
 		<div class="grid grid-cols-2 gap-px bg-foreground p-px">
 			{#each Object.entries(projects) as [key, project], i}
 				{@const length = Object.keys(projects).length}
-				{@const isLastRow = i === length - 1}
 				<button
-					class="group flex h-24 items-center rounded-[calc(var(--radius)-1px)] bg-background px-6 max-sm:flex-col-reverse sm:justify-between sm:gap-4 md:h-32 md:px-10
-						{isLastRow && length % 2 !== 0 && 'col-span-2'}"
+					class="group flex h-24 items-center rounded-[calc(var(--radius)-1px)] bg-background px-6 max-sm:flex-col-reverse sm:justify-between sm:gap-4 md:h-32 md:px-10"
 					onclick={() => {
 						if (i === length - 1) {
 							window.open(project.link, '_blank');

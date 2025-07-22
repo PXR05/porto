@@ -32,12 +32,28 @@ export const projects: Record<
 		link: 'https://preprocess.pages.dev',
 		carouselLength: 9
 	},
-	binary: {
-		title: 'Binary',
+	// binary: {
+	// 	title: 'Binary',
+	// 	content:
+	// 		'A variation of tic-tac-toe built using Svelte with the ability to do co-op multiplayer using the PeerJS WebRTC library.',
+	// 	tags: ['Web', 'Svelte', 'TypeScript', 'WebRTC'],
+	// 	link: 'https://binarygame.pages.dev',
+	// 	carouselLength: 3
+	// },
+	kotak: {
+		title: 'Kotak',
 		content:
-			'A variation of tic-tac-toe built using Svelte with the ability to do co-op multiplayer using the PeerJS WebRTC library.',
-		tags: ['Web', 'Svelte', 'TypeScript', 'WebRTC'],
-		link: 'https://binarygame.pages.dev',
+			'A self-hosted file management system built with SvelteKit that provides secure file storage, organization, and sharing capabilities. This web app allows you to upload, organize, preview, and share files through an intuitive interface, basically a simple personal cloud storage that you control completely.',
+		tags: ['Web', 'Svelte', 'TypeScript', 'PostgreSQL', 'Docker'],
+		link: 'https://github.com/PXR05/kotak',
+		carouselLength: 3
+	},
+	kanade: {
+		title: 'Kanade',
+		content:
+			'A terminal music player written in Go. Manage, play, and download music from YouTube, all from a minimal TUI. It supports local libraries, album art, and metadata display.',
+		tags: ['Terminal', 'Go', 'Bubble Tea', 'ffmpeg'],
+		link: 'https://github.com/PXR05/kanade',
 		carouselLength: 3
 	},
 	archive: {
