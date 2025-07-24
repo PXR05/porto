@@ -48,23 +48,23 @@
 <div
 	bind:this={carouselContainer}
 	onscroll={handleScroll}
-	style="--duration: {animate ? $duration : 0}ms; grid-template-columns: repeat({count}, 100%);"
-	class="relative grid snap-x snap-mandatory overflow-scroll {className}"
+	style="--duration: {animate
+		? $duration
+		: 0}ms; grid-template-columns: repeat({count}, 100%); grid-template-rows: 100%;"
+	class="grid snap-x snap-mandatory overflow-x-auto overflow-y-hidden {className}"
 	class:img={animate}
 >
 	{#each Array.from({ length: count }) as _, i}
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-		<div class="relative h-full w-full snap-start">
+		<div class="relative h-full snap-start">
 			<img
 				{onclick}
 				alt="{proj}-{i}"
 				draggable="false"
 				bind:this={images[i]}
 				src="/assets/{proj}_{i}.webp"
-				class="h-full w-full select-none snap-center object-cover {i === 0
-					? 'object-center'
-					: 'object-top'}"
+				class="h-full w-full select-none snap-center object-cover object-center"
 			/>
 			<div class="absolute right-2 top-2 m-auto flex gap-2" style="">
 				<button
