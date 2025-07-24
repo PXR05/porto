@@ -70,7 +70,11 @@
 <div in:fade={{ delay: 150, duration: 200 }} class="grid">
 	<div class="hide-scroll h-svh snap-y snap-mandatory overflow-y-auto" bind:this={ref}>
 		{#each sections as { el: Section, name }, i (name)}
-			<div id={i.toString()} bind:this={entries[i].el} class="h-svh snap-start">
+			<div
+				id={i.toString()}
+				bind:this={entries[i].el}
+				class="grid h-dvh snap-start place-items-center p-8 md:p-16"
+			>
 				<Section inview={entries[i].viewed} />
 			</div>
 		{/each}

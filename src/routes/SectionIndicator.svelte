@@ -18,9 +18,9 @@
 </script>
 
 <div
-	class="fixed z-10 p-4 max-md:bottom-2 max-md:left-1/2 max-md:-translate-x-1/2 max-sm:bottom-0 md:right-4 md:top-1/2 md:-translate-y-1/2"
+	class="fixed right-4 z-10 p-4 max-lg:bottom-2 max-md:bottom-4 lg:right-2 lg:top-1/2 lg:-translate-y-1/2"
 >
-	<div class="flex items-center gap-2 md:flex-col">
+	<div class="flex items-center gap-2 lg:flex-col">
 		{#each sections as _, i}
 			<button
 				onclick={() => {
@@ -38,7 +38,7 @@
 			</button>
 			{#if i !== sections.length - 1}
 				<div
-					class="h-px w-8 transition-colors md:h-8 md:w-px {currentIndex === i ||
+					class="h-px w-8 transition-colors lg:h-8 lg:w-px {currentIndex === i ||
 					i + 1 === currentIndex
 						? 'bg-primary'
 						: 'bg-muted-foreground/50'}"

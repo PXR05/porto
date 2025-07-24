@@ -46,59 +46,57 @@
 	}
 </script>
 
-<section class="grid min-h-svh place-items-center p-8">
-	<div class="col-[1/1] row-[1/1] flex w-full max-w-screen-xl flex-col gap-8 md:gap-16">
-		{#if inview}
-			<h1
-				in:fly={{ delay: 250, duration: 300, y: 50 }}
-				class="break-words font-serif text-4xl sm:text-5xl md:text-6xl"
+<div class="col-[1/1] row-[1/1] flex w-full max-w-screen-xl flex-col gap-8 md:gap-16">
+	{#if inview}
+		<h1
+			in:fly={{ delay: 250, duration: 300, y: 50 }}
+			class="break-words font-serif text-4xl sm:text-5xl md:text-6xl"
+		>
+			here are some of my <span class="text-primary"> projects </span>
+		</h1>
+	{/if}
+	<div class="grid grid-cols-2 gap-px bg-foreground p-px">
+		{#each Object.entries(projects) as [key, project], i}
+			{@const length = Object.keys(projects).length}
+			<button
+				class="group flex h-24 items-center rounded-[calc(var(--radius)-1px)] bg-background px-6 max-sm:flex-col-reverse sm:justify-between sm:gap-4 md:h-32 md:px-10"
+				onclick={() => {
+					if (i === length - 1) {
+						window.open(project.link, '_blank');
+						return;
+					}
+					openProject(key);
+				}}
 			>
-				here are some of my <span class="text-primary"> projects </span>
-			</h1>
-		{/if}
-		<div class="grid grid-cols-2 gap-px bg-foreground p-px">
-			{#each Object.entries(projects) as [key, project], i}
-				{@const length = Object.keys(projects).length}
-				<button
-					class="group flex h-24 items-center rounded-[calc(var(--radius)-1px)] bg-background px-6 max-sm:flex-col-reverse sm:justify-between sm:gap-4 md:h-32 md:px-10"
-					onclick={() => {
-						if (i === length - 1) {
-							window.open(project.link, '_blank');
-							return;
-						}
-						openProject(key);
-					}}
-				>
-					{#if inview}
-						<h2
-							in:blur={{
-								delay: 500 + 100 * i,
-								duration: 300
-							}}
-							class="grid gap-1 border-transparent text-left font-serif text-2xl transition-all group-hover:border-primary group-hover:pb-1 max-sm:py-1 sm:border-b-4 md:text-4xl"
+				{#if inview}
+					<h2
+						in:blur={{
+							delay: 500 + 100 * i,
+							duration: 300
+						}}
+						class="grid gap-1 border-transparent text-left font-serif text-2xl transition-all group-hover:border-primary group-hover:pb-1 max-sm:py-1 sm:border-b-4 md:text-4xl"
+					>
+						{project.title}
+						<p
+							class="line-clamp-2 max-h-0 text-xs transition-all group-hover:max-h-10 max-sm:hidden md:text-sm"
 						>
-							{project.title}
-							<p
-								class="line-clamp-2 max-h-0 text-xs transition-all group-hover:max-h-10 max-sm:hidden md:text-sm"
-							>
-								{project.content}
-							</p>
-						</h2>
-						<img
-							in:blur={{
-								delay: 750 + 100 * i,
-								duration: 300
-							}}
-							class="aspect-square h-10 w-10 max-sm:rounded"
-							src="/assets/{key}_logo.webp"
-							alt={project.title}
-						/>
-					{/if}
-				</button>
-			{/each}
-		</div>
+							{project.content}
+						</p>
+					</h2>
+					<img
+						in:blur={{
+							delay: 750 + 100 * i,
+							duration: 300
+						}}
+						class="aspect-square h-10 w-10 max-sm:rounded"
+						src="/assets/{key}_logo.webp"
+						alt={project.title}
+					/>
+				{/if}
+			</button>
+		{/each}
 	</div>
-</section>
+</div>
 
 <Dialog.Root bind:open>
 	<Dialog.Content class="h-[100dvh] w-screen max-w-full items-end rounded-none p-0">
