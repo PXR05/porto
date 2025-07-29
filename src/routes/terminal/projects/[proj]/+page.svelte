@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { projects } from '@/lib/data';
-	import { className } from '@/lib/stores';
-	import Header from '@/routes/terminal/Header.svelte';
-	import { onMount } from 'svelte';
+	import Header from '../../Header.svelte';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import Carousel from '@/lib/components/Carousel.svelte';
 	import { ArrowUpRight } from 'lucide-svelte';
@@ -12,10 +10,6 @@
 
 	let proj = $derived(page.params.proj);
 	let project = $derived(projects[proj] ?? {});
-
-	onMount(() => {
-		className.set('md:max-w-[90vw]');
-	});
 
 	let open = $state(false);
 	let index = $state(0);
@@ -57,12 +51,7 @@
 	</span>
 </Header>
 <div class="grid overflow-scroll">
-	<Carousel 
-		bind:index 
-		{proj} 
-		count={project.carouselLength} 
-		onclick={openImageViewer} 
-	/>
+	<Carousel bind:index {proj} count={project.carouselLength} onclick={openImageViewer} />
 	<div class="flex w-full flex-col gap-4 border-t-2 border-primary p-4">
 		<a
 			href={project.link}

@@ -1,12 +1,6 @@
 <script>
-	import { onMount } from 'svelte';
 	import Header from '../Header.svelte';
 	import { projects } from '@/lib/data';
-	import { className } from '@/lib/stores';
-
-	onMount(() => {
-		className.set('md:max-w-[90vw]');
-	});
 </script>
 
 <svelte:head>
@@ -35,6 +29,6 @@
 		{/each}
 	</div>
 	<p class="text-lg">
-		Or you can go back to the <a href="/">home page</a>.
+		Or you can go back to the <a class="underline hover:no-underline" href="/terminal">home page</a>.
 	</p>
 </div>

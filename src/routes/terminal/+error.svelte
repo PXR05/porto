@@ -1,11 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { className } from '@/lib/stores';
-	import { onMount } from 'svelte';
-
-	onMount(() => {
-		className.set('md:max-w-[90vw]');
-	});
+	import { page } from '$app/state';
 </script>
 
 <svelte:head>
@@ -21,13 +15,13 @@
 </a>
 <div class="m-auto flex flex-col items-center justify-center">
 	<h1 class="text-5xl font-semibold text-primary">
-		{$page.status}
+		{page.status}
 	</h1>
 	<span class="text-lg text-muted-foreground">
-		{typeof $page.error === 'object' && $page.error !== null
-			? $page.error.message
-			: $page.error !== null
-				? $page.error
+		{typeof page.error === 'object' && page.error !== null
+			? page.error.message
+			: page.error !== null
+				? page.error
 				: 'an error occurred'}
 	</span>
 </div>

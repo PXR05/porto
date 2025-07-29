@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { className, cmdHistory, duration, skip } from '@/lib/stores';
+	import { cmdHistory, duration, skip } from './stores';
 	import * as HoverCard from '@/lib/components/ui/hover-card';
 	import { highlight } from '@/lib/highlight';
 	import 'highlight.js/styles/atom-one-dark.min.css';
@@ -51,7 +51,8 @@
 			type: 'links',
 			content: Object.entries(contacts).map(([key, value]) => ({
 				link: key === 'Email' ? `mailto:${value}` : value,
-				content: key
+				content: key,
+				external: true
 			}))
 		},
 		{
@@ -59,36 +60,13 @@
 			type: 'list',
 			content: skills
 		},
-		// {
-		// 	cmd: 'ls certificates | sort',
-		// 	type: 'links',
-		// 	content: [
-		// 		{
-		// 			link: '/certificates/a',
-		// 			content: 'A'
-		// 		},
-		// 		{
-		// 			link: '/certificates/b',
-		// 			content: 'B'
-		// 		},
-		// 		{
-		// 			link: '/certificates/c',
-		// 			content: 'C'
-		// 		},
-		// 		{
-		// 			link: '/certificates/d',
-		// 			content: 'D'
-		// 		},
-		// 		{
-		// 			link: '/certificates/e',
-		// 			content: 'E'
-		// 		}
-		// 	]
-		// },
 		{
 			cmd: 'ls <a>projects</a>',
 			type: 'links',
-			content: projects
+			content: projects.map((p) => ({
+				...p,
+				external: false
+			}))
 		}
 	]);
 
@@ -141,8 +119,6 @@
 		setTimeout(() => {
 			show = true;
 		}, $duration * 1.5);
-
-		className.set('');
 
 		const history = $cmdHistory.map((h) => ({
 			cmd: 'view ' + h,
@@ -219,10 +195,15 @@
 					<div class="flex flex-wrap items-center text-muted-foreground">
 						[
 						{#each section.content as link, i}
-							{@const l = link as { link: string; content: string; hover?: string }}
+							{@const l = link as {
+								link: string;
+								content: string;
+								hover?: string;
+								external: boolean;
+							}}
 							<HoverCard.Root openDelay={150} closeDelay={50}>
 								<p>
-									"<a href={l.link} class="text-lg">
+									"<a href={l.link} class="text-lg" target={l.external ? '_blank' : undefined}>
 										<HoverCard.Trigger class="">
 											{l.content}
 										</HoverCard.Trigger>
