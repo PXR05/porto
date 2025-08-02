@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { duration } from '@/routes/terminal/stores';
-	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
+	import { ChevronLeft, ChevronRight } from '@lucide/svelte';
 
 	let {
 		proj,

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button } from '@/lib/components/ui/button';
 	import { contacts, profile, projects, skills } from '@/lib/data';
-	import { Download } from 'lucide-svelte';
+	import { Download } from '@lucide/svelte';
 	import { fade } from 'svelte/transition';
 
 	function downloadPDF(

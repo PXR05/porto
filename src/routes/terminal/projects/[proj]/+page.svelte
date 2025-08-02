@@ -4,7 +4,7 @@
 	import Header from '../../Header.svelte';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import Carousel from '@/lib/components/Carousel.svelte';
-	import { ArrowUpRight } from 'lucide-svelte';
+	import { ArrowUpRight } from '@lucide/svelte';
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 
