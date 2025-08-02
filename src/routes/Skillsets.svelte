@@ -55,12 +55,12 @@
 </div>
 
 {#snippet star()}
-	<div class="relative aspect-square h-4 w-4 bg-primary">
-		<span class="absolute -right-2 -top-2 aspect-square h-4 w-4 rounded-full bg-background"></span>
-		<span class="absolute -bottom-2 -right-2 aspect-square h-4 w-4 rounded-full bg-background"
+	<div class="relative aspect-square size-4 bg-primary">
+		<span class="absolute -right-2 -top-2 aspect-square size-4 rounded-full bg-background"></span>
+		<span class="absolute -bottom-2 -right-2 aspect-square size-4 rounded-full bg-background"
 		></span>
-		<span class="absolute -left-2 -top-2 aspect-square h-4 w-4 rounded-full bg-background"></span>
-		<span class="absolute -bottom-2 -left-2 aspect-square h-4 w-4 rounded-full bg-background"
+		<span class="absolute -left-2 -top-2 aspect-square size-4 rounded-full bg-background"></span>
+		<span class="absolute -bottom-2 -left-2 aspect-square size-4 rounded-full bg-background"
 		></span>
 	</div>
 {/snippet}

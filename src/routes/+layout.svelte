@@ -67,13 +67,13 @@
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger>
 				<Button variant="outline" size="icon">
-					<currentRoute.icon class="h-6 w-6" strokeWidth={1.5} />
+					<currentRoute.icon strokeWidth={1.5} />
 				</Button>
 			</DropdownMenu.Trigger>
-			<DropdownMenu.Content align="end" side="top" class="w-fit min-w-0 py-0">
+			<DropdownMenu.Content align="center" side="top" class="w-fit min-w-0 py-0">
 				{#each routes as route}
-					<DropdownMenu.Item onclick={() => goto(route.path)} class="my-2 w-fit">
-						<route.icon class="h-6 w-6" strokeWidth={1.5} />
+					<DropdownMenu.Item onclick={() => goto(route.path)} class="my-1 size-8 w-fit">
+						<route.icon strokeWidth={1.5} />
 					</DropdownMenu.Item>
 				{/each}
 			</DropdownMenu.Content>

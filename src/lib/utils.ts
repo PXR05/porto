@@ -7,6 +7,13 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type WithoutChild<T> = T extends { child?: any } ? Omit<T, 'child'> : T;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type WithoutChildren<T> = T extends { children?: any } ? Omit<T, 'children'> : T;
+export type WithoutChildrenOrChild<T> = WithoutChildren<WithoutChild<T>>;
+export type WithElementRef<T, U extends HTMLElement = HTMLElement> = T & { ref?: U | null };
+
 type FlyAndScaleParams = {
 	y?: number;
 	x?: number;
@@ -40,7 +47,7 @@ export const reverseWipeIn = (
 			return `clip-path: inset(0 0 ${eased * 100}% 0);`;
 		}
 	};
-}
+};
 
 export const wipeOut = (
 	node: Element,
@@ -70,21 +77,18 @@ export const reverseWipeOut = (
 	};
 };
 
-export const typewriter = (
-  node: Element,
-  { speed = 1 }: { speed?: number }
-): TransitionConfig => {
-  const text = node.textContent ?? ''
-  const duration = text.length / (speed * 0.01)
+export const typewriter = (node: Element, { speed = 1 }: { speed?: number }): TransitionConfig => {
+	const text = node.textContent ?? '';
+	const duration = text.length / (speed * 0.01);
 
-  return {
-	duration,
-	tick: (t) => {
-	  const i = Math.trunc(text.length * t)
-	  node.textContent = text.slice(0, i)
-	}
-  }
-}
+	return {
+		duration,
+		tick: (t) => {
+			const i = Math.trunc(text.length * t);
+			node.textContent = text.slice(0, i);
+		}
+	};
+};
 
 export const flyAndScale = (
 	node: Element,

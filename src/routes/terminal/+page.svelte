@@ -187,12 +187,12 @@
 						}ms forwards;`}
 			>
 				{#if section.type === 'text'}
-					<p class="text-lg text-muted-foreground">
+					<p class="text-muted-foreground text-lg">
 						"<span class="text-foreground">{@html section.content}</span>"
 					</p>
 				{/if}
 				{#if section.type === 'links'}
-					<div class="flex flex-wrap items-center text-muted-foreground">
+					<div class="text-muted-foreground flex flex-wrap items-center">
 						[
 						{#each section.content as link, i}
 							{@const l = link as {
@@ -212,7 +212,7 @@
 								</p>
 								{#if l.hover && hoverEnabled}
 									<HoverCard.Content
-										class="mt-0 rounded-none border-2 border-primary bg-background p-4 font-term_sans"
+										class="border-primary bg-background font-term_sans mt-0 rounded-none border-2 p-4"
 									>
 										{@html l.hover}
 									</HoverCard.Content>
@@ -223,7 +223,7 @@
 					</div>
 				{/if}
 				{#if section.type === 'list'}
-					<div class="flex flex-wrap items-center text-muted-foreground">
+					<div class="text-muted-foreground flex flex-wrap items-center">
 						[
 						{#each section.content as item, i}
 							<p class="text-lg">
@@ -245,21 +245,9 @@
 			axis: 'y',
 			duration: $duration / 4
 		}}
-		class="absolute bottom-0 grid w-full place-items-center bg-primary p-2 text-xl font-medium text-primary-foreground transition-all hover:opacity-75"
+		class="bg-primary text-primary-foreground absolute bottom-0 grid w-full place-items-center p-2 text-xl font-medium transition-all hover:opacity-75"
 		onclick={() => skip.set(true)}
 	>
 		<span class="scale-x-150"> ▼ </span>
 	</button>
 {/if}
-
-<style>
-	a {
-		color: hsl(var(--primary));
-		text-decoration: underline;
-		text-decoration-thickness: 0.1rem;
-	}
-
-	a:hover {
-		text-decoration: none;
-	}
-</style>

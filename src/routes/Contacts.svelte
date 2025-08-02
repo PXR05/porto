@@ -35,16 +35,16 @@
 							duration: 300,
 							x: -50
 						}}
-						class="relative aspect-square h-4 w-4 bg-primary"
+						class="relative aspect-square size-4 bg-primary"
 					>
-						<span class="absolute -right-2 -top-2 aspect-square h-4 w-4 rounded-full bg-background"
+						<span class="absolute -right-2 -top-2 aspect-square size-4 rounded-full bg-background"
 						></span>
 						<span
-							class="absolute -bottom-2 -right-2 aspect-square h-4 w-4 rounded-full bg-background"
+							class="absolute -bottom-2 -right-2 aspect-square size-4 rounded-full bg-background"
 						></span>
-						<span class="absolute -left-2 top-[-0.575rem] aspect-square h-4 w-4 bg-background"
+						<span class="absolute -left-2 top-[-0.575rem] aspect-square size-4 bg-background"
 						></span>
-						<span class="absolute -left-2 bottom-[-0.575rem] aspect-square h-4 w-4 bg-background"
+						<span class="absolute -left-2 bottom-[-0.575rem] aspect-square size-4 bg-background"
 						></span>
 					</div>
 					<h2

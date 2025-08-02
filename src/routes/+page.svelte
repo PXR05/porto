@@ -88,19 +88,13 @@
 		transition:fade
 		class="fixed animate-bounce max-md:right-4 max-md:top-1/2 max-md:-translate-y-1/2 md:bottom-8 md:left-1/2 md:-translate-x-1/2"
 	>
-		<div class="relative aspect-square h-6 w-6 bg-primary">
-			<span class="absolute -bottom-3 -left-3 aspect-square h-6 w-6 rounded-full bg-background"
+		<div class="relative aspect-square size-6 bg-primary">
+			<span class="absolute -bottom-3 -left-3 aspect-square size-6 rounded-full bg-background"
 			></span>
-			<span class="absolute -bottom-3 -right-3 aspect-square h-6 w-6 rounded-full bg-background"
+			<span class="absolute -bottom-3 -right-3 aspect-square size-6 rounded-full bg-background"
 			></span>
-			<span class="absolute -top-3 left-[-0.85rem] aspect-square h-6 w-6 bg-background"></span>
-			<span class="absolute -top-3 right-[-0.85rem] aspect-square h-6 w-6 bg-background"></span>
+			<span class="absolute -top-3 left-[-0.85rem] aspect-square size-6 bg-background"></span>
+			<span class="absolute -top-3 right-[-0.85rem] aspect-square size-6 bg-background"></span>
 		</div>
 	</div>
 {/if}
-
-<style>
-	:global(html) {
-		scroll-behavior: smooth;
-	}
-</style>

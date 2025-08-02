@@ -27,8 +27,6 @@
 
 	let grid = $state(Array(logoSize).fill(Array(logoSize).fill(false)));
 
-	const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 	async function animateLogo(type: 'show' | 'hide' = 'show') {
 		interactive = false;
 
@@ -45,7 +43,7 @@
 
 		for (const [i, j] of cellsToAnimate) {
 			grid[i][j] = type === 'show';
-			await delay(0);
+			await new Promise((resolve) => requestAnimationFrame(resolve));
 		}
 
 		interactive = true;
@@ -55,10 +53,10 @@
 	let interactive = $state(false);
 
 	onMount(() => {
-		animateLogo().then(() => {
+		animateLogo('show').then(() => {
 			setTimeout(() => {
 				animateLogo('hide');
-			}, 500);
+			}, 300);
 		});
 	});
 
@@ -77,7 +75,7 @@
 <svelte:window onwheel={(e) => handleScroll(e)} />
 
 <button
-	class="absolute inset-0 grid h-full w-full place-items-center bg-background {!interactive &&
+	class="bg-background absolute inset-0 grid h-full w-full place-items-center {!interactive &&
 		'pointer-events-none'}"
 	onclick={() => animateLogo('hide')}
 	onkeydown={(e) => {
@@ -90,7 +88,7 @@
 		{#each grid as row}
 			<div class="flex">
 				{#each row as cell}
-					<span class="aspect-square h-6 w-6 {cell && 'bg-foreground'}"> </span>
+					<span class="aspect-square size-6 {cell && 'bg-foreground'}"> </span>
 				{/each}
 			</div>
 		{/each}
