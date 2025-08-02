@@ -63,7 +63,7 @@
 		{@render children()}
 	{/if}
 
-	<div class="fixed bottom-4 left-4 z-10">
+	<div id="bottom-left" class="fixed bottom-4 left-4 z-10">
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger>
 				<Button variant="outline" size="icon">
