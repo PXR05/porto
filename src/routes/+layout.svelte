@@ -3,14 +3,14 @@
 	import { page } from '$app/state';
 	import { Button } from '$lib/components/ui/button';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-	import { FileText, Sparkle, TerminalSquare } from '@lucide/svelte';
+	import { FileText, Sparkle, TerminalSquare, TicketIcon } from '@lucide/svelte';
 	import '../app.css';
 	import Splash from './Splash.svelte';
 	import { capitalizeFirstLetter } from '@/lib/utils';
 
 	let { children } = $props();
 
-	let showSplash = $state(true);
+	let showSplash = $state(page.url.searchParams.get('splash') !== 'false');
 
 	const routes = [
 		{
@@ -30,6 +30,12 @@
 			path: '/text',
 			theme: 'text',
 			icon: FileText
+		},
+		{
+			name: 'Ticket',
+			path: '/ticket',
+			theme: 'ticket',
+			icon: TicketIcon
 		}
 	];
 

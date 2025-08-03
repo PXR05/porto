@@ -24,13 +24,13 @@
 		delay: 150,
 		duration: 200
 	}}
-	class="mx-auto max-w-3xl select-text bg-background p-6 text-foreground"
+	class="bg-background text-foreground mx-auto max-w-3xl p-6 font-normal select-text"
 >
 	<!-- Header -->
 	<header class="mb-6 border-b pb-4">
 		<div class="flex items-start justify-between">
 			<div class="flex-1">
-				<h1 class="mb-1 text-2xl font-bold uppercase tracking-wide">{profile.name}</h1>
+				<h1 class="mb-1 text-2xl font-bold tracking-wide uppercase">{profile.name}</h1>
 				<h2 class="mb-1 text-base font-semibold">{profile.title}</h2>
 				<p class="mb-2 text-sm">{profile.location}</p>
 				<p class="text-sm leading-relaxed">{profile.intro}</p>
@@ -43,12 +43,12 @@
 
 	<!-- Contact Information -->
 	<section class="mb-5">
-		<h2 class="mb-2 border-b pb-1 text-base font-bold uppercase tracking-wide">
+		<h2 class="mb-2 border-b pb-1 text-base font-bold tracking-wide uppercase">
 			Contact Information
 		</h2>
 		<div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
 			{#each Object.entries(contacts) as [key, value]}
-				<div class="flex">
+				<div class="flex max-md:flex-col">
 					<span class="w-20 font-semibold">{key}:</span>
 					<span class="">{value}</span>
 				</div>
@@ -58,7 +58,7 @@
 
 	<!-- Skills -->
 	<section class="mb-5">
-		<h2 class="mb-2 border-b pb-1 text-base font-bold uppercase tracking-wide">Technical Skills</h2>
+		<h2 class="mb-2 border-b pb-1 text-base font-bold tracking-wide uppercase">Technical Skills</h2>
 		<div class="text-sm">
 			{skills.join(' • ')}
 		</div>
@@ -66,7 +66,7 @@
 
 	<!-- Projects -->
 	<section class="mb-5">
-		<h2 class="mb-2 border-b pb-1 text-base font-bold uppercase tracking-wide">
+		<h2 class="mb-2 border-b pb-1 text-base font-bold tracking-wide uppercase">
 			Projects & Experience
 		</h2>
 		<div class="space-y-4">
