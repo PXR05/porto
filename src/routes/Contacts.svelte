@@ -13,7 +13,7 @@
 	{#if inview}
 		<h1
 			in:fly={{ delay: 250, duration: 300, y: 50 }}
-			class="break-words font-serif text-4xl sm:text-5xl md:text-6xl"
+			class="font-serif text-4xl break-words sm:text-5xl md:text-6xl"
 		>
 			<span class="text-primary"> contact </span> me through these platforms
 		</h1>
@@ -35,16 +35,16 @@
 							duration: 300,
 							x: -50
 						}}
-						class="relative aspect-square size-4 bg-primary"
+						class="bg-primary relative aspect-square size-4"
 					>
-						<span class="absolute -right-2 -top-2 aspect-square size-4 rounded-full bg-background"
+						<span class="bg-background absolute -top-2 -right-2 aspect-square size-4 rounded-full"
 						></span>
 						<span
-							class="absolute -bottom-2 -right-2 aspect-square size-4 rounded-full bg-background"
+							class="bg-background absolute -right-2 -bottom-2 aspect-square size-4 rounded-full"
 						></span>
-						<span class="absolute -left-2 top-[-0.575rem] aspect-square size-4 bg-background"
+						<span class="bg-background absolute top-[-0.575rem] -left-2 aspect-square size-4"
 						></span>
-						<span class="absolute -left-2 bottom-[-0.575rem] aspect-square size-4 bg-background"
+						<span class="bg-background absolute bottom-[-0.575rem] -left-2 aspect-square size-4"
 						></span>
 					</div>
 					<h2
@@ -53,7 +53,7 @@
 							duration: 300,
 							x: -50
 						}}
-						class="flex w-full justify-between border-b-2 border-transparent font-serif text-2xl sm:text-3xl transition-colors group-hover:border-primary max-md:flex-col md:items-center md:text-4xl"
+						class="group-hover:border-primary flex w-full justify-between border-b-2 border-transparent font-serif text-2xl transition-colors max-md:flex-col sm:text-3xl md:items-center md:text-3xl"
 					>
 						<span>
 							{label}

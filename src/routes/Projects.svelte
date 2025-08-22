@@ -59,8 +59,7 @@
 		{#each Object.entries(projects) as [key, project], i}
 			{@const length = Object.keys(projects).length}
 			<button
-				class="group bg-background flex h-24 items-center rounded-[calc(var(--radius)-1px)] px-6 max-sm:flex-col-reverse sm:justify-between sm:gap-4 md:h-32 md:px-10 {i ===
-					length - 1 && 'col-span-full'}"
+				class="group bg-background flex h-24 items-center rounded-[calc(var(--radius)-1px)] px-6 max-sm:flex-col-reverse sm:justify-between sm:gap-4 md:h-28 md:px-10"
 				onclick={() => {
 					if (i === length - 1) {
 						window.open(project.link, '_blank');

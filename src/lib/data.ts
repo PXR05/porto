@@ -72,14 +72,14 @@ export const projects: Record<
 		link: 'https://github.com/PXR05/archive',
 		carouselLength: 2
 	},
-	neiro: {
-		title: 'Neiro',
-		content:
-			'Mobile music player and downloader built using flutter. Able to download music from Spotify and YouTube. Uses YouTube’s public API and Spotify’s official API.',
-		tags: ['Mobile', 'Flutter', 'Dart'],
-		link: 'https://gitfront.io/r/PXR05/vzsoXNa8AR3m/neiro-flutter/',
-		carouselLength: 2
-	},
+	// neiro: {
+	// 	title: 'Neiro',
+	// 	content:
+	// 		'Mobile music player and downloader built using flutter. Able to download music from Spotify and YouTube. Uses YouTube’s public API and Spotify’s official API.',
+	// 	tags: ['Mobile', 'Flutter', 'Dart'],
+	// 	link: 'https://gitfront.io/r/PXR05/vzsoXNa8AR3m/neiro-flutter/',
+	// 	carouselLength: 2
+	// },
 	others: {
 		title: 'Others',
 		content:

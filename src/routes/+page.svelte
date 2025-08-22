@@ -86,15 +86,15 @@
 {#if showScrollHint}
 	<div
 		transition:fade
-		class="fixed animate-bounce max-md:right-4 max-md:top-1/2 max-md:-translate-y-1/2 md:bottom-8 md:left-1/2 md:-translate-x-1/2"
+		class="fixed animate-bounce max-md:top-1/2 max-md:right-4 max-md:-translate-y-1/2 md:bottom-8 md:left-1/2 md:-translate-x-1/2"
 	>
-		<div class="relative aspect-square size-6 bg-primary">
-			<span class="absolute -bottom-3 -left-3 aspect-square size-6 rounded-full bg-background"
+		<div class="bg-primary relative aspect-square size-6">
+			<span class="bg-background absolute -bottom-3 -left-3 aspect-square size-6 rounded-full"
 			></span>
-			<span class="absolute -bottom-3 -right-3 aspect-square size-6 rounded-full bg-background"
+			<span class="bg-background absolute -right-3 -bottom-3 aspect-square size-6 rounded-full"
 			></span>
-			<span class="absolute -top-3 left-[-0.85rem] aspect-square size-6 bg-background"></span>
-			<span class="absolute -top-3 right-[-0.85rem] aspect-square size-6 bg-background"></span>
+			<span class="bg-background absolute -top-3 left-[-0.85rem] aspect-square size-6"></span>
+			<span class="bg-background absolute -top-3 right-[-0.85rem] aspect-square size-6"></span>
 		</div>
 	</div>
 {/if}
