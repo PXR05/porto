@@ -118,17 +118,13 @@ export const skills: string[] = [
 	'Godot'
 ];
 
-export const profile: {
-	name: string;
-	title: string;
-	location: string;
-	intro: string;
-} = {
+export const profile = {
 	name: 'William',
+	surname: 'Luhur',
 	title: 'Software Developer',
 	location: 'Jakarta, Indonesia',
 	intro:
 		'Undergraduate student majoring in Computer Science. Able to adapt and work on various technologies quickly. Creating software for users.'
-};
+} as const;
 
 export default { projects, contacts, skills, profile };

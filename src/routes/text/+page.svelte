@@ -30,7 +30,10 @@
 	<header class="mb-6 border-b pb-4">
 		<div class="flex items-start justify-between">
 			<div class="flex-1">
-				<h1 class="mb-1 text-2xl font-bold tracking-wide uppercase">{profile.name}</h1>
+				<h1 class="mb-1 text-2xl font-bold tracking-wide uppercase">
+					{profile.name}
+					{profile.surname}
+				</h1>
 				<h2 class="mb-1 text-base font-semibold">{profile.title}</h2>
 				<p class="mb-2 text-sm">{profile.location}</p>
 				<p class="text-sm leading-relaxed">{profile.intro}</p>
