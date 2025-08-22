@@ -50,16 +50,17 @@
 	{#if inview}
 		<h1
 			in:fly={{ delay: 250, duration: 300, y: 50 }}
-			class="break-words font-serif text-4xl sm:text-5xl md:text-6xl"
+			class="font-serif text-4xl break-words sm:text-5xl md:text-6xl"
 		>
 			here are some of my <span class="text-primary"> projects </span>
 		</h1>
 	{/if}
-	<div class="grid grid-cols-2 gap-px bg-foreground p-px">
+	<div class="bg-foreground grid grid-cols-2 gap-px p-px">
 		{#each Object.entries(projects) as [key, project], i}
 			{@const length = Object.keys(projects).length}
 			<button
-				class="group flex h-24 items-center rounded-[calc(var(--radius)-1px)] bg-background px-6 max-sm:flex-col-reverse sm:justify-between sm:gap-4 md:h-32 md:px-10"
+				class="group bg-background flex h-24 items-center rounded-[calc(var(--radius)-1px)] px-6 max-sm:flex-col-reverse sm:justify-between sm:gap-4 md:h-32 md:px-10 {i ===
+					length - 1 && 'col-span-full'}"
 				onclick={() => {
 					if (i === length - 1) {
 						window.open(project.link, '_blank');
@@ -74,7 +75,7 @@
 							delay: 500 + 100 * i,
 							duration: 300
 						}}
-						class="grid gap-1 border-transparent text-left font-serif text-2xl transition-all group-hover:border-primary group-hover:pb-1 max-sm:py-1 sm:border-b-4 md:text-4xl"
+						class="group-hover:border-primary grid gap-1 border-transparent text-left font-serif text-2xl transition-all group-hover:pb-1 max-sm:py-1 sm:border-b-4 md:text-4xl"
 					>
 						{project.title}
 						<p

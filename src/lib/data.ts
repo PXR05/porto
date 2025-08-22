@@ -32,6 +32,14 @@ export const projects: Record<
 		link: 'https://preprocess.pages.dev',
 		carouselLength: 9
 	},
+	panopticon: {
+		title: 'Panopticon',
+		content:
+			'A Human Resource (HR) management system designed to streamline administration for both employees and managers. Features a personal dashboard for tracking attendance, leave, and salary, alongside a management portal for overseeing requests, managing employee data, and exporting reports.',
+		tags: ['Web', 'Svelte', 'TypeScript', 'PostgreSQL', 'Docker'],
+		link: 'https://pxr0.pages.dev/?project=panopticon&splash=false#projects',
+		carouselLength: 3
+	},
 	// binary: {
 	// 	title: 'Binary',
 	// 	content:

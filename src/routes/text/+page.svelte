@@ -80,7 +80,7 @@
 					</div>
 					<div class="text-xs">
 						<span class="font-semibold">Link:</span>
-						{project.link}
+						<a href={project.link} target="_blank" rel="noopener noreferrer">{project.link}</a>
 					</div>
 				</div>
 			{/each}
