@@ -63,7 +63,7 @@
 	<section class="mb-5">
 		<h2 class="mb-2 border-b pb-1 text-base font-bold tracking-wide uppercase">Technical Skills</h2>
 		<div class="text-sm">
-			{skills.join(' • ')}
+			{skills.join(', ')}
 		</div>
 	</section>
 
