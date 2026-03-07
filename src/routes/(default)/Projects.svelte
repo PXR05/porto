@@ -55,11 +55,11 @@
 			here are some of my <span class="text-primary"> projects </span>
 		</h1>
 	{/if}
-	<div class="bg-foreground grid grid-cols-2 gap-px p-px">
+	<div class="bg-foreground grid grid-cols-2 gap-px rounded-lg p-px">
 		{#each Object.entries(projects) as [key, project], i}
 			{@const length = Object.keys(projects).length}
 			<button
-				class="group bg-background flex h-24 items-center rounded-[calc(var(--radius)-1px)] px-6 max-sm:flex-col-reverse sm:justify-between sm:gap-4 md:h-28 md:px-10"
+				class="group bg-background flex h-24 items-center rounded-[calc(var(--radius)-1px)] px-6 transition-all max-sm:flex-col-reverse sm:justify-between sm:gap-4 md:h-28 md:px-10"
 				onclick={() => {
 					if (i === length - 1) {
 						window.open(project.link, '_blank');
@@ -74,11 +74,11 @@
 							delay: 500 + 100 * i,
 							duration: 300
 						}}
-						class="group-hover:border-primary grid gap-1 border-transparent text-left font-serif text-2xl transition-all group-hover:pb-1 max-sm:py-1 sm:border-b-4 md:text-4xl"
+						class="md:group-hover:border-primary grid gap-1 border-transparent text-left font-serif text-2xl transition-all max-sm:py-1 sm:border-b-4 md:text-4xl md:group-hover:pb-1"
 					>
 						{project.title}
 						<p
-							class="line-clamp-2 max-h-0 text-xs transition-all group-hover:max-h-10 max-sm:hidden md:text-sm"
+							class="line-clamp-2 max-h-0 text-xs transition-all max-sm:hidden md:text-sm md:group-hover:max-h-10"
 						>
 							{project.content}
 						</p>
@@ -88,7 +88,7 @@
 							delay: 750 + 100 * i,
 							duration: 300
 						}}
-						class="aspect-square h-10 w-10 max-sm:rounded"
+						class="aspect-square size-10 rounded md:size-12"
 						src="/assets/{key}_logo.webp"
 						alt={project.title}
 					/>

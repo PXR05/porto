@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { SquareArrowOutUpRight } from '@lucide/svelte';
 	import Carousel from '@/lib/components/Carousel.svelte';
 	import * as Dialog from '@/lib/components/ui/dialog';
 	import type { projects } from '@/lib/data';
@@ -16,7 +17,7 @@
 	let index = $state(0);
 
 	$effect(() => {
-		if (browser) { 
+		if (browser) {
 			const showImage = page.url.searchParams.get('image');
 			open = showImage === 'true';
 		}
@@ -39,9 +40,11 @@
 	}
 </script>
 
-<div class="relative col-[1/1] row-[1/1] flex h-[100dvh] w-screen flex-col gap-8 p-4 md:p-8">
+<div
+	class="relative col-[1/1] row-[1/1] flex h-[100dvh] w-screen flex-col gap-4 p-4 md:gap-8 md:p-8"
+>
 	<Carousel
-		className="rounded-lg border border-foreground hover:border-primary h-full m-4 mb-0"
+		className="rounded-lg border border-foreground hover:border-primary h-full md:mt-4 mt-8 mb-0"
 		bind:index
 		proj={selectedProject.title.toLowerCase()}
 		count={selectedProject.carouselLength}
@@ -53,14 +56,21 @@
 			href={selectedProject.link}
 			target="_blank"
 			rel="noopener noreferrer"
-			class="w-fit break-words border-b-2 border-transparent transition-all hover:border-primary"
+			class="hover:border-primary flex w-full items-end gap-3 border-b-2 border-transparent break-words transition-all md:w-fit"
 		>
-			{selectedProject.title}
+			<span>
+				{selectedProject.title}
+			</span>
+			<SquareArrowOutUpRight
+				strokeWidth={1.5}
+				absoluteStrokeWidth
+				class="mb-1 inline-block size-6 max-md:ml-auto md:size-8"
+			/>
 		</a>
 		<div class="flex flex-wrap gap-2">
 			{#each selectedProject.tags as tag}
 				<span
-					class="border border-foreground px-3 py-1 font-sans text-sm transition-all hover:border-primary hover:bg-primary hover:text-background md:text-base"
+					class="border-foreground hover:border-primary hover:bg-primary hover:text-background border px-3 py-1 font-sans text-sm transition-all md:text-base"
 				>
 					{tag}
 				</span>

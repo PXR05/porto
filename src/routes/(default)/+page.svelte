@@ -73,7 +73,7 @@
 			<div
 				id={i.toString()}
 				bind:this={entries[i].el}
-				class="grid min-h-dvh snap-start place-items-center p-8 md:p-16"
+				class="grid min-h-dvh snap-center place-items-center p-8 md:p-16"
 			>
 				<Section inview={entries[i].viewed} />
 			</div>
@@ -84,9 +84,16 @@
 <SectionIndicator {ref} {sections} {entries} />
 
 {#if showScrollHint}
-	<div
+	<button
+		aria-label="Scroll down"
 		transition:fade
-		class="fixed animate-bounce max-md:top-1/2 max-md:right-4 max-md:-translate-y-1/2 md:bottom-8 md:left-1/2 md:-translate-x-1/2"
+		class="fixed bottom-8 left-1/2 -translate-x-1/2 animate-bounce max-md:hidden"
+		onclick={() => {
+			ref.scrollTo({
+				top: ref.clientHeight,
+				behavior: 'smooth'
+			});
+		}}
 	>
 		<div class="bg-primary relative aspect-square size-6">
 			<span class="bg-background absolute -bottom-3 -left-3 aspect-square size-6 rounded-full"
@@ -96,5 +103,5 @@
 			<span class="bg-background absolute -top-3 left-[-0.85rem] aspect-square size-6"></span>
 			<span class="bg-background absolute -top-3 right-[-0.85rem] aspect-square size-6"></span>
 		</div>
-	</div>
+	</button>
 {/if}

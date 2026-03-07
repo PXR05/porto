@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import type { Component } from 'svelte';
+	import { innerWidth } from 'svelte/reactivity/window';
 
 	let {
 		ref,
@@ -18,11 +19,12 @@
 </script>
 
 <div
-	class="fixed right-4 z-10 p-4 max-lg:bottom-2 max-md:bottom-4 lg:right-2 lg:top-1/2 lg:-translate-y-1/2"
+	class="fixed right-4 z-10 p-4 max-lg:bottom-2 max-md:bottom-1 max-md:pr-0 lg:top-1/2 lg:right-2 lg:-translate-y-1/2"
 >
-	<div class="flex items-center gap-2 lg:flex-col">
+	<div class="flex items-center lg:flex-col">
 		{#each sections as _, i}
 			<button
+				class="p-2"
 				onclick={() => {
 					ref.scrollTo({
 						top: entries[i].el.offsetTop,
@@ -31,17 +33,15 @@
 				}}
 			>
 				{@render star({
-					size: 1,
+					size: (innerWidth.current ?? 0) < 768 ? 1.5 : 1,
 					className:
 						currentIndex === i ? 'bg-primary' : 'bg-muted-foreground/50 hover:bg-primary/50'
 				})}
 			</button>
 			{#if i !== sections.length - 1}
 				<div
-					class="h-px w-8 transition-colors lg:h-8 lg:w-px {currentIndex === i ||
-					i + 1 === currentIndex
-						? 'bg-primary'
-						: 'bg-muted-foreground/50'}"
+					class="h-px w-8 transition-colors lg:h-8 lg:w-px
+					{currentIndex === i || i + 1 === currentIndex ? 'bg-primary' : 'bg-muted-foreground/50'}"
 				></div>
 			{/if}
 		{/each}
@@ -54,16 +54,16 @@
 		class="relative aspect-square h-[var(--w)] w-[var(--w)] overflow-clip transition-all {className}"
 	>
 		<span
-			class="absolute -right-[calc(var(--w)/2)] -top-[calc(var(--w)/2)] aspect-square h-[var(--w)] w-[var(--w)] rounded-full bg-background"
+			class="bg-background absolute -top-[calc(var(--w)/2)] -right-[calc(var(--w)/2)] aspect-square h-[var(--w)] w-[var(--w)] rounded-full"
 		></span>
 		<span
-			class="absolute -bottom-[calc(var(--w)/2)] -right-[calc(var(--w)/2)] aspect-square h-[var(--w)] w-[var(--w)] rounded-full bg-background"
+			class="bg-background absolute -right-[calc(var(--w)/2)] -bottom-[calc(var(--w)/2)] aspect-square h-[var(--w)] w-[var(--w)] rounded-full"
 		></span>
 		<span
-			class="absolute -left-[calc(var(--w)/2)] -top-[calc(var(--w)/2)] aspect-square h-[var(--w)] w-[var(--w)] rounded-full bg-background"
+			class="bg-background absolute -top-[calc(var(--w)/2)] -left-[calc(var(--w)/2)] aspect-square h-[var(--w)] w-[var(--w)] rounded-full"
 		></span>
 		<span
-			class="absolute -bottom-[calc(var(--w)/2)] -left-[calc(var(--w)/2)] aspect-square h-[var(--w)] w-[var(--w)] rounded-full bg-background"
+			class="bg-background absolute -bottom-[calc(var(--w)/2)] -left-[calc(var(--w)/2)] aspect-square h-[var(--w)] w-[var(--w)] rounded-full"
 		></span>
 	</div>
 {/snippet}
