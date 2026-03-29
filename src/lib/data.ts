@@ -92,9 +92,7 @@ export const projects: Record<
 
 export const contacts: Record<string, string> = {
 	Email: 'williamluhur.27@gmail.com',
-	WhatsApp: 'https://wa.me/+628990377159',
-	'X (Twitter)': 'https://x.com/pxr_____',
-	GitHub: 'https://github.com/PXR05',
+	'X (Twitter)': 'https://x.com/pxr______',
 	LinkedIn: 'https://www.linkedin.com/in/william-luhur'
 };
 
