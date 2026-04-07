@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { skills } from '@/lib/data';
+	import { flatSkills } from '@/lib/data';
 	import { fade, fly } from 'svelte/transition';
 
 	let {
@@ -19,12 +19,12 @@
 		</h1>
 	{/if}
 	<div class="flex grid-cols-2 flex-wrap items-center gap-4 max-md:grid md:gap-8">
-		{#each skills as skill, i}
+		{#each flatSkills as skill, i}
 			{#if inview}
 				<div class="flex items-center gap-4">
 					<div
 						in:fade={{
-							delay: 500 + 50 * (Math.random() * skills.length),
+							delay: 500 + 50 * (Math.random() * flatSkills.length),
 							duration: 300
 						}}
 					>
@@ -32,7 +32,7 @@
 					</div>
 					<h2
 						in:fade={{
-							delay: 500 + 50 * (Math.random() * skills.length),
+							delay: 500 + 50 * (Math.random() * flatSkills.length),
 							duration: 300
 						}}
 						class="hover:text-primary font-serif text-xl transition-colors sm:text-2xl"
@@ -40,11 +40,11 @@
 						{skill}
 					</h2>
 				</div>
-				{#if i === skills.length - 1}
+				{#if i === flatSkills.length - 1}
 					<div
 						class="max-md:hidden"
 						in:fade={{
-							delay: 500 + 50 * (Math.random() * skills.length),
+							delay: 500 + 50 * (Math.random() * flatSkills.length),
 							duration: 300
 						}}
 					>

@@ -19,13 +19,14 @@
 		</h1>
 	{/if}
 	<div class="grid gap-8 md:gap-12">
-		{#each Object.entries(contacts).map( ([key, value]) => ({ label: key, link: key === 'Email' ? `mailto:${value}` : value, content: value
-						.split('/')
-						.pop() }) ) as { label, link, content }, i}
+		{#each Object.values(contacts).map( (contact) => ({ label: contact.label, link: contact.type === 'email' ? `mailto:${contact.value}` : contact.type === 'phone' ? `tel:${contact.value}` : contact.value, external: contact.type === 'url', content: contact.type === 'url' ? (contact.value
+								.split('/')
+								.filter(Boolean)
+								.pop() ?? contact.value) : contact.value }) ) as { label, link, content, external }, i}
 			<a
 				href={link}
-				target="_blank"
-				rel="noopener noreferrer"
+				target={external ? '_blank' : undefined}
+				rel={external ? 'noopener noreferrer' : undefined}
 				class="group flex items-center gap-4"
 			>
 				{#if inview}

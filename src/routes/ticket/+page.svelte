@@ -1,7 +1,7 @@
 <script>
 	import { innerHeight, innerWidth } from 'svelte/reactivity/window';
 	import { fade } from 'svelte/transition';
-	import { profile, skills } from '$lib/data';
+	import { flatSkills, profile } from '$lib/data';
 
 	const logoGrid = [
 		[1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
@@ -71,7 +71,7 @@
 		</div>
 
 		<div class="grid w-full grid-cols-2 gap-x-8 gap-y-4 px-8 py-6">
-			{#each skills.slice(0, 6) as skill, i}
+			{#each flatSkills.slice(0, 6) as skill, i}
 				<p class="flex items-end gap-1 text-xl font-semibold">
 					<span class="mb-1 text-xs">
 						{i + 1}

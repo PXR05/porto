@@ -6,8 +6,32 @@
 	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
 	import Header from './Header.svelte';
-	import { contacts, projects as pr, profile, skills } from '@/lib/data';
+	import { contacts, flatSkills, projects as pr, profile } from '@/lib/data';
 	import { beforeNavigate } from '$app/navigation';
+
+	type LinkItem = {
+		link: string;
+		content: string;
+		hover?: string;
+		external: boolean;
+	};
+
+	type Section =
+		| {
+				cmd: string;
+				type: 'text';
+				content: string;
+		  }
+		| {
+				cmd: string;
+				type: 'links';
+				content: LinkItem[];
+		  }
+		| {
+				cmd: string;
+				type: 'list';
+				content: string[];
+		  };
 
 	const projects = Object.entries(pr).map(([key, value]) => ({
 		link: key === 'others' ? value.link : `/terminal/projects/${key}`,
@@ -30,7 +54,7 @@
 			'</div>'
 	}));
 
-	let sections = $state([
+	let sections = $state<Section[]>([
 		{
 			cmd: 'cat name.txt',
 			type: 'text',
@@ -49,16 +73,21 @@
 		{
 			cmd: "grep -E 'email|wa|linkedin|github|x' socials.txt",
 			type: 'links',
-			content: Object.entries(contacts).map(([key, value]) => ({
-				link: key === 'Email' ? `mailto:${value}` : value,
-				content: key,
-				external: true
+			content: Object.values(contacts).map((contact) => ({
+				link:
+					contact.type === 'email'
+						? `mailto:${contact.value}`
+						: contact.type === 'phone'
+							? `tel:${contact.value}`
+							: contact.value,
+				content: contact.label,
+				external: contact.type === 'url'
 			}))
 		},
 		{
 			cmd: 'sort -k 2 skillset.txt',
 			type: 'list',
-			content: skills
+			content: flatSkills
 		},
 		{
 			cmd: 'ls <a>projects</a>',
@@ -120,14 +149,16 @@
 			show = true;
 		}, $duration * 1.5);
 
-		const history = $cmdHistory.map((h) => ({
-			cmd: 'view ' + h,
-			type: 'text',
-			// @ts-ignore
-			content: projects.some((c) => c.content.toLowerCase() === h.toLowerCase())
-				? `Opening project ${h}...`
-				: `view: ${h}: No such project found.`
-		}));
+		const history: Section[] = $cmdHistory.map(
+			(h): Section => ({
+				cmd: 'view ' + h,
+				type: 'text',
+				// @ts-ignore
+				content: projects.some((c) => c.content.toLowerCase() === h.toLowerCase())
+					? `Opening project ${h}...`
+					: `view: ${h}: No such project found.`
+			})
+		);
 		if (history.length > 0) {
 			skip.set(true);
 			done = true;
