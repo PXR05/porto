@@ -115,14 +115,6 @@ export const contacts: Record<
 		icon: Mail,
 		showInTextHeader: true
 	},
-	'X (Twitter)': {
-		label: 'X',
-		value: 'https://x.com/pxr______',
-		username: '@pxr______',
-		type: 'url',
-		icon: Twitter,
-		showInTextHeader: false
-	},
 	LinkedIn: {
 		label: 'LinkedIn',
 		value: 'https://www.linkedin.com/in/william-luhur',
