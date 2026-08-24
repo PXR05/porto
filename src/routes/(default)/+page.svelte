@@ -2,6 +2,7 @@
 	import { contacts, profile } from '@/lib/data';
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import { Github } from '@lucide/svelte';
 
 	const nameChars = [...`${profile.name} ${profile.surname}`];
 	let levels = $state<number[]>(nameChars.map(() => 1));
@@ -77,7 +78,7 @@
 	</div>
 
 	<footer class="border-border mt-2 flex flex-wrap gap-x-6 gap-y-1">
-		{#each Object.values(contacts) as contact}
+		{#each [{ label: 'GitHub', value: 'https://github.com/PXR05', type: 'url' }, ...Object.values(contacts)] as contact}
 			<a
 				href={contact.type === 'email' ? `mailto:${contact.value}` : contact.value}
 				target={contact.type === 'url' ? '_blank' : undefined}
