@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	import { Button } from '$lib/components/ui/button';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-	import { FileText, Sparkle, TerminalSquare, TicketIcon } from '@lucide/svelte';
+	import { FileText, Pilcrow, Sparkle, SquareTerminal, TerminalSquare, TicketIcon } from '@lucide/svelte';
 	import '../app.css';
 	import Splash from './Splash.svelte';
 	import { capitalizeFirstLetter } from '@/lib/utils';
@@ -16,14 +16,20 @@
 		{
 			name: 'Default',
 			path: '/',
-			theme: 'serif-default',
+			theme: 'default',
+			icon: Pilcrow
+		},
+		{
+			name: 'Serif',
+			path: '/serif',
+			theme: 'serif',
 			icon: Sparkle
 		},
 		{
 			name: 'Terminal',
 			path: '/terminal',
 			theme: 'ocean',
-			icon: TerminalSquare
+			icon: SquareTerminal
 		},
 		{
 			name: 'Text',

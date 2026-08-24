@@ -1,4 +1,4 @@
-import { Linkedin, Mail, Phone, Twitter } from '@lucide/svelte';
+import { Linkedin, Mail, MessageCircle, Twitter } from '@lucide/svelte';
 
 export const projects: Record<
 	string,
@@ -24,8 +24,17 @@ export const projects: Record<
 		title: 'Yorishiro',
 		content:
 			'A manga reading website that aggregates from multiple sources to get the latest chapters. Uses Supabase for remote database and authentication. Uses Dexie.js for a local cache to save on remote database bandwidth.',
-		tags: ['Web', 'Svelte', 'TypeScript', 'Tailwind', 'Supabase', 'Dexie.js'],
+		tags: ['Web', 'Svelte', 'TypeScript', 'Supabase', 'Dexie.js'],
 		link: 'https://pxr0.pages.dev/?project=yorishiro&splash=false#projects',
+		carouselLength: 5,
+		highlight: true
+	},
+	cadence: {
+		title: 'Cadence',
+		content:
+			'An offline capable web music player built with SvelteKit, designed to work with a self-hosted backend. Supports library browsing and search, playlist management, queue control, listening history, and offline playback through local caching.',
+		tags: ['Web', 'Svelte', 'TypeScript', 'Dexie.js'],
+		link: 'https://github.com/PXR05/cadence',
 		carouselLength: 5,
 		highlight: true
 	},
@@ -33,7 +42,7 @@ export const projects: Record<
 		title: 'Monograph',
 		content:
 			'A note-taking app that uses Markdown for formatting and extended with various QoL features. Built using Svelte and TipTap for the text editor. Data stored locally in IndexedDB with optional backup using Google Drive.',
-		tags: ['Web', 'Svelte', 'TypeScript', 'Tailwind', 'Dexie.js', 'Markdown', 'TipTap'],
+		tags: ['Web', 'Svelte', 'TypeScript', 'Dexie.js', 'Markdown', 'TipTap'],
 		link: 'https://monograph.pages.dev',
 		carouselLength: 7
 	},
@@ -41,7 +50,7 @@ export const projects: Record<
 		title: 'Preprocess',
 		content:
 			'A web app with a collection of tools to preprocesses multiple types of data. Uses ffmpeg.wasm for audio processing and Tesseract.js for OCR. Built using Svelte and Tailwind.',
-		tags: ['Web', 'Svelte', 'TypeScript', 'Tailwind', 'ffmpeg', 'Tesseract'],
+		tags: ['Web', 'Svelte', 'TypeScript', 'ffmpeg', 'Tesseract'],
 		link: 'https://preprocess.pages.dev',
 		carouselLength: 9
 	},
@@ -61,15 +70,14 @@ export const projects: Record<
 		link: 'https://github.com/PXR05/kotak',
 		carouselLength: 3
 	},
-	kanade: {
-		title: 'Kanade',
-		content:
-			'A terminal music player written in Go. Manage, play, and download music from YouTube, all from a minimal TUI. It supports local libraries, album art, and metadata display.',
-		tags: ['Terminal', 'Go', 'Bubble Tea', 'ffmpeg'],
-		link: 'https://github.com/PXR05/kanade',
-		carouselLength: 3,
-		highlight: true
-	},
+	// kanade: {
+	// 	title: 'Kanade',
+	// 	content:
+	// 		'A terminal music player written in Go. Manage and play music from a minimal TUI, with support for local libraries, album art, and metadata display.',
+	// 	tags: ['Terminal', 'Go', 'Bubble Tea', 'ffmpeg'],
+	// 	link: 'https://github.com/PXR05/kanade',
+	// 	carouselLength: 3
+	// },
 	archive: {
 		title: 'Archive',
 		content:
@@ -102,7 +110,7 @@ export const contacts: Record<
 		label: string;
 		value: string;
 		username?: string;
-		type: 'email' | 'phone' | 'url';
+		type: 'email' | 'url';
 		icon: typeof Mail;
 		showInTextHeader?: boolean;
 	}
@@ -123,12 +131,12 @@ export const contacts: Record<
 		icon: Linkedin,
 		showInTextHeader: true
 	},
-	Phone: {
-		label: 'Phone',
-		value: '+628990377159',
-		username: '+628990377159',
-		type: 'phone',
-		icon: Phone,
+	WhatsApp: {
+		label: 'WhatsApp',
+		value: 'https://wa.me/628990377159',
+		username: '+62 899-0377-159',
+		type: 'url',
+		icon: MessageCircle,
 		showInTextHeader: true
 	}
 };
@@ -147,7 +155,7 @@ export const profile = {
 	title: 'Software Developer',
 	location: 'Jakarta, Indonesia',
 	intro:
-		"Software developer focused on building reliable products, and a Master's student in Computer Science. Adapts quickly across stacks and prioritizes clean architecture, security, and practical user experience."
+		'Software developer who mostly builds web apps with Svelte and TypeScript, from small tools to full products. Also experienced with other languages and platforms where the project requires them.'
 } as const;
 
 export const professionalExperiences: Array<{

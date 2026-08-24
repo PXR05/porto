@@ -71,15 +71,10 @@
 			content: profile.intro
 		},
 		{
-			cmd: "grep -E 'email|wa|linkedin|github|x' socials.txt",
+			cmd: "grep -E 'email|wa|linkedin' socials.txt",
 			type: 'links',
 			content: Object.values(contacts).map((contact) => ({
-				link:
-					contact.type === 'email'
-						? `mailto:${contact.value}`
-						: contact.type === 'phone'
-							? `tel:${contact.value}`
-							: contact.value,
+				link: contact.type === 'email' ? `mailto:${contact.value}` : contact.value,
 				content: contact.label,
 				external: contact.type === 'url'
 			}))

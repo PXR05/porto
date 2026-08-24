@@ -20,12 +20,7 @@
 			value: contact.value,
 			label: contact.username ?? contact.value,
 			icon: contact.icon,
-			href:
-				contact.type === 'email'
-					? `mailto:${contact.value}`
-					: contact.type === 'phone'
-						? `tel:${contact.value}`
-						: contact.value,
+			href: contact.type === 'email' ? `mailto:${contact.value}` : contact.value,
 			external: contact.type === 'url'
 		}));
 </script>

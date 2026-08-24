@@ -41,6 +41,34 @@ body {
 	--serif: 'Lora', serif;
 	--mono: 'Geist Mono', monospace;
 
+	--background: hsl(48 47% 94%);
+	--foreground: hsl(30 10% 14%);
+	--card: hsl(45 30% 89%);
+	--card-foreground: hsl(30 10% 14%);
+	--popover: hsl(45 33% 92%);
+	--popover-foreground: hsl(30 12% 8%);
+	--primary: hsl(6 50% 44%);
+	--primary-foreground: hsl(45 33% 92%);
+	--secondary: hsl(40 14% 74%);
+	--secondary-foreground: hsl(30 12% 12%);
+	--muted: hsl(43 16% 84%);
+	--muted-foreground: hsl(32 8% 38%);
+	--accent: hsl(172 26% 78%);
+	--accent-foreground: hsl(30 12% 12%);
+	--destructive: hsl(0 55% 38%);
+	--destructive-foreground: hsl(45 33% 92%);
+	--border: hsl(35 12% 55%);
+	--input: hsl(30 10% 25%);
+	--ring: hsl(6 50% 44%);
+
+	--rust: hsl(6 50% 44%);
+	--mustard: hsl(38 76% 56%);
+	--teal: hsl(172 30% 46%);
+}
+
+.serif {
+	--radius: 0.65rem;
+
 	--background: hsl(218 0% 90%);
 	--foreground: hsl(218 0% 0%);
 	--card: hsl(218 0% 90%);
@@ -175,6 +203,9 @@ body {
 	--color-border: var(--border);
 	--color-input: var(--input);
 	--color-ring: var(--ring);
+	--color-rust: var(--rust);
+	--color-mustard: var(--mustard);
+	--color-teal: var(--teal);
 }
 
 @layer base {

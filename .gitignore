@@ -23,5 +23,6 @@ vite.config.ts.timestamp-*
 
 *.psd
 *.ai
+*.af
 package-lock.json
 bun.lock

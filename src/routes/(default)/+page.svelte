@@ -1,107 +1,91 @@
 <script lang="ts">
+	import { contacts, profile } from '@/lib/data';
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
-	import Profile from './Profile.svelte';
-	import Projects from './Projects.svelte';
-	import Skillsets from './Skillsets.svelte';
-	import Contacts from './Contacts.svelte';
-	import { goto } from '$app/navigation';
-	import { page } from '$app/state';
-	import SectionIndicator from './SectionIndicator.svelte';
 
-	const sections = [
-		{
-			name: 'profile',
-			el: Profile
-		},
-		{
-			name: 'projects',
-			el: Projects
-		},
-		{
-			name: 'skillsets',
-			el: Skillsets
-		},
-		{
-			name: 'contacts',
-			el: Contacts
-		}
-	];
-
-	let showScrollHint = $state(true);
-
-	let ref = $state<HTMLDivElement>(null!);
-	let entries = $state<{ el: HTMLDivElement; viewed: boolean }[]>(
-		Array(sections.length).fill({ el: null, viewed: false })
-	);
-	let observer = $state<IntersectionObserver | null>(null);
+	const nameChars = [...`${profile.name} ${profile.surname}`];
+	let levels = $state<number[]>(nameChars.map(() => 1));
+	let nameEl = $state<HTMLHeadingElement>(null!);
 
 	onMount(() => {
-		const hashindex = sections.findIndex((section) => section.name === page.url.hash.substring(1));
-		if (hashindex !== -1) {
-			ref.scrollTo({
-				top: entries[hashindex].el.offsetTop,
-				behavior: 'smooth'
+		if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+		let frame = 0;
+
+		function updateLevels(x: number, y: number) {
+			nameEl.querySelectorAll('span[data-char]').forEach((span, i) => {
+				const rect = span.getBoundingClientRect();
+				const dx = x - (rect.left + rect.width / 2);
+				const dy = y - (rect.top + rect.height / 2);
+				const distance = Math.hypot(dx, dy * 3.5);
+				levels[i] = Math.min(5, Math.max(0, 6 - Math.ceil(distance / 20)));
 			});
 		}
 
-		observer = new IntersectionObserver(
-			(e) =>
-				e.forEach((entry) => {
-					if (entry.isIntersecting) {
-						const index = parseInt(entry.target.id);
-						entries[index].viewed = true;
-						goto(`#${sections[index].name}`, { replaceState: true });
-					}
-				}),
-			{
-				root: ref,
-				threshold: 0.5
-			}
-		);
+		function onMouseMove(event: MouseEvent) {
+			if (frame) return;
+			frame = requestAnimationFrame(() => {
+				frame = 0;
+				updateLevels(event.clientX, event.clientY);
+			});
+		}
 
-		entries.forEach((entry) => observer!.observe(entry.el));
-
-		ref.addEventListener('scroll', () => (showScrollHint = false));
-		return () => ref.removeEventListener('scroll', () => (showScrollHint = false));
+		window.addEventListener('mousemove', onMouseMove);
+		return () => {
+			window.removeEventListener('mousemove', onMouseMove);
+			cancelAnimationFrame(frame);
+		};
 	});
 </script>
 
-<div in:fade={{ delay: 150, duration: 200 }} class="grid">
-	<div class="hide-scroll h-dvh snap-y snap-mandatory overflow-y-auto" bind:this={ref}>
-		{#each sections as { el: Section, name }, i (name)}
-			<div
-				id={i.toString()}
-				bind:this={entries[i].el}
-				class="grid min-h-dvh snap-center place-items-center p-8 md:p-16"
+<div
+	in:fade={{ delay: 150, duration: 200 }}
+	class="font-term_sans mx-auto flex min-h-dvh max-w-2xl flex-col justify-center gap-6 p-8 tracking-tighter select-text [word-spacing:-0.2em]"
+>
+	<h1 bind:this={nameEl} class="font-t_styled text-5xl">
+		{#each nameChars as char, i}
+			<span data-char style:white-space="pre" style:font-feature-settings={`'ss0${levels[i]}'`}
+				>{char}</span
 			>
-				<Section inview={entries[i].viewed} />
-			</div>
 		{/each}
+	</h1>
+
+	<p class="text-rust hover:font-term_mono w-fit text-lg font-medium hover:tracking-[-0.0865em]">
+		{profile.title}
+	</p>
+
+	<p class="max-w-prose leading-relaxed">
+		I'm a software developer building things for the web, from small tools to full products.
+	</p>
+
+	<p class="max-w-prose leading-relaxed">
+		Most of my work uses
+		<span class="text-mustard hover:font-term_mono font-medium hover:tracking-[-0.0865em]">
+			Svelte
+		</span>
+		and
+		<span class="text-teal hover:font-term_mono font-medium hover:tracking-[-0.0865em]">
+			TypeScript
+		</span>, branching into other technologies like Go, Python, or mobile when a project calls for
+		it.
+	</p>
+
+	<div aria-hidden="true" class="mt-2 flex h-1.5 w-full">
+		<div class="bg-rust flex-1"></div>
+		<div class="bg-mustard flex-1"></div>
+		<div class="bg-teal flex-1"></div>
 	</div>
+
+	<footer class="border-border mt-2 flex flex-wrap gap-x-6 gap-y-1">
+		{#each Object.values(contacts) as contact}
+			<a
+				href={contact.type === 'email' ? `mailto:${contact.value}` : contact.value}
+				target={contact.type === 'url' ? '_blank' : undefined}
+				rel={contact.type === 'url' ? 'noopener noreferrer' : undefined}
+				class="hover:text-primary hover:font-term_mono underline-offset-4 transition-colors hover:tracking-[-0.0865em] hover:underline"
+			>
+				{contact.label}
+			</a>
+		{/each}
+	</footer>
 </div>
-
-<SectionIndicator {ref} {sections} {entries} />
-
-{#if showScrollHint}
-	<button
-		aria-label="Scroll down"
-		transition:fade
-		class="fixed bottom-8 left-1/2 -translate-x-1/2 animate-bounce max-md:hidden"
-		onclick={() => {
-			ref.scrollTo({
-				top: ref.clientHeight,
-				behavior: 'smooth'
-			});
-		}}
-	>
-		<div class="bg-primary relative aspect-square size-6">
-			<span class="bg-background absolute -bottom-3 -left-3 aspect-square size-6 rounded-full"
-			></span>
-			<span class="bg-background absolute -right-3 -bottom-3 aspect-square size-6 rounded-full"
-			></span>
-			<span class="bg-background absolute -top-3 left-[-0.85rem] aspect-square size-6"></span>
-			<span class="bg-background absolute -top-3 right-[-0.85rem] aspect-square size-6"></span>
-		</div>
-	</button>
-{/if}

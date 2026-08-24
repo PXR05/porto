@@ -19,10 +19,7 @@
 		</h1>
 	{/if}
 	<div class="grid gap-8 md:gap-12">
-		{#each Object.values(contacts).map( (contact) => ({ label: contact.label, link: contact.type === 'email' ? `mailto:${contact.value}` : contact.type === 'phone' ? `tel:${contact.value}` : contact.value, external: contact.type === 'url', content: contact.type === 'url' ? (contact.value
-								.split('/')
-								.filter(Boolean)
-								.pop() ?? contact.value) : contact.value }) ) as { label, link, content, external }, i}
+		{#each Object.values(contacts).map( (contact) => ({ label: contact.label, link: contact.type === 'email' ? `mailto:${contact.value}` : contact.value, external: contact.type === 'url', content: contact.username ?? contact.value }) ) as { label, link, content, external }, i}
 			<a
 				href={link}
 				target={external ? '_blank' : undefined}
