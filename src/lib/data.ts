@@ -104,17 +104,16 @@ export const projects: Record<
 	}
 };
 
-export const contacts: Record<
-	string,
-	{
-		label: string;
-		value: string;
-		username?: string;
-		type: 'email' | 'url';
-		icon: typeof Mail;
-		showInTextHeader?: boolean;
-	}
-> = {
+type Contact = {
+	label: string;
+	value: string;
+	username?: string;
+	type: 'email' | 'url';
+	icon: typeof Mail;
+	showInTextHeader?: boolean;
+};
+
+export const contacts: Record<string, Contact> = {
 	Email: {
 		label: 'Email',
 		value: 'williamluhur.27@gmail.com',
@@ -131,20 +130,38 @@ export const contacts: Record<
 		icon: Linkedin,
 		showInTextHeader: true
 	},
-	WhatsApp: {
-		label: 'WhatsApp',
-		value: 'https://wa.me/628990377159',
-		username: '+62 899-0377-159',
+	X: {
+		label: 'X (Twitter)',
+		value: 'https://x.com/messages/compose?recipient_id=821337166374547458',
+		username: '@pxr_____',
 		type: 'url',
-		icon: MessageCircle,
+		icon: Twitter,
 		showInTextHeader: true
 	}
 };
 
+export const whatsappContact: Contact = {
+	label: 'WhatsApp',
+	value: 'https://wa.me/628990377159',
+	username: '+62 899-0377-159',
+	type: 'url',
+	icon: MessageCircle,
+	showInTextHeader: true
+};
+
 export const skills: Record<string, string[]> = {
-	Languages: ['TypeScript', 'SQL', 'Python', 'Java', 'C', 'C#', 'Dart', 'Go'],
-	Frameworks: ['Svelte', 'React', 'Next.js', 'React Native', 'Flutter', 'ElysiaJS'],
-	Tools: ['Git', 'Unity']
+	Languages: ['TypeScript', 'Python', 'SQL', 'Go', 'Java', 'C#', 'Dart', 'C'],
+	Frameworks: [
+		'SvelteKit',
+		'React',
+		'React Native',
+		'Next.js',
+		'ElysiaJS',
+		'FastAPI',
+		'Laravel',
+		'Flutter'
+	]
+	// Tools: ['Git', 'Unity']
 };
 
 export const flatSkills: string[] = Object.values(skills).flat();
@@ -163,22 +180,32 @@ export const professionalExperiences: Array<{
 	company: string;
 	content: string;
 	period: string;
+	link: string;
 	relatedProject?: string;
 }> = [
 	{
 		title: 'Software Developer',
-		company: 'Orcid Mantis Indonesia',
+		company: 'SiteSeeker.id',
 		content:
-			'Built Panopticon as a paid company project, delivering an HR web system focused on employee and manager workflows.',
-		period: 'April 2025 - July 2025',
-		relatedProject: 'Panopticon'
+			'Built and maintained the SiteSeeker property platform, primarily developing its SvelteKit frontend and Python service for automated location analysis and PowerPoint reports, with additional Laravel backend contributions.',
+		period: 'February 2026 - Present',
+		link: 'https://app.siteseeker.id'
 	},
 	{
 		title: 'IT Consultant',
-		company: 'SiteSeeeker',
+		company: 'SiteSeeker.id',
 		content:
-			'Worked as an IT consultant for a web project, ensuring the system was robust and secure while keeping the user experience pleasant and practical.',
-		period: 'October 2025 - February 2026'
+			'Advised on the architecture and development of the SiteSeeker web platform, helping translate business requirements into practical features while improving system reliability, security, and user experience.',
+		period: 'October 2025 - February 2026',
+		link: 'https://app.siteseeker.id'
+	},
+	{
+		title: 'Software Developer',
+		company: 'Orcid Mantis Indonesia',
+		content:
+			'Designed and built Panopticon, a paid HR management system with employee and manager workflows for attendance, leave requests, salary records, employee administration, and report exports.',
+		period: 'April 2025 - July 2025',
+		link: 'https://www.orcidmantis.co.id'
 	}
 ];
 
@@ -191,23 +218,24 @@ export const education: Array<{
 }> = [
 	{
 		institution: 'BINUS University',
+		degree: "Master's",
+		major: 'Computer Science',
+		period: 'Sep 2025 - Present',
+		grade: '4.00 / 4.00'
+	},
+	{
+		institution: 'BINUS University',
 		degree: "Bachelor's",
 		major: 'Computer Science',
 		period: 'Sep 2022 - Feb 2026',
 		grade: '3.90 / 4.00'
-	},
-	{
-		institution: 'BINUS University',
-		degree: "Master's",
-		major: 'Computer Science',
-		period: 'Sep 2025 - Feb 2027',
-		grade: '4.00 / 4.00'
 	}
 ];
 
 export default {
 	projects,
 	contacts,
+	whatsappContact,
 	skills,
 	flatSkills,
 	profile,

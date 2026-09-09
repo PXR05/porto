@@ -71,7 +71,7 @@
 			content: profile.intro
 		},
 		{
-			cmd: "grep -E 'email|wa|linkedin' socials.txt",
+			cmd: "grep -E 'email|x|linkedin' socials.txt",
 			type: 'links',
 			content: Object.values(contacts).map((contact) => ({
 				link: contact.type === 'email' ? `mailto:${contact.value}` : contact.value,

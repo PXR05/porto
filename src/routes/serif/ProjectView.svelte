@@ -41,10 +41,10 @@
 </script>
 
 <div
-	class="relative col-[1/1] row-[1/1] flex h-[100dvh] w-screen flex-col gap-4 p-4 md:gap-8 md:p-8"
+	class="relative col-[1/1] row-[1/1] flex h-[100dvh] w-screen flex-col gap-4 overflow-y-auto p-4 md:gap-8 md:p-8"
 >
 	<Carousel
-		className="rounded-lg border border-foreground hover:border-primary h-full md:mt-4 mt-8 mb-0"
+		className="rounded-lg border border-foreground hover:border-primary min-h-56 flex-1 shrink-0 md:mt-4 mt-8 mb-0"
 		bind:index
 		proj={selectedProject.title.toLowerCase()}
 		count={selectedProject.carouselLength}
@@ -83,11 +83,17 @@
 </div>
 
 <Dialog.Root bind:open>
-	<Dialog.Content class="h-[100dvh] w-screen max-w-full rounded-none p-0">
-		<img
-			src="/assets/{selectedProject?.title.toLowerCase()}_{index}.webp"
-			alt="{selectedProject?.title.toLowerCase()}-{index}"
-			class="h-full w-full object-contain"
+	<Dialog.Content class="h-[100dvh] w-screen max-w-full grid-rows-[minmax(0,1fr)] rounded-none p-0">
+		<Dialog.Title class="sr-only">{selectedProject.title} image preview</Dialog.Title>
+		<Dialog.Description class="sr-only"
+			>Swipe or use the previous and next buttons or arrow keys to switch images.</Dialog.Description
+		>
+		<Carousel
+			bind:index
+			proj={selectedProject.title.toLowerCase()}
+			count={selectedProject.carouselLength}
+			animate={false}
+			preview
 		/>
 	</Dialog.Content>
 </Dialog.Root>
