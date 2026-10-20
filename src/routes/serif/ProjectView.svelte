@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { SquareArrowOutUpRight } from '@lucide/svelte';
-	import Carousel from '@/lib/components/Carousel.svelte';
-	import * as Dialog from '@/lib/components/ui/dialog';
-	import type { projects } from '@/lib/data';
-	import { browser } from '$app/environment';
+	import Carousel from '#lib/components/Carousel.svelte';
+	import * as Dialog from '#lib/components/ui/dialog/index.js';
+	import type { projects } from '#lib/data.ts';
+	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 
@@ -25,17 +25,17 @@
 
 	$effect(() => {
 		if (browser && !open && page.url.searchParams.has('image')) {
-			const url = new URL(page.url);
+			const url = new URL(page.url.href);
 			url.searchParams.delete('image');
-			goto(url, { noScroll: true });
+			goto(url, { reset: false });
 		}
 	});
 
 	function openImageViewer() {
 		if (browser) {
-			const url = new URL(page.url);
+			const url = new URL(page.url.href);
 			url.searchParams.set('image', 'true');
-			goto(url, { noScroll: true });
+			goto(url, { reset: false });
 		}
 	}
 </script>

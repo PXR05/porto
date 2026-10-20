@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { contacts, profile } from '@/lib/data';
+	import { contacts, profile } from '#lib/data.ts';
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
-	import { Github } from '@lucide/svelte';
 
 	const nameChars = [...`${profile.name} ${profile.surname}`];
 	let levels = $state<number[]>(nameChars.map(() => 1));

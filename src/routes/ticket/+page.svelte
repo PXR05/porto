@@ -1,7 +1,7 @@
 <script>
 	import { innerHeight, innerWidth } from 'svelte/reactivity/window';
 	import { fade } from 'svelte/transition';
-	import { flatSkills, profile } from '$lib/data';
+	import { flatSkills, profile } from '#lib/data.js';
 
 	const logoGrid = [
 		[1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],

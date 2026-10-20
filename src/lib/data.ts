@@ -1,4 +1,6 @@
-import { Linkedin, Mail, MessageCircle, Twitter } from '@lucide/svelte';
+import { Mail, MessageCircle } from '@lucide/svelte';
+import Linkedin from '#lib/components/icons/Linkedin.svelte';
+import Twitter from '#lib/components/icons/Twitter.svelte';
 
 export const projects: Record<
 	string,

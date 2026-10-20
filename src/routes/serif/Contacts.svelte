@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { contacts } from '@/lib/data';
+	import { contacts } from '#lib/data.ts';
 	import { fly } from 'svelte/transition';
 
 	let {

@@ -1,6 +1,6 @@
 <script>
 	import Header from '../Header.svelte';
-	import { projects } from '@/lib/data';
+	import { projects } from '#lib/data.ts';
 </script>
 
 <svelte:head>
@@ -21,7 +21,7 @@
 				+
 				<a
 					href={key === 'others' ? value.link : `/projects/${key}`}
-					class="text-lg font-semibold text-primary"
+					class="text-primary text-lg font-semibold"
 				>
 					{key.charAt(0).toUpperCase() + key.slice(1)}
 				</a>
@@ -29,6 +29,7 @@
 		{/each}
 	</div>
 	<p class="text-lg">
-		Or you can go back to the <a class="underline hover:no-underline" href="/terminal">home page</a>.
+		Or you can go back to the <a class="underline hover:no-underline" href="/terminal">home page</a
+		>.
 	</p>
 </div>

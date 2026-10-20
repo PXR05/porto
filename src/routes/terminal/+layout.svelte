@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onNavigate } from '$app/navigation';
-	import { duration } from '@/routes/terminal/stores';
-	import { cn, reverseWipeIn, reverseWipeOut, wipeIn, wipeOut } from '@/lib/utils';
+	import { duration } from '#/routes/terminal/stores.ts';
+	import { cn, reverseWipeIn, reverseWipeOut, wipeIn, wipeOut } from '#lib/utils.ts';
 	import { type Snippet } from 'svelte';
 	import { fade } from 'svelte/transition';
 
@@ -10,6 +10,8 @@
 	let renderCount = $state(0);
 
 	onNavigate((e) => {
+		if (e.shallow && e.type === 'goto') return;
+
 		const { from, to } = e;
 		if (from?.url.pathname === to?.url.pathname) {
 			return;
@@ -22,7 +24,7 @@
 	<title>PXR</title>
 </svelte:head>
 
-<div in:fade={{ duration: $duration }} class="contents font-term_sans">
+<div in:fade={{ duration: $duration }} class="font-term_sans contents">
 	<div class="relative h-svh w-full">
 		{#key renderCount}
 			<div
@@ -36,7 +38,7 @@
 				}}
 				style="--duration: {$duration}ms;"
 				class={cn(
-					'absolute inset-0 m-auto flex h-[calc(100svh-1rem)] w-full max-w-[80ch] flex-col overflow-hidden border-2 border-primary md:h-[calc(100svh-10rem)] md:max-w-[90vw]'
+					'border-primary absolute inset-0 m-auto flex h-[calc(100svh-1rem)] w-full max-w-[80ch] flex-col overflow-hidden border-2 md:h-[calc(100svh-10rem)] md:max-w-[90vw]'
 				)}
 				class:cont={renderCount === 0}
 			>
@@ -48,7 +50,7 @@
 					out:reverseWipeIn={{
 						duration: $duration / 2
 					}}
-					class={cn('absolute inset-0 z-50 h-full w-full bg-primary')}
+					class={cn('bg-primary absolute inset-0 z-50 h-full w-full')}
 					class:screen={renderCount === 0}
 					class:clipped={renderCount > 0}
 				></div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { projects } from '$lib/data';
+	import { projects } from '#lib/data.js';
 	import { ArrowUpRight } from '@lucide/svelte';
 
 	const highlightedProjects = Object.values(projects).filter((project) => project.highlight);

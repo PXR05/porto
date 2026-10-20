@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { contacts, whatsappContact } from '$lib/data';
+	import { contacts, whatsappContact } from '#lib/data.js';
 	import { Mail } from '@lucide/svelte';
 	import { onMount } from 'svelte';
 	import Caption from './Caption.svelte';
@@ -35,7 +35,7 @@
 </script>
 
 <div class="flex shrink-0 justify-end">
-	<div class="border-foreground/40 w-full max-w-[36rem] border-t min-[660px]:border-l">
+	<div class="border-foreground/40 w-full max-w-xl border-t min-[660px]:border-l">
 		<div
 			class="timedate border-foreground/40 divide-foreground/40 flex flex-col divide-y border-b sm:flex-row sm:divide-x sm:divide-y-0"
 		>

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { Button } from '$lib/components/ui/button';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+	import { Button } from '#lib/components/ui/button/index.js';
+	import * as DropdownMenu from '#lib/components/ui/dropdown-menu/index.js';
 	import {
 		DraftingCompass,
 		FileText,
@@ -13,7 +13,7 @@
 	} from '@lucide/svelte';
 	import '../app.css';
 	import Splash from './Splash.svelte';
-	import { capitalizeFirstLetter, cn } from '@/lib/utils';
+	import { capitalizeFirstLetter, cn } from '#lib/utils.ts';
 
 	let { children } = $props();
 
@@ -37,7 +37,7 @@
 			path: '/draft',
 			theme: 'draft',
 			icon: DraftingCompass,
-			dropdownClass: 'bottom-5 right-5 left-auto'
+			dropdownClass: 'bottom-5 md:left-5 left-auto max-md:right-5'
 		},
 		{
 			name: 'Terminal',

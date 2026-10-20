@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { flatSkills } from '$lib/data';
+	import { flatSkills } from '#lib/data.js';
 </script>
 
 <p class="text-foreground/80 text-[0.72rem] leading-relaxed">

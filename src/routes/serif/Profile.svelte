@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { profile } from '@/lib/data';
+	import { profile } from '#lib/data.ts';
 	import { fly } from 'svelte/transition';
 
 	let {
@@ -27,7 +27,7 @@
 				duration: 300,
 				y: 50
 			}}
-			class="font-serif text-4xl text-primary"
+			class="text-primary font-serif text-4xl"
 		>
 			a {profile.title}
 		</h2>

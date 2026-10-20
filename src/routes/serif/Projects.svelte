@@ -1,9 +1,9 @@
 <script lang="ts">
-	import * as Dialog from '@/lib/components/ui/dialog';
-	import { projects } from '@/lib/data';
+	import * as Dialog from '#lib/components/ui/dialog/index.js';
+	import { projects } from '#lib/data.ts';
 	import ProjectView from './ProjectView.svelte';
 	import { blur, fly } from 'svelte/transition';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 
@@ -31,17 +31,17 @@
 
 	$effect(() => {
 		if (browser && !open && page.url.searchParams.has('project')) {
-			const url = new URL(page.url);
+			const url = new URL(page.url.href);
 			url.searchParams.delete('project');
-			goto(url, { noScroll: true });
+			goto(url, { reset: false });
 		}
 	});
 
 	function openProject(key: string) {
 		if (browser) {
-			const url = new URL(page.url);
+			const url = new URL(page.url.href);
 			url.searchParams.set('project', key);
-			goto(url, { noScroll: true });
+			goto(url, { reset: false });
 		}
 	}
 </script>

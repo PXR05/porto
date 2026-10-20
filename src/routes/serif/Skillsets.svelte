@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { flatSkills } from '@/lib/data';
+	import { flatSkills } from '#lib/data.ts';
 	import { fade, fly } from 'svelte/transition';
 
 	let {

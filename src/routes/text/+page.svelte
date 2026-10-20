@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button } from '@/lib/components/ui/button';
+	import { Button } from '#lib/components/ui/button/index.js';
 	import {
 		contacts,
 		education,
@@ -8,8 +8,9 @@
 		projects,
 		skills,
 		whatsappContact
-	} from '@/lib/data';
-	import { Download, ExternalLink, Github } from '@lucide/svelte';
+	} from '#lib/data.ts';
+	import { Download, ExternalLink } from '@lucide/svelte';
+	import Github from '#lib/components/icons/Github.svelte';
 	import { fade } from 'svelte/transition';
 
 	const highlightedProjects = Object.values(projects).filter((project) => project.highlight);

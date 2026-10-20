@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { duration } from '@/routes/terminal/stores';
-	import * as CarouselUI from '@/lib/components/ui/carousel';
-	import type { CarouselAPI } from '@/lib/components/ui/carousel/context';
+	import { duration } from '#/routes/terminal/stores.ts';
+	import * as CarouselUI from '#lib/components/ui/carousel/index.js';
+	import type { CarouselAPI } from '#lib/components/ui/carousel/context.ts';
 	import { untrack } from 'svelte';
 
 	let {

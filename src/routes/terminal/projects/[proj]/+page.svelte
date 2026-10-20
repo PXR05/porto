@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { projects } from '@/lib/data';
+	import { projects } from '#lib/data.ts';
 	import Header from '../../Header.svelte';
-	import * as Dialog from '$lib/components/ui/dialog';
-	import Carousel from '@/lib/components/Carousel.svelte';
+	import * as Dialog from '#lib/components/ui/dialog/index.js';
+	import Carousel from '#lib/components/Carousel.svelte';
 	import { ArrowUpRight } from '@lucide/svelte';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
 
-	let proj = $derived(page.params.proj);
+	let proj = $derived(page.params.proj ?? '');
 	let project = $derived(projects[proj] ?? {});
 
 	let open = $state(false);
@@ -23,17 +23,17 @@
 
 	$effect(() => {
 		if (browser && !open && page.url.searchParams.has('image')) {
-			const url = new URL(page.url);
+			const url = new URL(page.url.href);
 			url.searchParams.delete('image');
-			goto(url, { noScroll: true });
+			goto(url, { reset: false });
 		}
 	});
 
 	function openImageViewer() {
 		if (browser) {
-			const url = new URL(page.url);
+			const url = new URL(page.url.href);
 			url.searchParams.set('image', 'true');
-			goto(url, { noScroll: true });
+			goto(url, { reset: false });
 		}
 	}
 </script>
@@ -52,21 +52,22 @@
 </Header>
 <div class="grid overflow-scroll">
 	<Carousel bind:index {proj} count={project.carouselLength} onclick={openImageViewer} />
-	<div class="flex w-full flex-col gap-4 border-t-2 border-primary p-4">
+
+	<div class="border-primary flex w-full flex-col gap-4 border-t-2 p-4">
 		<a
 			href={project.link}
 			target="_blank"
 			rel="noopener noreferrer"
 			class="flex w-fit items-center gap-2"
 		>
-			<h2 class="flex items-center gap-1 font-term_mono text-2xl font-semibold text-primary">
+			<h2 class="font-term_mono text-primary flex items-center gap-1 text-2xl font-semibold">
 				{project.title}
 				<ArrowUpRight size={28} strokeWidth={3} absoluteStrokeWidth />
 			</h2>
 		</a>
-		<div class="flex flex-wrap gap-2 font-term_mono">
+		<div class="font-term_mono flex flex-wrap gap-2">
 			{#each project.tags as tag}
-				<span class="bg-primary px-1.5 font-medium text-primary-foreground">
+				<span class="bg-primary text-primary-foreground px-1.5 font-medium">
 					{tag}
 				</span>
 			{/each}

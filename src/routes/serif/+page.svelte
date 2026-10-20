@@ -51,7 +51,7 @@
 					if (entry.isIntersecting) {
 						const index = parseInt(entry.target.id);
 						entries[index].viewed = true;
-						goto(`#${sections[index].name}`, { replaceState: true });
+						goto(`#${sections[index].name}`, { replace: true });
 					}
 				}),
 			{
@@ -62,8 +62,12 @@
 
 		entries.forEach((entry) => observer!.observe(entry.el));
 
-		ref.addEventListener('scroll', () => (showScrollHint = false));
-		return () => ref.removeEventListener('scroll', () => (showScrollHint = false));
+		function hideScrollHint() {
+			showScrollHint = false;
+		}
+
+		ref.addEventListener('scroll', hideScrollHint);
+		return () => ref.removeEventListener('scroll', hideScrollHint);
 	});
 </script>
 

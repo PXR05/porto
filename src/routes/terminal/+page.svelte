@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { cmdHistory, duration, skip } from './stores';
-	import * as HoverCard from '@/lib/components/ui/hover-card';
-	import { highlight } from '@/lib/highlight';
+	import * as HoverCard from '#lib/components/ui/hover-card/index.js';
+	import { highlight } from '#lib/highlight.ts';
 	import 'highlight.js/styles/atom-one-dark.min.css';
 	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
 	import Header from './Header.svelte';
-	import { contacts, flatSkills, projects as pr, profile } from '@/lib/data';
+	import { contacts, flatSkills, projects as pr, profile } from '#lib/data.ts';
 	import { beforeNavigate } from '$app/navigation';
 
 	type LinkItem = {
@@ -17,21 +17,9 @@
 	};
 
 	type Section =
-		| {
-				cmd: string;
-				type: 'text';
-				content: string;
-		  }
-		| {
-				cmd: string;
-				type: 'links';
-				content: LinkItem[];
-		  }
-		| {
-				cmd: string;
-				type: 'list';
-				content: string[];
-		  };
+		| { cmd: string; type: 'text'; content: string }
+		| { cmd: string; type: 'links'; content: LinkItem[] }
+		| { cmd: string; type: 'list'; content: string[] };
 
 	const projects = Object.entries(pr).map(([key, value]) => ({
 		link: key === 'others' ? value.link : `/terminal/projects/${key}`,
@@ -55,21 +43,13 @@
 	}));
 
 	let sections = $state<Section[]>([
-		{
-			cmd: 'cat name.txt',
-			type: 'text',
-			content: profile.name
-		},
+		{ cmd: 'cat name.txt', type: 'text', content: profile.name },
 		{
 			cmd: 'cat location.txt',
 			type: 'text',
 			content: profile.location
 		},
-		{
-			cmd: 'cat intro.txt',
-			type: 'text',
-			content: profile.intro
-		},
+		{ cmd: 'cat intro.txt', type: 'text', content: profile.intro },
 		{
 			cmd: "grep -E 'email|x|linkedin' socials.txt",
 			type: 'links',
@@ -144,16 +124,14 @@
 			show = true;
 		}, $duration * 1.5);
 
-		const history: Section[] = $cmdHistory.map(
-			(h): Section => ({
-				cmd: 'view ' + h,
-				type: 'text',
-				// @ts-ignore
-				content: projects.some((c) => c.content.toLowerCase() === h.toLowerCase())
-					? `Opening project ${h}...`
-					: `view: ${h}: No such project found.`
-			})
-		);
+		const history: Section[] = $cmdHistory.map((h): Section => ({
+			cmd: 'view ' + h,
+			type: 'text',
+			// @ts-ignore
+			content: projects.some((c) => c.content.toLowerCase() === h.toLowerCase())
+				? `Opening project ${h}...`
+				: `view: ${h}: No such project found.`
+		}));
 		if (history.length > 0) {
 			skip.set(true);
 			done = true;
@@ -165,7 +143,10 @@
 	});
 
 	let hoverEnabled = $state(true);
-	beforeNavigate(() => {
+
+	beforeNavigate(({ shallow, type }) => {
+		if (shallow && type === 'goto') return;
+
 		hoverEnabled = false;
 		if (!$skip && !done) {
 			skip.set(true);
@@ -193,15 +174,13 @@
 				class="flex flex-wrap items-center justify-between text-lg font-medium text-white"
 				style={$skip
 					? ''
-					: `height: 0; opacity: 0; animation: snap-in ${$duration / 2}ms ${
-							i * $duration * 2.5
-						}ms forwards;`}
+					: `height: 0; opacity: 0; animation: snap-in ${$duration / 2}ms ${i * $duration * 2.5}ms forwards;`}
 			>
-				<span class="cmd flex flex-wrap items-center">
-					&gt;&nbsp;
-					{@html highlight(section.cmd).join('')}
-				</span>
+				<span class="cmd flex flex-wrap items-center"
+					>> {@html highlight(section.cmd).join('')}</span
+				>
 			</h2>
+
 			<div
 				onanimationstart={handleAnimationStart}
 				onanimationend={() => handleAnimationEnd(i)}
@@ -229,12 +208,15 @@
 							}}
 							<HoverCard.Root openDelay={150} closeDelay={50}>
 								<p>
-									"<a href={l.link} class="text-lg" target={l.external ? '_blank' : undefined}>
-										<HoverCard.Trigger class="">
-											{l.content}
-										</HoverCard.Trigger>
-									</a>"{#if i !== section.content.length - 1},
-									{/if}&nbsp;
+									"
+
+									<a href={l.link} class="text-lg" target={l.external ? '_blank' : undefined}
+										><HoverCard.Trigger class="">{l.content}</HoverCard.Trigger></a
+									>
+
+									"{#if i !== section.content.length - 1}
+										,
+									{/if}
 								</p>
 								{#if l.hover && hoverEnabled}
 									<HoverCard.Content
@@ -253,9 +235,9 @@
 						[
 						{#each section.content as item, i}
 							<p class="text-lg">
-								"<span class="text-foreground">{item}</span>"{i !== section.content.length - 1
-									? ','
-									: ''}&nbsp;
+								"
+								<span class="text-foreground">{item}</span>
+								"{i !== section.content.length - 1 ? ',' : ''}
 							</p>
 						{/each}
 						]

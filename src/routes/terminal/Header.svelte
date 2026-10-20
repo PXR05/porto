@@ -12,14 +12,14 @@
 </script>
 
 <h1
-	class="flex w-full items-center justify-between border-b-2 border-primary font-term_mono text-xl font-medium text-primary"
+	class="border-primary font-term_mono text-primary flex w-full items-center justify-between border-b-2 text-xl font-medium"
 >
 	<div class="flex items-center">
-		<div class="mr-3 bg-primary">
+		<div class="bg-primary mr-3">
 			<img
 				src="/assets/logo.webp"
 				alt="logo"
-				class="h-10 w-10 bg-primary [clip-path:inset(5px_5px_5px_6px)]"
+				class="bg-primary h-10 w-10 [clip-path:inset(5px_5px_5px_6px)]"
 			/>
 		</div>
 		{#if children}
@@ -32,7 +32,7 @@
 				skip.set(true);
 				goto('/terminal');
 			}}
-			class="grid aspect-square h-full place-items-center bg-primary text-center text-3xl font-normal text-primary-foreground no-underline transition-all hover:opacity-75"
+			class="bg-primary text-primary-foreground grid aspect-square h-full place-items-center text-center text-3xl font-normal no-underline transition-all hover:opacity-75"
 		>
 			&times;
 		</button>

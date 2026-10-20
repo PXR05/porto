@@ -1,4 +1,4 @@
-import { contacts, flatSkills, profile, projects } from '@/lib/data';
+import { contacts, flatSkills, profile, projects } from '#lib/data.ts';
 
 function formatForTerminal(): string {
 	const width = 80;

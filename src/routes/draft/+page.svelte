@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { profile } from '$lib/data';
+	import { profile } from '#lib/data.js';
 	import { fade } from 'svelte/transition';
 	import Caption from './Caption.svelte';
 	import SheetFrame from './SheetFrame.svelte';
