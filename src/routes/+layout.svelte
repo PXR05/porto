@@ -3,10 +3,17 @@
 	import { page } from '$app/state';
 	import { Button } from '$lib/components/ui/button';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-	import { FileText, Pilcrow, Sparkle, SquareTerminal, TerminalSquare, TicketIcon } from '@lucide/svelte';
+	import {
+		DraftingCompass,
+		FileText,
+		Pilcrow,
+		Sparkle,
+		SquareTerminal,
+		TicketIcon
+	} from '@lucide/svelte';
 	import '../app.css';
 	import Splash from './Splash.svelte';
-	import { capitalizeFirstLetter } from '@/lib/utils';
+	import { capitalizeFirstLetter, cn } from '@/lib/utils';
 
 	let { children } = $props();
 
@@ -24,6 +31,13 @@
 			path: '/serif',
 			theme: 'serif',
 			icon: Sparkle
+		},
+		{
+			name: 'Draft',
+			path: '/draft',
+			theme: 'draft',
+			icon: DraftingCompass,
+			dropdownClass: 'bottom-5 right-5 left-auto'
 		},
 		{
 			name: 'Terminal',
@@ -75,7 +89,7 @@
 		{@render children()}
 	{/if}
 
-	<div class="fixed bottom-4 left-4 z-10 print:hidden">
+	<div class={cn('fixed bottom-4 left-4 z-10 print:hidden', currentRoute.dropdownClass)}>
 		<DropdownMenu.Root>
 			<DropdownMenu.Trigger>
 				<Button variant="outline" size="icon" class="max-md:size-12">
