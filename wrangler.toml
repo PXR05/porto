@@ -1,5 +1,5 @@
-name = "porto"
+name = "pxr0"
 pages_build_output_dir = ".svelte-kit/cloudflare"
 compatibility_date = "2025-04-01"
-compatibility_flags = [ "nodejs_compat" ]
+compatibility_flags = ["nodejs_compat"]
 upload_source_maps = true

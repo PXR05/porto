@@ -2,6 +2,9 @@
 	"name": "portofolio",
 	"version": "1.0.0",
 	"private": true,
+	"engines": {
+		"node": ">=22.17.0"
+	},
 	"scripts": {
 		"dev": "vite dev --host",
 		"build": "vite build",
