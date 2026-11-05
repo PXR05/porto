@@ -187,19 +187,19 @@ export const professionalExperiences: Array<{
 }> = [
 	{
 		title: 'Software Developer',
-		company: 'SiteSeeker.id',
+		company: 'Siteseeker.id',
 		content:
-			'Built and maintained the SiteSeeker property platform, primarily developing its SvelteKit frontend and Python service for automated location analysis and PowerPoint reports, with additional Laravel backend contributions.',
+			'Built and maintained the Siteseeker property platform, primarily developing its SvelteKit frontend and Python service for automated location analysis and PowerPoint reports, with additional Laravel backend contributions.',
 		period: 'February 2026 - Present',
-		link: 'https://app.siteseeker.id'
+		link: 'https://www.siteseeker.id'
 	},
 	{
 		title: 'IT Consultant',
-		company: 'SiteSeeker.id',
+		company: 'Siteseeker.id',
 		content:
-			'Advised on the architecture and development of the SiteSeeker web platform, helping translate business requirements into practical features while improving system reliability, security, and user experience.',
+			'Advised on the architecture and development of the Siteseeker web platform, helping translate business requirements into practical features while improving system reliability, security, and user experience.',
 		period: 'October 2025 - February 2026',
-		link: 'https://app.siteseeker.id'
+		link: 'https://www.siteseeker.id'
 	},
 	{
 		title: 'Software Developer',
