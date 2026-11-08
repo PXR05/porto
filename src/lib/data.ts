@@ -205,7 +205,7 @@ export const professionalExperiences: Array<{
 		title: 'Software Developer',
 		company: 'Orcid Mantis Indonesia',
 		content:
-			'Designed and built Panopticon, a paid HR management system with employee and manager workflows for attendance, leave requests, salary records, employee administration, and report exports.',
+			'Designed and built Panopticon, an HR management system with employee and manager workflows for attendance, leave requests, salary records, employee administration, and report exports.',
 		period: 'April 2025 - July 2025',
 		link: 'https://www.orcidmantis.co.id'
 	}
