@@ -222,7 +222,7 @@ export const education: Array<{
 		institution: 'BINUS University',
 		degree: "Master's",
 		major: 'Computer Science',
-		period: 'Sep 2025 - Present',
+		period: 'Sep 2025 - Feb 2027',
 		grade: '4.00 / 4.00'
 	},
 	{
