@@ -31,6 +31,15 @@ export const projects: Record<
 		carouselLength: 5,
 		highlight: true
 	},
+	cymatic: {
+		title: 'Cymatic',
+		content:
+			'A minimal Android music player built with Kotlin and Jetpack Compose. Features a click wheel interface, pixel typography, local and remote music libraries, offline downloads, and direct USB DAC playback with support for FLAC, ALAC, and DSD audio.',
+		tags: ['Mobile', 'Android', 'Kotlin', 'Jetpack Compose'],
+		link: 'https://github.com/PXR05/cymatic',
+		carouselLength: 2,
+		highlight: true
+	},
 	cadence: {
 		title: 'Cadence',
 		content:
@@ -38,7 +47,7 @@ export const projects: Record<
 		tags: ['Web', 'Svelte', 'TypeScript', 'Dexie.js'],
 		link: 'https://github.com/PXR05/cadence',
 		carouselLength: 5,
-		highlight: true
+		highlight: false
 	},
 	monograph: {
 		title: 'Monograph',
@@ -48,14 +57,14 @@ export const projects: Record<
 		link: 'https://monograph.pages.dev',
 		carouselLength: 7
 	},
-	preprocess: {
-		title: 'Preprocess',
-		content:
-			'A web app with a collection of tools to preprocesses multiple types of data. Uses ffmpeg.wasm for audio processing and Tesseract.js for OCR. Built using Svelte and Tailwind.',
-		tags: ['Web', 'Svelte', 'TypeScript', 'ffmpeg', 'Tesseract'],
-		link: 'https://preprocess.pages.dev',
-		carouselLength: 9
-	},
+	// preprocess: {
+	// 	title: 'Preprocess',
+	// 	content:
+	// 		'A web app with a collection of tools to preprocesses multiple types of data. Uses ffmpeg.wasm for audio processing and Tesseract.js for OCR. Built using Svelte and Tailwind.',
+	// 	tags: ['Web', 'Svelte', 'TypeScript', 'ffmpeg', 'Tesseract'],
+	// 	link: 'https://preprocess.pages.dev',
+	// 	carouselLength: 9
+	// },
 	// binary: {
 	// 	title: 'Binary',
 	// 	content:
