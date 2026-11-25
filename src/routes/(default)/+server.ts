@@ -1,4 +1,4 @@
-import { contacts, flatSkills, profile, projects } from '#lib/data.ts';
+import { contacts, flatSkills, profile, professionalExperiences, projects } from '#lib/data.ts';
 
 function formatForTerminal(): string {
 	const width = 80;
@@ -59,9 +59,29 @@ function formatForTerminal(): string {
 	}
 	output += '\n';
 
-	output += `PROJECTS & EXPERIENCE\n`;
+	output += `EXPERIENCE\n`;
 	output += `${line}\n`;
-	Object.values(projects).forEach((project, index) => {
+	professionalExperiences.forEach((experience, index) => {
+		if (index > 0) output += '\n';
+
+		output += `▶ ${experience.title.toUpperCase()} @ ${experience.company.toUpperCase()}\n`;
+		output += `  ${experience.period}\n`;
+
+		output += `${wrapText(experience.content, width, '  ')}\n`;
+
+		if (experience.relatedProject) {
+			output += `  Related Project: ${experience.relatedProject}\n`;
+		}
+
+		const linkLine = `Link: ${experience.link}`;
+		output += `${wrapText(linkLine, width, '  ')}\n`;
+	});
+	output += '\n';
+
+	output += `PROJECTS\n`;
+	output += `${line}\n`;
+	const highlightedProjects = Object.values(projects).filter((project) => project.highlight);
+	highlightedProjects.forEach((project, index) => {
 		if (index > 0) output += '\n';
 
 		output += `▶ ${project.title.toUpperCase()}\n`;
