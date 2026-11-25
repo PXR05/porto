@@ -55,19 +55,20 @@
 	</p>
 
 	<p class="max-w-prose leading-relaxed">
-		I'm a software developer building things for the web, from small tools to full products.
+		I'm a full-stack product engineer building web applications, backend services, and mobile
+		products, from
+		<span class="text-mustard hover:font-term_mono font-medium hover:tracking-[-0.0865em]"
+			>interface</span
+		>
+		to
+		<span class="text-teal hover:font-term_mono font-medium hover:tracking-[-0.0865em]"
+			>infrastructure</span
+		>.
 	</p>
 
 	<p class="max-w-prose leading-relaxed">
-		Most of my work uses
-		<span class="text-mustard hover:font-term_mono font-medium hover:tracking-[-0.0865em]">
-			Svelte
-		</span>
-		and
-		<span class="text-teal hover:font-term_mono font-medium hover:tracking-[-0.0865em]">
-			TypeScript
-		</span>, branching into other technologies like Go, Python, or mobile when a project calls for
-		it.
+		I work across SvelteKit, TypeScript, Python, and Laravel, deploying and operating production
+		workloads on Docker and Linux.
 	</p>
 
 	<div aria-hidden="true" class="mt-2 flex h-1.5 w-full">

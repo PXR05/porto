@@ -34,8 +34,8 @@ export const projects: Record<
 	cymatic: {
 		title: 'Cymatic',
 		content:
-			'A minimal Android music player built with Kotlin and Jetpack Compose. Features a click wheel interface, pixel typography, local and remote music libraries, offline downloads, and direct USB DAC playback with support for FLAC, ALAC, and DSD audio.',
-		tags: ['Mobile', 'Android', 'Kotlin', 'Jetpack Compose'],
+			'A minimal Android music player built with Kotlin, Jetpack Compose, and a custom JNI layer for direct USB DAC playback. Features a click wheel interface, local and remote music libraries, offline downloads, and support for FLAC, ALAC, and DSD audio.',
+		tags: ['Mobile', 'Android', 'Kotlin', 'Jetpack Compose', 'C++', 'JNI'],
 		link: 'https://github.com/PXR05/cymatic',
 		carouselLength: 2,
 		highlight: true
@@ -161,7 +161,7 @@ export const whatsappContact: Contact = {
 };
 
 export const skills: Record<string, string[]> = {
-	Languages: ['TypeScript', 'Python', 'SQL', 'Go', 'Java', 'C#', 'Dart', 'C'],
+	Languages: ['TypeScript', 'Python', 'SQL', 'Kotlin', 'PHP', 'Go', 'Java', 'C#', 'C'],
 	Frameworks: [
 		'SvelteKit',
 		'React',
@@ -170,9 +170,9 @@ export const skills: Record<string, string[]> = {
 		'ElysiaJS',
 		'FastAPI',
 		'Laravel',
-		'Flutter'
-	]
-	// Tools: ['Git', 'Unity']
+		'Jetpack Compose'
+	],
+	Tools: ['Docker', 'Linux', 'GitHub Actions', 'GitLab CI', 'Supabase']
 };
 
 export const flatSkills: string[] = Object.values(skills).flat();
@@ -183,7 +183,7 @@ export const profile = {
 	title: 'Software Developer',
 	location: 'Jakarta, Indonesia',
 	intro:
-		'Software developer who mostly builds web apps with Svelte and TypeScript, from small tools to full products. Also experienced with other languages and platforms where the project requires them.'
+		'Full-stack software engineer experienced building and operating web, mobile, and backend systems from architecture to deployment. Emphasizes practical architecture, fast iteration, and shipping reliable software under real-world constraints.'
 } as const;
 
 export const professionalExperiences: Array<{
@@ -198,7 +198,7 @@ export const professionalExperiences: Array<{
 		title: 'Software Developer',
 		company: 'Siteseeker.id',
 		content:
-			'Built and maintained the Siteseeker property platform, primarily developing its SvelteKit frontend and Python service for automated location analysis and PowerPoint reports, with additional Laravel backend contributions.',
+			'Built and maintained the Siteseeker property platform, developing the SvelteKit frontend, contributing to the Laravel backend, and engineering a Python service with an async job queue for an LLM powered location analysis and automated PowerPoint report generation.',
 		period: 'February 2026 - Present',
 		link: 'https://www.siteseeker.id'
 	},
@@ -206,7 +206,7 @@ export const professionalExperiences: Array<{
 		title: 'IT Consultant',
 		company: 'Siteseeker.id',
 		content:
-			'Advised on the architecture and development of the Siteseeker web platform, helping translate business requirements into practical features while improving system reliability, security, and user experience.',
+			'Diagnosed scalability bottlenecks in a vendor-built WordPress site and led the migration to a decoupled SvelteKit and Laravel stack aligned with team capability and long-term maintainability.',
 		period: 'October 2025 - February 2026',
 		link: 'https://www.siteseeker.id'
 	},

@@ -73,7 +73,7 @@
 	<header>
 		<div class="flex items-start justify-between">
 			<div class="flex-1">
-				<h1 class="mb-2 text-2xl font-bold tracking-wide uppercase">
+				<h1 class="mb-2 text-2xl font-bold tracking-wide">
 					{profile.name}
 					{profile.surname}
 				</h1>
@@ -208,7 +208,7 @@
 	<!-- Skills -->
 	<section>
 		<h2 class="mb-2 border-b pb-1 text-base font-bold tracking-wide uppercase">Technical Skills</h2>
-		<div class="space-y-2">
+		<div>
 			{#each Object.entries(skills) as [category, categorySkills], i}
 				<p class="text-sm leading-relaxed">
 					<span class="font-semibold">{category}:</span>
