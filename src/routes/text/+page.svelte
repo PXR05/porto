@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { Button } from '#lib/components/ui/button/index.js';
 	import {
 		contacts,
@@ -9,11 +10,17 @@
 		skills,
 		whatsappContact
 	} from '#lib/data.ts';
-	import { Download, ExternalLink } from '@lucide/svelte';
+	import { Download, ExternalLink, List } from '@lucide/svelte';
 	import Github from '#lib/components/icons/Github.svelte';
 	import { fade } from 'svelte/transition';
 
+	let detailed = $state(page.url.searchParams.get('detailed') !== 'false');
+
 	const highlightedProjects = Object.values(projects).filter((project) => project.highlight);
+	const detailedProjects = Object.values(projects).filter(
+		(project) => project.highlight || project.substantial
+	);
+	let visibleProjects = $derived(detailed ? detailedProjects : highlightedProjects);
 	const githubProfile = 'https://github.com/PXR05';
 	type ProfessionalExperience = (typeof professionalExperiences)[number];
 	const experienceGroups = professionalExperiences.reduce<
@@ -71,7 +78,7 @@
 >
 	<!-- Header -->
 	<header>
-		<div class="flex items-start justify-between">
+		<div class="flex items-start justify-between gap-4">
 			<div class="flex-1">
 				<h1 class="mb-2 text-2xl font-bold tracking-wide">
 					{profile.name}
@@ -104,9 +111,24 @@
 				</p>
 				<p class="text-sm leading-relaxed">{profile.intro}</p>
 			</div>
-			<Button onclick={() => window.print()} variant="outline" size="icon" class="print:hidden">
-				<Download />
-			</Button>
+			<div class="flex shrink-0 items-center gap-2 print:hidden">
+				<Button
+					onclick={() => (detailed = !detailed)}
+					variant={detailed ? 'default' : 'outline'}
+					size="icon"
+					aria-pressed={detailed}
+				>
+					<List class="size-3.5" aria-hidden="true" />
+				</Button>
+				<Button
+					onclick={() => window.print()}
+					variant="outline"
+					size="icon"
+					aria-label="Print or download CV"
+				>
+					<Download aria-hidden="true" />
+				</Button>
+			</div>
 		</div>
 	</header>
 
@@ -116,8 +138,8 @@
 		<div class="space-y-4">
 			{#each experienceGroups as company}
 				<div>
-					<div class="mb-1 flex items-center gap-2">
-						<h3 class="text-sm font-bold">
+					<div class="mb-1.5 flex items-center gap-2">
+						<h3 class="text-[15px] font-bold">
 							{company.company}
 						</h3>
 						<a
@@ -130,16 +152,26 @@
 							<ExternalLink class="size-3.5" />
 						</a>
 					</div>
-					<div class="space-y-2">
+					<div>
 						{#each company.roles as experience}
-							<div>
-								<div class="mb-1 flex items-center justify-between gap-3 text-xs">
-									<p class="font-semibold whitespace-nowrap">
+							<div class="pb-2.5 last:pb-0 print:break-inside-avoid">
+								<div class="mb-1 flex items-baseline justify-between gap-3">
+									<p class="text-sm font-semibold">
 										{experience.title}
 									</p>
-									<p class="font-semibold whitespace-nowrap">{experience.period}</p>
+									<p class="text-xs font-semibold whitespace-nowrap">
+										{experience.period}
+									</p>
 								</div>
-								<p class="mb-1 text-sm leading-tight">{@html experience.content}</p>
+								{#if detailed && experience.details?.length}
+									<ul class="mb-1 list-disc space-y-1 pl-4 text-sm leading-snug">
+										{#each experience.details as detail}
+											<li>{detail}</li>
+										{/each}
+									</ul>
+								{:else}
+									<p class="mb-1 text-sm leading-tight">{@html experience.content}</p>
+								{/if}
 								{#if experience.relatedProject}
 									<p class="text-xs">
 										<span class="font-semibold">Related Project:</span>
@@ -164,10 +196,11 @@
 					<div class="space-y-2">
 						{#each institution.programs as item}
 							<div>
-								<div class="flex items-center justify-between gap-3 text-xs font-semibold">
+								<div class="flex items-center justify-between gap-3 text-sm font-semibold">
 									<p>{item.degree}, {item.major}</p>
-									<p class="whitespace-nowrap">{item.period}</p>
+									<p class="text-xs whitespace-nowrap">{item.period}</p>
 								</div>
+								<p class="text-xs">Focus: {item.focus}</p>
 								<p class="text-xs">GPA: {item.grade}</p>
 							</div>
 						{/each}
@@ -181,8 +214,8 @@
 	<section>
 		<h2 class="mb-2 border-b pb-1 text-base font-bold tracking-wide uppercase">Projects</h2>
 		<div class="space-y-4">
-			{#each highlightedProjects as project}
-				<div>
+			{#each visibleProjects as project}
+				<div class="print:break-inside-avoid">
 					<div class="mb-1 flex items-center gap-2">
 						<h3 class="text-sm font-bold">{project.title}</h3>
 						<a
@@ -195,11 +228,21 @@
 							<ExternalLink class="size-3.5" />
 						</a>
 					</div>
-					<p class="text-sm leading-tight">{project.content}</p>
-					<!-- <div class="mb-1 text-xs">
-						<span class="font-semibold">Technologies:</span>
-						{project.tags.join(', ')}
-					</div> -->
+					{#if detailed && project.details?.length}
+						<ul class="list-disc space-y-1 pl-4 text-sm leading-snug">
+							{#each project.details as detail}
+								<li>{detail}</li>
+							{/each}
+						</ul>
+					{:else}
+						<p class="text-sm leading-tight">{project.content}</p>
+					{/if}
+					{#if detailed && project.tags.length}
+						<p class="mt-1 text-xs">
+							<span class="font-semibold">Technologies:</span>
+							{project.tags.join(', ')}
+						</p>
+					{/if}
 				</div>
 			{/each}
 		</div>
